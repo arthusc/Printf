@@ -22,8 +22,11 @@ int		ft_printf(char *format, ...)
 	{
 		if (*format == '%')
 		{
-			before_conv_size = pf_nputstr(format - before_conv_size, before_conv_size);
-//			conv(++format, ap);
+			if (before_conv_size > 0)
+			{
+				before_conv_size = pf_nputstr(format - before_conv_size, before_conv_size);
+			}
+			conv(++format, ap);
 		}
 		format++;
 		before_conv_size++;

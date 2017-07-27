@@ -2,13 +2,14 @@
 
 char	*conv(char *format, va_list ap)
 	{
-	int value;
-	if (ft_strchr("-+#0 ", (int)format) != NULL)
-	{
-		format++;
-		if (ft_strchr("0123456789", (int)format))
+		int count;
+
+		count  = 0;
+		while (ft_strchr("sSpdDioOuUxXcC", *format))
+		{
 			format++;
-	}
+			count++;
+		}
 	//format++;
 	//if((value = option(format)) != 0)
 	//{
@@ -16,10 +17,19 @@ char	*conv(char *format, va_list ap)
 	//ft_putstr		(pf_str_option(ft_itoa(va_arg(ap, int)), ' ', value));
 	//}
 	if (*format == 's')
-		conv_s(ap, format);
+	{
+		write(1, "s", 1);
+	//	conv_s(ap, (format - count));
+	}
 	if (*format == 'c')
-		conv_c(ap);
+	{
+		write(1, "c", 1);
+	//	conv_c(ap);
+	}
 	if (*format == 'd')
-		conv_d(ap, format);
+	{
+		write(1, "d", 1);
+	//	conv_d(ap, format);
+	}
 	return (&*format);
 }

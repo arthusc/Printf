@@ -8,8 +8,8 @@ int main(int ac, char **av)
 	ft_printf("\n----| Debut_du_test_ft_printf |------\n");
 
 	printf("\n---test00---------------------\n");
-	printf("abcd\n");
-	ft_printf("abcd\n");
+	printf("abcd%s\n", " 1");
+	ft_printf("abcd%s\n"," 1");
 
 	printf("\n---test01_c---------------------\n");
 	printf("->%c\n", 'a');
