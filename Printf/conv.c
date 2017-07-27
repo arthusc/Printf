@@ -18,8 +18,7 @@ char	*conv(char *format, va_list ap)
 	//}
 	if (*format == 's')
 	{
-		write(1, "s", 1);
-	//	conv_s(ap, (format - count));
+		conv_s(ap, (format - count));
 	}
 	if (*format == 'c')
 	{

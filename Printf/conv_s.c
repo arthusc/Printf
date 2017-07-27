@@ -29,7 +29,12 @@ void	conv_s(va_list ap, char *format)
 	char *str;
 
 	str = va_arg(ap, char *);
-	if (format == '-')
+	if (ft_strchr("-+#0 ")
+		format++;
+		pf->moins = 1;
+	if (is_digit(
+			p->minimal_ara = atoi(format
+
 		str = option_minus("tout le monde", 5);
 	ft_putstr(str);
 }
