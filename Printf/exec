@@ -1,1 +1,0 @@
-gcc conv.c conv_c.c conv_s.c ft_printf.c libft/libft.a test_printf.c

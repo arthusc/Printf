@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   conv_c.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
+/*   Updated: 2017/07/29 22:58:20 by mbriffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include "includes/ft_printf.h"
 
-void	conv_c(va_list ap)
+void	conv_c(t_printf *pf)
 {
-		ft_putchar(va_arg(ap, unsigned));
+		ft_putchar(va_arg(*pf->ap, unsigned));
 }

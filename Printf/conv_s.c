@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   conv_s.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
+/*   Updated: 2017/07/29 22:55:05 by mbriffau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include "includes/ft_printf.h"
 
 
@@ -24,17 +36,21 @@ char *option_minus(char *str, int size)
 		return (dst);
 }
 
-void	conv_s(va_list ap, char *format)
+void	conv_s(t_printf *pf, char *format)
 {
-	char *str;
+	//char *str;
+	// int		moins = 0;//
 
-	str = va_arg(ap, char *);
-	if (ft_strchr("-+#0 ")
-		format++;
-		pf->moins = 1;
-	if (is_digit(
-			p->minimal_ara = atoi(format
-
-		str = option_minus("tout le monde", 5);
-	ft_putstr(str);
+	//str = va_arg(ap, char *);
+	// if (ft_strchr("-+#0 ", *format))
+	// {
+	// 	format++;
+	// 	moins = 1;
+	// }
+	// if (moins && ft_isdigit(*format))
+	// {
+	// 		minimal_ara = atoi(format);
+	// }
+	// str = option_minus("tout le monde", 5);
+	ft_putstr(va_arg(*pf->ap, char *));
 }
