@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/29 22:57:45 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/07/30 15:32:50 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct			s_printf
 }						t_printf;
 
 int		ft_printf(char *format, ...);
-char	*conversion_specifier(char *format, t_printf *pf);
+t_printf	*conversion_specifier(t_printf *pf);
 void	conv_c(t_printf *pf);
-void	conv_d(t_printf *pf, char *format);
-void	conv_s(t_printf *pf, char *format);
-void	conv_d(t_printf *pf, char *format);
+void	conv_d(t_printf *pf);
+void	conv_s(t_printf *pf);
+void	conv_d(t_printf *pf);

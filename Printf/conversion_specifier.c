@@ -6,17 +6,18 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/29 22:56:26 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/07/30 15:33:25 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "includes/ft_printf.h"
 
-char	*conversion_specifier(char *format, t_printf *pf)
+t_printf	*conversion_specifier(t_printf *pf)
 {
 	int count;
 
 	count  = 0;
+	pf->format++;
 	// while (ft_strchr("sSpdDioOuUxXcC", *format))
 	// {
 	// 	format++;
@@ -29,20 +30,20 @@ char	*conversion_specifier(char *format, t_printf *pf)
 	//ft_putstr		(pf_str_option(ft_itoa(va_arg(ap, int)), ' ', value));
 	//}
 
-	if (*format == 's')
+	if (*pf->format == 's')
 	{
-		conv_s(pf, (format - count));
-		format++;
+		conv_s(pf);
+		pf->format++;
 	}
-	else if (*format == 'c')
+	else if (*pf->format == 'c')
 	{
 		conv_c(pf);
-		format++;
+		pf->format++;
 	}
-	else if (*format == 'd')
+	else if (*pf->format == 'd')
 	{
-		conv_d(pf, format);
-		format++;
+		conv_d(pf);
+		pf->format++;
 	}
-	return (&*format);
+	return (pf);
 }

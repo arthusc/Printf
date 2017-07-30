@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/29 22:55:05 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/07/30 15:33:09 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char *option_minus(char *str, int size)
 		return (dst);
 }
 
-void	conv_s(t_printf *pf, char *format)
+void	conv_s(t_printf *pf)
 {
 	//char *str;
 	// int		moins = 0;//

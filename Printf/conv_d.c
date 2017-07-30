@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/29 22:55:01 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/07/30 15:32:56 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
  *gere conv_i aussi
  */
 
-void	conv_d(t_printf *pf, char *format)
+void	conv_d(t_printf *pf)
 {
 	// int value;
 
