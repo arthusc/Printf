@@ -23,6 +23,7 @@ typedef struct			s_printf
 	va_list		*ap;
 	int			minimum_field_width;
 	int			too_far_format;
+	int		before_conv_size;
 }						t_printf;
 
 int		ft_printf(char *format, ...);
