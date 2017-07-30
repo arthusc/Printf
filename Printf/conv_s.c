@@ -39,7 +39,7 @@ char *option_minus(char *str, int size)
 void	conv_s(t_printf *pf)
 {
 	//char *str;
-	// int		moins = 0;//
+	// int		moins = 0;
 
 	//str = va_arg(ap, char *);
 	// if (ft_strchr("-+#0 ", *format))

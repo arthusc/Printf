@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:43:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/29 18:45:55 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/07/30 18:06:25 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int main(int ac, char **av)
 	printf("\n---test00---------------------\n");
 	printf("abcd%s\n", " 1");
 	ft_printf("abcd%s\n"," 1");
+	printf("abcd%-15s\n", " 1");
+	ft_printf("abcd%+15s\n"," 1");
 
 	printf("\n---test01_c---------------------\n");
 	printf("->%c\n", 'a');

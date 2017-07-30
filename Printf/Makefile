@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/29 22:02:18 by mbriffau          #+#    #+#              #
-#    Updated: 2017/07/29 22:57:03 by mbriffau         ###   ########.fr        #
+#    Updated: 2017/07/30 17:21:32 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ FILES = 		ft_printf.c \
 				conversion_specifier.c \
 				conv_c.c \
 				conv_s.c \
-				conv_d.c
+				conv_d.c \
+				ft_error.c
 
 all : $(NAME)
 

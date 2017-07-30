@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:41:18 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/30 15:29:43 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/07/30 17:29:33 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		ft_printf(char *format, ...)
 				pf_nputstr(pf->format - before_conv_size, before_conv_size);
 				before_conv_size = 0;
 			}
-			pf = conversion_specifier(pf);
+			conversion_specifier(pf);
 		}
 		pf->format++;
 		before_conv_size++;
