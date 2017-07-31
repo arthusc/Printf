@@ -20,7 +20,7 @@
 typedef struct			s_printf
 {
 	char 		*format;
-	va_list		*ap;
+	va_list		ap;
 	int			minimum_field_width;
 	int			too_far_format;
 	int			before_conv_size;

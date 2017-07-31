@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/30 15:33:09 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/07/31 22:29:44 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ char *option_minus(char *str, int size)
 
 void	conv_s(t_printf *pf)
 {
+	unsigned *s;
+	int i = 0;
+
+	if (!(s = va_arg(pf->ap, unsigned *)))
 	//char *str;
 	// int		moins = 0;
 
@@ -52,5 +56,8 @@ void	conv_s(t_printf *pf)
 	// 		minimal_ara = atoi(format);
 	// }
 	// str = option_minus("tout le monde", 5);
-	ft_putstr(va_arg(*pf->ap, char *));
+	while (s)
+		i++;
+	write(1, s, i);
+//	ft_putstr(va_arg(*pf->ap, char *));
 }

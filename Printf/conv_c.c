@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/30 19:46:49 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/07/31 21:56:57 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	conv_c(t_printf *pf)
 // 					pf->format++;
 // 				}
 // 			}
-	ft_putchar(va_arg(*pf->ap, unsigned));
+	ft_putchar(va_arg(pf->ap, unsigned));
 }
 
 /* Can deal with option "-" if there is a minimal_width
