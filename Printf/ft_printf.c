@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:41:18 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/30 23:57:36 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/07/31 20:18:10 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ t_printf	*init_t_printf(va_list *ap, char *format)
 {
 	t_printf	*pf;
 
-	if (!(pf = (t_printf *)malloc(sizeof(t_printf *))))
+	if (!(pf = (t_printf *)malloc(sizeof(t_printf))))
 		return (0);	
 	pf->minimum_field_width = 0;
 	pf->too_far_format = 0;
 	pf->ap = ap;
 	pf->format = format;
-
-
+	pf->i = 0;
 	return (pf);
 }
 
@@ -48,22 +47,22 @@ int		ft_printf(char *format, ...)
 	 * variete de nombre d'argument possibles, de types pouvant etre 
 	 * differents
 	  */
-	while (*pf->format)
+	while (pf->format[pf->i])
 	{
-		if (*pf->format == '%')
+		if (pf->format[pf->i] == '%')
 		{
 			if (before_conv_size > 0)
 			{
-				pf_nputstr(pf->format - before_conv_size, before_conv_size);
+				pf_nputstr(&pf->format[pf->i - before_conv_size], before_conv_size);
 				before_conv_size = 0;
 			}
 			conversion_specifier(pf);
 		}
-		pf->format++;
+		pf->i++;
 		before_conv_size++;
 	}
 	if (before_conv_size > 0)
-			pf_nputstr(pf->format - before_conv_size, before_conv_size);
+			pf_nputstr(&pf->format[pf->i - before_conv_size], before_conv_size);
 	va_end(*pf->ap);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/30 17:07:51 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/07/31 19:57:13 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ typedef struct			s_printf
 	va_list		*ap;
 	int			minimum_field_width;
 	int			too_far_format;
-	int		before_conv_size;
+	int			before_conv_size;
+	int			i;
 }						t_printf;
 
 int		ft_printf(char *format, ...);
