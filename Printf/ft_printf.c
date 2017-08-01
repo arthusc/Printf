@@ -6,16 +6,17 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:41:18 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/01 15:25:44 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/01 23:56:47 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "includes/ft_printf.h"
 
-void		pf_nputstr(char *str, int size)
+static int	print_until(char *s, int i, int c)
 {
-	write(1, str, size);
-	return;
+	while (s[i] != 0 && s[i] != c)
+		write(1, &s[i++], 1);
+	return (i);
 }
 
 int		ft_printf(char *format, ...)
@@ -27,28 +28,17 @@ int		ft_printf(char *format, ...)
 	pf.format = format;
 	while (pf.format[pf.i] != 0)
 	{
+		pf.i = print_until(pf.format, pf.i, '%');
 		if (pf.format[pf.i] == '%')
-		{
-			if (pf.before_conv_size > 0)
-			{
-				pf_nputstr(&pf.format[pf.i - pf.before_conv_size], pf.before_conv_size);
-				pf.before_conv_size = 0;
-			}
-			conversion_specifier(&pf);
-		}
-		if (pf.format == 0)
-		{
-			break;
-		}
+			pf.i++;
+		if (pf.format != 0)
+			parse_conversion(&pf);
 		pf.i++;
-		pf.before_conv_size++;
+		pf.i = print_until(pf.format, pf.i, '%');
 	}
-	if (pf.before_conv_size > 0)
-		pf_nputstr(&pf.format[pf.i - pf.before_conv_size], pf.before_conv_size);
 	va_end(pf.ap);
 	return (0);
 }
-
 
 /*
  * Quand la precision est trop grande, printf comble avec des 0

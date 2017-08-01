@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/29 22:02:18 by mbriffau          #+#    #+#              #
-#    Updated: 2017/08/01 16:04:13 by mbriffau         ###   ########.fr        #
+#    Updated: 2017/08/01 22:55:36 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,11 @@ SRCS = srcs/
 DIR = ./
 
 FILES = 		ft_printf.c \
-				conversion_specifier.c \
+				parse_conversion.c \
 				conv_c.c \
 				conv_s.c \
-				conv_d.c 
+				conv_d.c \
+				init_conv.c 
 
 all : $(NAME)
 

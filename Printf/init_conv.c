@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_printf.c                                      :+:      :+:    :+:   */
+/*   init_conv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/27 15:43:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/01 17:26:46 by mbriffau         ###   ########.fr       */
+/*   Created: 2017/08/01 23:38:21 by mbriffau          #+#    #+#             */
+/*   Updated: 2017/08/01 23:39:52 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdio.h"
+# include "includes/ft_printf.h"
 
-int 	main(int ac, char **av)
+static t_flags		*init_flags(void)
 {
-	if (ac)
+	t_flags		*newflags;
 
-	printf("abcd%s\n", " 1");
-	printf("efg%-15s\n", " 1");
-	printf("->%c\n", 'a');
-	printf("->%s\n", "test_s");
-	printf("->%d\n", 42);
-	printf("->%-10s\n", "Salut");
-	return (0);
+	newflags = malloc(sizeof(t_flags));
+	ft_bzero(newflags, sizeof(t_flags));
+	return (newflags);
+}
+
+t_conv				*init_conv(void)
+{
+	t_conv		*conv;
+	
+	if (!(conv = malloc(sizeof(t_conv))))
+		ft_error("error_malloc_init_conv");
+	ft_bzero(conv, sizeof(t_conv));
+	conv->flags = init_flags();
+	conv->modif = NONE;
+	return (conv);
 }

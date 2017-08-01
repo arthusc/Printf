@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/01 15:37:14 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/01 22:04:39 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ char *option_minus(char *str, int size)
 
 void	conv_s(t_printf *pf)
 {
-	//write(1, "E", 1);
 	unsigned *s;
-	// int i = 0;
 
 	if (!(s = va_arg(pf->ap, unsigned *)))
 	{
