@@ -6,13 +6,13 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/30 17:03:28 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/30 17:07:33 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/01 15:54:47 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_printf.h"
+#include "../libft.h"
 
-void	ft_error(char *s)
+void	ft_error(char const *s)
 {
 	write(1, s, ft_strlen(s));
 	write(1, "\n", 1);

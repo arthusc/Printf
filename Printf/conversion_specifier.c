@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/31 22:29:56 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/01 15:24:22 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_printf	*conversion_specifier(t_printf *pf)
 	}
 	if ((pf->format[pf->i + pf->too_far_format]) == 's')
 	{
-		//printf("---------------- %s\n", pf->format[pf->i + pf->too_far_format]);
 		conv_s(pf);
 		pf->i++;
 	}

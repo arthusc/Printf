@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/31 21:56:57 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/01 16:06:30 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 // 	minimum_field_width = 5;
 // 	return (minimum_field_width);
 //}
+
 void	conv_c(t_printf *pf)
 {
 // 	char *str;

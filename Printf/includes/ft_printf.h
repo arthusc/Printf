@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/07/31 19:57:13 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/01 15:57:22 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ void	conv_c(t_printf *pf);
 void	conv_d(t_printf *pf);
 void	conv_s(t_printf *pf);
 void	conv_d(t_printf *pf);
-void	ft_error(char *s);

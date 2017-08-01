@@ -1,1 +1,0 @@
-gcc -o the_real_one ./ft_printf.c conversion_specifier.c conv_c.c conv_s.c conv_d.c ft_error.c test_printf.c libft/libft.a
