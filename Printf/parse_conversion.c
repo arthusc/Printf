@@ -6,13 +6,13 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/02 00:00:29 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/02 00:55:39 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "includes/ft_printf.h"
 
-t_conv		*parse_flags(t_printf *pf, t_conv *conv)
+static t_conv		*parse_flags(t_printf *pf, t_conv *conv)
 {
 	while (ft_strchr("#0-+ ", pf->format[pf->i]))
 	{
@@ -35,6 +35,16 @@ t_conv		*parse_flags(t_printf *pf, t_conv *conv)
 	return (conv);
 }
 
+static t_conv	*parse_minimal_width(t_printf *pf, t_conv *conv)
+{
+	conv->min_width = atoi(&pf->format[pf->i]);
+	while (ft_isdigit(pf->format[pf->i]))
+		pf->i++;
+	if (!(pf->format))
+		ft_error("error_parse_minimal_width");
+	return (conv);
+}
+
 t_printf	*parse_conversion(t_printf *pf)
 {
 	t_conv		*conv;
@@ -42,6 +52,7 @@ t_printf	*parse_conversion(t_printf *pf)
 	//write(1, "x", 1);
 	conv = init_conv();
 	conv = parse_flags(&*pf, conv);
+	conv = parse_minimal_width(&*pf, conv);
 	while (!(ft_strchr("sdc", pf->format[pf->i])))
 	{
 		pf->i += 1;
@@ -54,8 +65,7 @@ t_printf	*parse_conversion(t_printf *pf)
 		conv_d(pf);
 	pf->format += pf->too_far_format;
 	pf->too_far_format = 0;
-	printf("hi%d\n%d\n%d\n%d\n%d\n", conv->flags->sharp,
-		conv->flags->zero, conv->flags->minus, conv->flags->plus, conv->flags->space);
+	printf("\nmin %d\n", conv->min_width);
 	return (pf);
 }
 
