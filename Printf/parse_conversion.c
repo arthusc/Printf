@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/02 00:55:39 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/02 01:52:19 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,13 @@ static t_conv		*parse_flags(t_printf *pf, t_conv *conv)
 {
 	while (ft_strchr("#0-+ ", pf->format[pf->i]))
 	{
-		if (pf->format[pf->i] == '#')
-			conv->flags->sharp = 1;
-		else if (pf->format[pf->i] == '0')
-			conv->flags->zero = 1;
-		else if (pf->format[pf->i] == '-')
-			conv->flags->minus = 1;
-		else if (pf->format[pf->i] == '+')
-			conv->flags->plus = 1;
-		else if (pf->format[pf->i] == ' ')
-			conv->flags->space = 1;
-		else if (pf->format[pf->i] == '\0')
-			break ;
-		else
-			ft_error("error_parse_flags");
+		pf->format[pf->i] == '#' ? conv->flags->sharp = 1 : 0;
+		pf->format[pf->i] == '0' ? conv->flags->zero = 1 : 0;
+		pf->format[pf->i] == '-' ? conv->flags->minus = 1 : 0;
+		pf->format[pf->i] == '+' ? conv->flags->plus = 1 : 0;
+		pf->format[pf->i] == ' ' ? conv->flags->space = 1 : 0;
+		if (pf->format[pf->i] == '\0')
+			break;
 		pf->i++;
 	}
 	return (conv);
@@ -45,48 +38,30 @@ static t_conv	*parse_minimal_width(t_printf *pf, t_conv *conv)
 	return (conv);
 }
 
+static t_conv	*parse_precision(t_printf *pf, t_conv *conv)
+{
+	conv->precision = atoi(&pf->format[++pf->i]);
+	conv->precision > 0 ? conv->precision_set = 1 : 0 ;
+	while (ft_isdigit(pf->format[pf->i]))
+		pf->i++;
+	if (!pf->format[pf->i]) 
+		ft_error("Invalid format. (After Precision)");
+	return (conv);
+}
+
 t_printf	*parse_conversion(t_printf *pf)
 {
 	t_conv		*conv;
 
-	//write(1, "x", 1);
 	conv = init_conv();
 	conv = parse_flags(&*pf, conv);
 	conv = parse_minimal_width(&*pf, conv);
+	conv = (pf->format[pf->i] == '.' ? parse_precision(&*pf, conv) : conv);
 	while (!(ft_strchr("sdc", pf->format[pf->i])))
-	{
 		pf->i += 1;
-	}
-	if ((pf->format[pf->i + pf->too_far_format]) == 's')
-		conv_s(pf);
-	if ((pf->format[pf->i + pf->too_far_format]) == 'c')
-		conv_c(pf);
-	if ((pf->format[pf->i +pf->too_far_format]) == 'd')
-		conv_d(pf);
-	pf->format += pf->too_far_format;
-	pf->too_far_format = 0;
-	printf("\nmin %d\n", conv->min_width);
+	pf->format[pf->i] == 's' ? conv_s(pf) : 0;
+	pf->format[pf->i] == 'c' ? conv_c(pf) : 0;
+	pf->format[pf->i] == 'd' ? conv_d(pf) : 0;
+	//printf("\nprec %d\n", conv->precision);
 	return (pf);
 }
-
-
-// t_printf	*parse_conversion(t_printf *pf)
-// {
-// 	t_conv		*conv;
-// 	ft_bzero(&conv, sizeof(t_conv));
-// 	while ((pf->format[pf->i + pf->too_far_format]) != 's'
-// 		&& (pf->format[pf->i + pf->too_far_format]) != 'd'
-// 		&& (pf->format[pf->i + pf->too_far_format]) != 'c')
-// 	{
-// 		pf->too_far_format += 1;
-// 	}
-// 	if ((pf->format[pf->i + pf->too_far_format]) == 's')
-// 		conv_s(pf);
-// 	if ((pf->format[pf->i + pf->too_far_format]) == 'c')
-// 		conv_c(pf);
-// 	if ((pf->format[pf->i +pf->too_far_format]) == 'd')
-// 		conv_d(pf);
-// 	pf->format += pf->too_far_format;
-// 	pf->too_far_format = 0;
-// 	return (pf);
-// }

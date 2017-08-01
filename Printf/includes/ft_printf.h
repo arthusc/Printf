@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/01 23:38:08 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/02 01:03:12 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct			s_conv
 {
 	int					min_width;
 	int					precision;
-	int					prec_set;
+	int					precision_set;
 	t_modifier			modif;
 	char				type;
 	char				sign;
