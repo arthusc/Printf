@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/02 14:57:25 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/02 16:40:03 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	conv_c(t_printf *pf, t_conv *conv)
 {
-	if (conv->flags->zero == 1)
+	if (conv->flags->zero == 1 && conv->flags->minus == 0)
 		while(conv->min_width-- > 1)
 			ft_putchar('0');
 	if (conv->flags->space == 1)
