@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/02 17:38:31 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/02 17:53:13 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	conv_s(t_printf *pf, t_conv *conv)
 {
-		char *str;
+		char *apstring;
 		int len;
-	
-		pf->apstring = va_arg(pf->ap, char*);
-		len = ft_strlen(pf->apstring);
+
+		if (!(apstring = va_arg(pf->ap, char*)))
+					ft_error("error_conv_s\n");
+		len = ft_strlen(apstring);
 //	printf("%d\n", len);
 	if (conv->flags->zero == 1 && conv->flags->minus == 0)
 	while (conv->min_width-- > 0 + len)
@@ -28,12 +29,12 @@ void	conv_s(t_printf *pf, t_conv *conv)
 	ft_putchar(' ');
 	if (conv->flags->minus == 1)
 	{
-	ft_putstr(pf->apstring);
+	ft_putstr(apstring);
 	while (conv->min_width-- > 0 + len)
 	ft_putchar(' ');
 	return;
 	}
-	ft_putstr(pf->apstring);
+	ft_putstr(apstring);
 }
 	//char *str;
 	// int		moins = 0;
