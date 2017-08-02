@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/02 13:33:56 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/02 15:59:11 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,30 @@ static t_conv	*parse_precision(t_printf *pf, t_conv *conv)
 	return (conv);
 }
 
+static t_conv	*parse_modifier(t_printf *pf, t_conv *conv)
+{
+	if (!(ft_strchr("hljz", pf->format[pf->i])))
+		return (conv);
+	if (ft_strncmp(&pf->format[pf->i], "hh", 2) == 0)
+	{
+		conv->modif = 'H';
+		pf->i += 2;
+		return (conv);
+	}
+	if (ft_strncmp(&pf->format[pf->i], "ll", 2) == 0)
+	{
+		conv->modif = 'L';
+		pf->i += 2;
+		return (conv);
+	}
+	pf->format[pf->i] == 'h' ? conv-> modif = 'h': 0;
+	pf->format[pf->i] == 'l' ? conv-> modif = 'l': 0;
+	pf->format[pf->i] == 'j' ? conv-> modif = 'j': 0;
+	pf->format[pf->i] == 'z' ? conv-> modif = 'z': 0;
+	pf->i++;
+	return (conv);
+}
+
 t_printf	*parse_conversion(t_printf *pf)
 {
 	t_conv		*conv;
@@ -58,11 +82,13 @@ t_printf	*parse_conversion(t_printf *pf)
 	conv = parse_flags(&*pf, conv);
 	conv = parse_minimal_width(&*pf, conv);
 	conv = (pf->format[pf->i] == '.' ? parse_precision(&*pf, conv) : conv);
+	conv = parse_modifier(&*pf, conv);
 	while (!(ft_strchr("sdc", pf->format[pf->i])))
 		pf->i += 1;
 	pf->format[pf->i] == 's' ? conv_s(pf) : 0;
 	pf->format[pf->i] == 'c' ? conv_c(pf, conv) : 0;
 	pf->format[pf->i] == 'd' ? conv_d(pf) : 0;
-	//printf("\nprec %d\n", conv->precision);
+	if (conv->modif != '0')
+		printf("\nmodif %c\n", conv->modif);
 	return (pf);
 }

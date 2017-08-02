@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/01 23:38:21 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/01 23:39:52 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/02 15:57:11 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ t_conv				*init_conv(void)
 		ft_error("error_malloc_init_conv");
 	ft_bzero(conv, sizeof(t_conv));
 	conv->flags = init_flags();
-	conv->modif = NONE;
+	conv->modif = '0';
 	return (conv);
 }

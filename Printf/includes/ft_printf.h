@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/02 13:21:16 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/02 16:00:59 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,12 @@ typedef struct			s_flags
 	int					space;
 }						t_flags;
 
-typedef enum		e_modifier
-{
-	NONE, HH, LL, H, L, J, Z
-}					t_modifier;
-
 typedef struct			s_conv
 {
 	int					min_width;
 	int					precision;
 	int					precision_set;
-	t_modifier			modif;
+	char				modif;
 	char				type;
 	char				sign;
 	t_flags				*flags;
@@ -48,8 +43,6 @@ typedef struct			s_printf
 {
 	char 		*format;
 	va_list		ap;
-	int			minimum_field_width;
-	int			too_far_format;
 	int			i;
 }						t_printf;
 

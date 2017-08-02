@@ -29,4 +29,3 @@ void	conv_c(t_printf *pf, t_conv *conv)
 	}
 	ft_putchar(va_arg(pf->ap, unsigned));
 }
-
