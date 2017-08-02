@@ -6,44 +6,35 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/01 22:04:39 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/02 17:38:31 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "includes/ft_printf.h"
 
-
-char *option_minus(char *str, int size)
+void	conv_s(t_printf *pf, t_conv *conv)
 {
-	char *dst;
-	int i;
-
-	i = 0;
-	if (!(dst = malloc(sizeof(char) * (size + 1))))
-		return (0);
-	while (str[i])
+		char *str;
+		int len;
+	
+		pf->apstring = va_arg(pf->ap, char*);
+		len = ft_strlen(pf->apstring);
+//	printf("%d\n", len);
+	if (conv->flags->zero == 1 && conv->flags->minus == 0)
+	while (conv->min_width-- > 0 + len)
+	ft_putchar('0');
+	if (conv->flags->space == 1)
+	while (conv->min_width-- > 0 + len)
+	ft_putchar(' ');
+	if (conv->flags->minus == 1)
 	{
-		dst[i] = str[i];
-		i++;
+	ft_putstr(pf->apstring);
+	while (conv->min_width-- > 0 + len)
+	ft_putchar(' ');
+	return;
 	}
-	size = size - i;
-	while (size--)
-	{
-		dst[i] = ' ';
-		i++;
-	}
-	dst[i] = '\0';
-		return (dst);
+	ft_putstr(pf->apstring);
 }
-
-void	conv_s(t_printf *pf)
-{
-	unsigned *s;
-
-	if (!(s = va_arg(pf->ap, unsigned *)))
-	{
-		ft_error("error_conv_s\n");
-	}
 	//char *str;
 	// int		moins = 0;
 
@@ -63,5 +54,5 @@ void	conv_s(t_printf *pf)
 	// 	i++;
 	// }
 	// write(1, s, i);
-	ft_putstr((char *)s);
-}
+//	ft_putstr((char *)s);
+//}
