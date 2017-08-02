@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/02 15:59:11 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/02 16:22:35 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_printf	*parse_conversion(t_printf *pf)
 		pf->i += 1;
 	pf->format[pf->i] == 's' ? conv_s(pf) : 0;
 	pf->format[pf->i] == 'c' ? conv_c(pf, conv) : 0;
-	pf->format[pf->i] == 'd' ? conv_d(pf) : 0;
+	pf->format[pf->i] == 'd' ? conv_d(pf, conv) : 0;
 	if (conv->modif != '0')
 		printf("\nmodif %c\n", conv->modif);
 	return (pf);
