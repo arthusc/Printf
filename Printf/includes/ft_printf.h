@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/02 16:21:53 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/02 16:28:38 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct			s_printf
 {
 	char 		*format;
 	va_list		ap;
+	int			apint;
 	int			i;
 }						t_printf;
 
