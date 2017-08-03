@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:43:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/01 17:26:46 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/03 02:49:31 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int 	main(int ac, char **av)
 
 	printf("abcd%s\n", " 1");
 	printf("efg%-15s\n", " 1");
-	printf("->%c\n", 'a');
+	printf("->%lc\n", 'a');
 	printf("->%s\n", "test_s");
 	printf("->%d\n", 42);
 	printf("->%-10s\n", "Salut");

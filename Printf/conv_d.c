@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/02 18:36:45 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/03 01:18:10 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	conv_d_l(t_printf *pf, t_conv *conv)
 void	conv_d_h(t_printf *pf, t_conv *conv)
 {
 	int		len;
-	int		apint;
+	uint16_t		apint;
 	char	*str;
 
-	if (!(apint = va_arg(pf->ap, short)))
+	if (!(apint = va_arg(pf->ap, uintmax_t)))
 		ft_error("error_conv_d\n");
 	len = ft_strlen(str = ft_itoa(apint));
 	if (conv->flags->zero == 1 && conv->flags->minus == 0)
