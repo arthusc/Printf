@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/03 02:06:36 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/03 18:21:54 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_conv		*parse_flags(t_printf *pf, t_conv *conv)
 {
 	while (ft_strchr("#0-+ ", pf->format[pf->i]))
-	{
+	{ 	
 		pf->format[pf->i] == '#' ? conv->flags->sharp = 1 : 0;
 		/* # The result is converted to an ‘‘alternative form’’. For o conversion, it increases the precision, if and only if necessary, to force the first digit of the result to be a zero (if the value and precision are both 0, a single 0 is printed). For x (or X) conversion, a nonzero result has 0x (or 0X) prefixed to it. For a, A, e, E, f, F, g, and G conversions, the result of converting a floating-point number always contains a decimal-point character, even if no digits follow it. (Normally, a decimal-point character appears in the result of these conversions only if a digit follows it.) For g and G conversions, trailing zeros are not removed from the result. For other conversions, the behavior is undefined. */
 		pf->format[pf->i] == '0' ? conv->flags->zero = 1 : 0;

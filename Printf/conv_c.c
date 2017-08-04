@@ -6,13 +6,13 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/03 02:16:41 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/04 16:36:20 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "includes/ft_printf.h"
 
-static void	print_wint(wint_t wint)
+void	print_wint(wint_t wint)
 {
 	char	str[4];
 

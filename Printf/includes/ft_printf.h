@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/02 18:30:45 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/04 16:19:31 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,4 @@ void	conv_d_l(t_printf *pf, t_conv *conv);
 void	conv_d_h(t_printf *pf, t_conv *conv);
 void	conv_f(t_printf *pf, t_conv *conv);
 void	conv_f_L(t_printf *pf, t_conv *conv);
+void	print_wint(wint_t wint);
