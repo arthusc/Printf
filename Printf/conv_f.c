@@ -6,7 +6,7 @@
 /*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/02 18:17:08 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/02 18:35:08 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/04 12:52:18 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	conv_f(t_printf *pf, t_conv *conv)
 	int		apint;
 	char	*str;
 
-
+	if (conv->precision_set == 0)
+		conv->precision = 6;
 	if(conv->modif == 'L')
 		conv_f_L(pf, conv);
 	if(!(apint = va_arg(pf->ap, double)))
