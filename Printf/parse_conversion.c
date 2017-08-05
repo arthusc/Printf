@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/05 16:37:48 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/05 18:01:44 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ static t_conv	*parse_precision(t_printf *pf, t_conv *conv)
 
 static t_conv	*parse_modifier(t_printf *pf, t_conv *conv)
 {
+	
+	if (ft_strchr("CSDUOX", pf->format[pf->i]))
+	{
+		conv-> modif = 'l';
+		return (conv);
+	}
 	if (!(ft_strchr("hljz", pf->format[pf->i])))
 		return (conv);
 	if (ft_strncmp(&pf->format[pf->i], "hh", 2) == 0)
@@ -85,12 +91,12 @@ t_printf	*parse_conversion(t_printf *pf)
 	conv = parse_modifier(&*pf, conv);
 	(!pf->format[pf->i]) ? ft_error("error_format_type") : 0;
 	conv->type = pf->format[pf->i];
-	while (!(ft_strchr("sdpc", conv->type)))
+	while (!(ft_strchr("sSdDpcC", conv->type)))
 		pf->i += 1;
-	pf->format[pf->i] == 'd' ? conv_d(pf, conv) : 0;
+	pf->format[pf->i] == 'd' || pf->format[pf->i] == 'D' ? conv_d(pf, conv) : 0;
 		// printf_num();
-	pf->format[pf->i] == 's' ? conv_s(pf, conv) : 0;
-	pf->format[pf->i] == 'c' ? conv_c(pf, conv) : 0;
+	pf->format[pf->i] == 's' || pf->format[pf->i] == 'S' ? conv_s(pf, conv) : 0;
+	pf->format[pf->i] == 'c' || pf->format[pf->i] == 'C' ? conv_c(pf, conv) : 0;
 	pf->format[pf->i] == 'p' ? conv_p(pf, conv) : 0;
 	// if (conv->modif != '0')
 	// 	printf("\nmodif %c\n", conv->modif);
