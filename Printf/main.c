@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 23:29:04 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/04 15:43:35 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/05 20:16:58 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int		main(int ac, char **av)
 	ft_printf("->%-10s\n", "Salut");
 	ft_printf("->%ls\n", L"ひらがな");
 	ft_printf("->%lc\n", L'ひ');
+	ft_printf("%O\n", 30);
+	printf("%O\n", 30);
 	return (0);
 }
 

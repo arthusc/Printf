@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/29 22:02:18 by mbriffau          #+#    #+#              #
-#    Updated: 2017/08/05 18:25:35 by achambon         ###   ########.fr        #
+#    Updated: 2017/08/05 19:56:20 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ FILES = 		ft_printf.c \
 				conv_d.c \
 				conv_p.c \
 				conv_x.c \
+				conv_o.c \
 				init_conv.c 
 
 all : $(NAME)

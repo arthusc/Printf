@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/05 18:32:11 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/05 20:17:30 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,14 @@ t_printf	*parse_conversion(t_printf *pf)
 	conv = parse_modifier(&*pf, conv);
 	(!pf->format[pf->i]) ? ft_error("error_format_type") : 0;
 	conv->type = pf->format[pf->i];
-	while (!(ft_strchr("sSdDpcCxX", conv->type)))
+	while (!(ft_strchr("cCsSdDipxXuUoO", conv->type)))
 		pf->i += 1;
-	pf->format[pf->i] == 'd' || pf->format[pf->i] == 'D' ? conv_d(pf, conv) : 0;
-		// printf_num();
-	pf->format[pf->i] == 's' || pf->format[pf->i] == 'S' ? conv_s(pf, conv) : 0;
-	pf->format[pf->i] == 'c' || pf->format[pf->i] == 'C' ? conv_c(pf, conv) : 0;
-	pf->format[pf->i] == 'p' ? conv_p(pf, conv) : 0;
-	pf->format[pf->i] == 'x' ? conv_x(pf, conv) : 0;
-	pf->format[pf->i] == 'X' ? conv_mx(pf, conv) : 0;
-	// if (conv->modif != '0')
-	// 	printf("\nmodif %c\n", conv->modif);
+	conv->type == 'd' || conv->type == 'D' || conv->type == 'i' ? conv_d(pf, conv) : 0;
+	conv->type == 's' || conv->type == 'S' ? conv_s(pf, conv) : 0;
+	conv->type == 'c' || conv->type == 'C' ? conv_c(pf, conv) : 0;
+	conv->type == 'p' ? conv_p(pf, conv) : 0;
+	conv->type == 'x' ? conv_x(pf, conv) : 0;
+	conv->type == 'X' ? conv_mx(pf, conv) : 0;
+	conv->type == 'o' || conv->type == 'O'? conv_o(pf, conv) : 0;
 	return (pf);
 }
