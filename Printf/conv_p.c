@@ -6,7 +6,7 @@
 /*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 15:58:06 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/07 20:11:05 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/07 20:35:00 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ void	conv_p(t_printf *pf, t_conv *conv)
 	{
 		if(conv->min_width > conv->precision)
 		{
-			while(conv->min_width-- - conv->precision - ft_strlen("0x") > 0)
+			while(conv->min_width-- - len - ft_strlen("0x") > 0)
 				ft_putchar(' ');
 			ft_putstr("0x");
-			option(conv->precision -  ft_strlen("0x"),'0', 0, str);
+			option((conv->min_width - conv->precision) - ft_strlen("0x"),'0', 0, str);
 		}
 		if(conv->min_width < conv->precision || conv->min_width == conv->precision)
 		{
