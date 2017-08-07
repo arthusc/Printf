@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 23:29:04 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/07 10:12:50 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/07 11:15:54 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,11 @@ int		main(int ac, char **av)
 	// ft_printf("->%-10s\n", "Salut");
 	// ft_printf("->%ls\n", L"ひらがな");
 	// ft_printf("->%llc\n", L'ひ');
-	ft_printf("m :%O\n", 30);
-	printf("t :%O\n", 30);
-	ft_printf("m :%zo\n", a);
-	printf("t :%50zo\n", a);
+	ft_printf("m :%lo\n", 30);
+	ft_printf("m :% 15zo\n", a);
 	ft_printf("m :%jo\n", max);
-	printf("t :%jo\n", max);
 	ft_printf("m :%010o\n", 60);
-	printf("t :%010o\n", 60);
 	ft_printf("m :%hho\n", uchar);
-	printf("t :%hho\n", uchar);
 	return (0);
 }
 
