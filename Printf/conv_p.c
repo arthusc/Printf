@@ -6,7 +6,7 @@
 /*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 15:58:06 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/07 19:40:37 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/07 20:11:05 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	conv_p_minus(t_printf *pf, t_conv *conv, char *str, int len)
 	ft_putstr("0x");
 	if (conv->min_width > conv->precision)
 	{
-		option(conv->precision - ft_strlen("0x"),, '0', 0, str);
+		option(conv->precision - ft_strlen("0x"), '0', 0, str);
 		conv->min_width = conv->min_width - conv->precision - 2;
 		while(conv->min_width-- > 0)
 			ft_putchar(' ');
 	}
 	if(conv->min_width < conv->precision || conv->min_width == conv->precision)
 		if(conv->min_width && conv->precision)
-			option(conv->precision - ft_strlen("0x"), '0', 0, str);
+			option(conv->precision - len, '0', 0, str);
 	if(conv->flags->minus == 1 && !conv->precision && conv->min_width)
 	{
 		ft_putstr("0x");
