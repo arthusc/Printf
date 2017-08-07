@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/07 18:24:56 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/07 21:06:31 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,16 @@ static t_conv	*parse_modifier(t_printf *pf, t_conv *conv)
 {
 	
 	if (ft_strchr("CSDUOX", pf->format[pf->i]))
-	{
 		conv-> modif = 'l';
-		return (conv);
-	}
-	if (!(ft_strchr("hljz", pf->format[pf->i])))
-		return (conv);
-	if (ft_strncmp(&pf->format[pf->i], "hh", 2) == 0)
+	else if (ft_strchr("hljz", pf->format[pf->i]))
 	{
-		conv->modif = 'H';
-		pf->i += 2;
-		return (conv);
+		conv->modif = *ft_strchr("hljz", pf->format[pf->i++]);
+		if (pf->format[pf->i] == conv->modif)
+		{
+			conv->modif = ft_toupper(conv->modif);
+			pf->i++;
+		}
 	}
-	if (ft_strncmp(&pf->format[pf->i], "ll", 2) == 0)
-	{
-		conv->modif = 'L';
-		pf->i += 2;
-		return (conv);
-	}
-	pf->format[pf->i] == 'h' ? conv-> modif = 'h': 0;
-	pf->format[pf->i] == 'l' ? conv-> modif = 'l': 0;
-	pf->format[pf->i] == 'j' ? conv-> modif = 'j': 0;
-	pf->format[pf->i] == 'z' ? conv-> modif = 'z': 0;
-	pf->i++;
 	return (conv);
 }
 
