@@ -80,7 +80,7 @@ t_printf	*parse_conversion(t_printf *pf)
 	conv->type = pf->format[pf->i];
 	while (!(ft_strchr("cCsSdDipxXuUoO", conv->type)))
 		pf->i += 1;
-	conv->type == 'd' || conv->type == 'D' || conv->type == 'i' ? conv_d(pf, conv) : 0;
+	(ft_strchr("dDi", conv->type)) ? conv_d(pf, conv) : 0;
 	conv->type == 's' || conv->type == 'S' ? conv_s(pf, conv) : 0;
 	conv->type == 'c' || conv->type == 'C' ? conv_c(pf, conv) : 0;
 	conv->type == 'p' ? conv_p(pf, conv) : 0;
@@ -88,6 +88,5 @@ t_printf	*parse_conversion(t_printf *pf)
 	conv->type == 'X' ? conv_mx(pf, conv) : 0;
 	conv->type == 'o' || conv->type == 'O'? conv_o(pf, conv) : 0;
 	conv->type == 'u' ? conv_u(pf, conv) : 0;
-
 	return (pf);
 }

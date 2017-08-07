@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/04 16:56:04 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/08 00:08:10 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,28 +86,20 @@ void	conv_d(t_printf *pf, t_conv *conv)
 	char	*str;
 	
 
-	if(conv->modif == 'h')
+	if(conv->modif == 'h' || conv->modif == 'l')
 	{
-		conv_d_h(pf, conv);
-		return;
-	}
-	if(conv->modif == 'l')
-	{
-		conv_d_l(pf, conv);
+		conv->modif == 'h' ? conv_d_h(pf, conv) : 0;
+		conv->modif == 'l' ? conv_d_l(pf, conv) : 0;
 		return;
 	}
 	if(!(apint = va_arg(pf->ap, int)))
 		ft_error("error_conv_d\n");
 	len = ft_strlen(str = ft_itoa(apint));
-
-	if (conv->flags->zero == 1 && conv->flags->minus == 0)
-		while (conv->min_width-- > 0 + len)
-			ft_putchar('0');
-
+	if (conv->flags->zero && !conv->flags->minus)
+		conv->min_width = option(conv->min_width - len, '0', 0, 0);
 	if (conv->flags->space == 1)
 		while ( conv->min_width-- > 0 + len)
 			ft_putchar(' ');
-
 	if (conv->flags->minus == 1)
 	{
 		if(conv->precision_set > 0)

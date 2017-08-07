@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:43:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/07 11:17:53 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/07 16:15:36 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int 	main(int ac, char **av)
 	if (ac)
 
 	printf("t :%O\n", 30);
-	printf("t :% 15zo\n", a);
+	printf("t :%15zo\n", a);
 	printf("t :%jo\n", max);
 	printf("t :%010o\n", 60);
 	printf("t :%hho\n", uchar);
