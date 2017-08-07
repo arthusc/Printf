@@ -6,7 +6,7 @@
 /*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/07 13:05:40 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/07 13:07:37 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/07 19:32:54 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,35 @@ void	print_conv_u(char *str, t_conv *conv)
 	int len ;
 
 	len = ft_strlen(str);
-	if (conv->flags->zero == 1 && conv->flags->minus == 0)
-		while (conv->min_width-- > 0 + len)
-			ft_putchar('0');
-	else if (conv->flags->space == 1 || conv->min_width > 0)
-		while ( conv->min_width-- > 0 + len)
+	if (conv->flags->minus == 1)
+		
+	if (conv->precision && conv->min_width)
+	{
+		if(conv->precision > conv->min_width)
+			option(conv->precision - len, '0', 0, str);
+		if(conv->precision < conv->min_width)
+		{
+			while(conv->min_width - conv->precision > 0)
+			{
+				ft_putchar(' ');
+				conv->min_width--;
+			}
+			option(conv->precision - len, '0', 0, str);
+		}
+	}
+	if(!conv->precision && conv->min_width)
+	{
+		while(conv->min_width-- - len - conv->precision > 0)
 			ft_putchar(' ');
-	ft_putstr(str);
-}
+		ft_putstr(str);
+	}
+	if(!conv->min_width && conv->precision)
+	{
+		option(conv->precision - len, '0', 0, str);
+	}
 
+
+}
 void	conv_u(t_printf *pf, t_conv *conv)
 {
 	unsigned int ptr;
@@ -38,6 +58,6 @@ void	conv_u(t_printf *pf, t_conv *conv)
 	conv->modif == 'z' ? ptr = (size_t)ptr : 0;
 	conv->modif == 'j' ? ptr = (uintmax_t)ptr : 0;
 	ptr = va_arg(pf->ap, uintmax_t);
-	print_conv_o(ft_itoa_base((long long)ptr, 10), conv);
+	print_conv_u(ft_itoa_base((long long)ptr, 10), conv);
 	return;
 }

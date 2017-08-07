@@ -6,7 +6,7 @@
 /*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 15:58:06 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/07 18:16:57 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/07 19:28:52 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	conv_p(t_printf *pf, t_conv *conv)
 	if(!conv->min_width && conv->precision)
 	{
 		ft_putstr("0x");
-		option(conv->precision - 2, '0', 0, str);
+		option(conv->precision - len, '0', 0, str);
 	}
 
 	return;

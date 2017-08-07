@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/05 20:17:30 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/07 18:24:56 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,7 @@ t_printf	*parse_conversion(t_printf *pf)
 	conv->type == 'x' ? conv_x(pf, conv) : 0;
 	conv->type == 'X' ? conv_mx(pf, conv) : 0;
 	conv->type == 'o' || conv->type == 'O'? conv_o(pf, conv) : 0;
+	conv->type == 'u' ? conv_u(pf, conv) : 0;
+
 	return (pf);
 }
