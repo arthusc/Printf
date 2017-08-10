@@ -6,48 +6,99 @@
 /*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:30:50 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/05 18:24:44 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/10 16:25:32 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "includes/ft_printf.h"
 
-void		conv_x(t_printf *pf, t_conv *conv)
+void		print_conv_x(t_printf *pf, t_conv *conv, int len, char *str)
 {
 
-	unsigned int pointer_x;
-	char *str;
-	int i;
+	if (!(conv->min_width) && !(conv->precision))
+		return (ft_putstr(str));
 
-	i = 0;
-
-	if(!(pointer_x = va_arg(pf->ap, unsigned int)))
-		return(ft_putstr("0x0"));
-	str = ft_itoa_base((long long)pointer_x, 16);
-	while (str[i])
+	if(conv->min_width && !(conv->precision))
 	{
-		if (ft_isalpha(str[i]))
+		if (conv->flags->minus == 1)
 		{
-			str[i] = ft_tolower((int)str[i]);
+			conv->before = 1;
+			option(conv->min_width - len , ' ', conv, str);
+			return;
 		}
-		i++;
+		if (conv->min_width <= len)
+			return(ft_putstr(str));
+		conv->before = 0;
+		option(conv->min_width - len, ' ', conv, str);
+		return;
 	}
-	ft_putstr(str);
-	return;
+
+	if(!(conv->min_width) && conv->precision)
+	{
+		if (conv->precision <= len)
+			return(ft_putstr(str));
+		conv->before = 0;
+		option(conv->precision - len, '0', conv, str);
+		return;
+	}
+
+	if(conv->min_width && conv->precision)
+	{
+		if(conv->precision <= len && conv->min_width <= len)
+		{
+			ft_putstr(str);
+		}
+			if(conv->precision > conv->min_width && conv->precision > len)
+		{
+			conv->before = 0;
+			option(conv->precision - len, '0', conv, str);
+			return;
+		}
+		if(conv->min_width > conv->precision && conv->min_width >= len)
+		{
+			if(conv->flags->minus == 1)
+			{
+				while (conv->precision-- - len)
+					ft_putchar('0');
+				conv->before = 1;
+				option(conv->min_width - len, ' ', conv, str);
+				return;
+			}
+			conv->before = 0;
+			while (conv->min_width-- - conv->precision)
+				ft_putchar(' ');
+			option(conv->precision - len, '0', conv, str);
+			return;
+		}
+	}
+return;
 }
 
-void		conv_mx(t_printf *pf, t_conv *conv)
+void		conv_x(t_printf *pf, t_conv *conv, char height)
 {
 
 	unsigned int pointer_x;
 	char *str;
 	int i;
-
+	int len;
 	i = 0;
 
 	if(!(pointer_x = va_arg(pf->ap, unsigned int)))
 		return(ft_putstr("0x0"));
 	str = ft_itoa_base((long long)pointer_x, 16);
-	ft_putstr(str);
+	len = ft_strlen(str);
+
+	if (height == 'x')
+	{
+		while (str[i])
+		{
+			if (ft_isalpha(str[i]))
+			{
+				str[i] = ft_tolower((int)str[i]);
+			}
+			i++;
+		}
+	}
+	print_conv_x(pf, conv, len, str);
 	return;
 }

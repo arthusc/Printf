@@ -6,67 +6,75 @@
 /*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/07 13:05:40 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/07 20:17:15 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/10 16:02:28 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "includes/ft_printf.h"
 
-void	printf_conv_u_minus(char *str, t_conv *conv, int len)
-{
-	if (conv->min_width > conv->precision)
-	{
-		option(conv->precision - len, '0', 0, str);
-		conv->min_width = conv->min_width - conv->precision;
-		while(conv->min_width-- > 0)
-			ft_putchar(' ');
-		return;
-	}
-	if(conv->min_width < conv->precision || conv->min_width == conv->precision)
-		if(conv->min_width && conv->precision)
-			option(conv->precision - len, '0', 0, str);
-//	if(conv->flags->minus == 1 && !conv->precision && conv->min_width)
-//		option(conv->min_width - len, ' ', 0, str);
-//	if(conv->flags->minus == 1 && !conv->min_width && conv->precision)
-//		option(conv->precision, '0', 0, str);
-}
 
 void	print_conv_u(char *str, t_conv *conv)
 {
 	int len ;
 
 	len = ft_strlen(str);
-	if (conv->flags->minus == 1)
+	if (!(conv->min_width) && !(conv->precision))
+		return (ft_putstr(str));
+
+	if(conv->min_width && !(conv->precision))
 	{
-		printf_conv_u_minus(str, conv, len);
+		if (conv->flags->minus == 1)
+		{
+			conv->before = 1;
+			option(conv->min_width - len , ' ', conv, str);
+			return;
+		}
+		if (conv->min_width <= len)
+			return(ft_putstr(str));
+		conv->before = 0;
+		option(conv->min_width - len, ' ', conv, str);
 		return;
 	}
-		if (conv->precision && conv->min_width)
+
+	if(!(conv->min_width) && conv->precision)
 	{
-		if(conv->precision > conv->min_width)
-			option(conv->precision - len, '0', 0, str);
-		if(conv->precision < conv->min_width)
+		if (conv->precision <= len)
+			return(ft_putstr(str));
+		conv->before = 0;
+		option(conv->precision - len, '0', conv, str);
+		return;
+	}
+
+	if(conv->min_width && conv->precision)
+	{
+		if(conv->precision <= len && conv->min_width <= len)
 		{
-			while(conv->min_width - conv->precision > 0)
-			{
-				ft_putchar(' ');
-				conv->min_width--;
-			}
-			option(conv->precision - len, '0', 0, str);
+			ft_putstr(str);
 		}
-	}
-	if(!conv->precision && conv->min_width)
-	{
-		while(conv->min_width-- - len - conv->precision > 0)
-			ft_putchar(' ');
-		ft_putstr(str);
-	}
-	if(!conv->min_width && conv->precision)
-	{
-		option(conv->precision - len, '0', 0, str);
-	}
+			if(conv->precision > conv->min_width && conv->precision > len)
+		{
+			conv->before = 0;
+			option(conv->precision - len, '0', conv, str);
+			return;
+		}
+		if(conv->min_width > conv->precision && conv->min_width >= len)
+		{
+			if(conv->flags->minus == 1)
+			{
+				while (conv->precision-- - len)
+					ft_putchar('0');
+				conv->before = 1;
+				option(conv->min_width - len, ' ', conv, str);
+				return;
+			}
+			conv->before = 0;
+			while (conv->min_width-- - conv->precision)
+				ft_putchar(' ');
+			option(conv->precision - len, '0', conv, str);
+			return;
+		}
 
-
+}
 }
 void	conv_u(t_printf *pf, t_conv *conv)
 {

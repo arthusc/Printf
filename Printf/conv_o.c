@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 19:35:35 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/07 12:58:53 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/10 16:07:59 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,67 @@
 
 void print_conv_o(char *str, t_conv *conv)
 {
-	int len ;
-	
+	int len;
+
 	len = ft_strlen(str);
-	if (conv->flags->zero == 1 && conv->flags->minus == 0)
-		while (conv->min_width-- > 0 + len)
-			ft_putchar('0');
-	else if (conv->flags->space == 1 || conv->min_width > 0)
-		while ( conv->min_width-- > 0 + len)
-			ft_putchar(' ');
-	ft_putstr(str);
-} 
+	if (!(conv->min_width) && !(conv->precision))
+		return (ft_putstr(str));
+
+	if(conv->min_width && !(conv->precision))
+	{
+		if (conv->flags->minus == 1)
+		{
+			conv->before = 1;
+			option(conv->min_width - len , ' ', conv, str);
+			return;
+		}
+		if (conv->min_width <= len)
+			return(ft_putstr(str));
+		conv->before = 0;
+		option(conv->min_width - len, ' ', conv, str);
+		return;
+	}
+
+	if(!(conv->min_width) && conv->precision)
+	{
+		if (conv->precision <= len)
+			return(ft_putstr(str));
+		conv->before = 0;
+		option(conv->precision - len, '0', conv, str);
+		return;
+	}
+
+	if(conv->min_width && conv->precision)
+	{
+		if(conv->precision <= len && conv->min_width <= len)
+		{
+			ft_putstr(str);
+		}
+			if(conv->precision > conv->min_width && conv->precision > len)
+		{
+			conv->before = 0;
+			option(conv->precision - len, '0', conv, str);
+			return;
+		}
+		if(conv->min_width > conv->precision && conv->min_width >= len)
+		{
+			if(conv->flags->minus == 1)
+			{
+				while (conv->precision-- - len)
+					ft_putchar('0');
+				conv->before = 1;
+				option(conv->min_width - len, ' ', conv, str);
+				return;
+			}
+			conv->before = 0;
+			while (conv->min_width-- - conv->precision)
+				ft_putchar(' ');
+			option(conv->precision - len, '0', conv, str);
+			return;
+		}
+	}
+	return;
+}
 
 void		conv_o(t_printf *pf, t_conv *conv)
 {

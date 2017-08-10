@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/07 21:06:31 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/10 16:25:25 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ t_printf	*parse_conversion(t_printf *pf)
 	conv->type == 's' || conv->type == 'S' ? conv_s(pf, conv) : 0;
 	conv->type == 'c' || conv->type == 'C' ? conv_c(pf, conv) : 0;
 	conv->type == 'p' ? conv_p(pf, conv) : 0;
-	conv->type == 'x' ? conv_x(pf, conv) : 0;
-	conv->type == 'X' ? conv_mx(pf, conv) : 0;
+	conv->type == 'x' ? conv_x(pf, conv, 'x') : 0;
+	conv->type == 'X' ? conv_x(pf, conv, 'X') : 0;
 	conv->type == 'o' || conv->type == 'O'? conv_o(pf, conv) : 0;
 	conv->type == 'u' ? conv_u(pf, conv) : 0;
 	return (pf);
