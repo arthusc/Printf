@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/31 23:29:04 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/10 20:35:38 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/10 22:57:26 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,40 +125,68 @@ int		main(int ac, char **av)
 	ft_printf("m :%-10.5x\n", c);
 	printf("t :%-5.10x\n", c);
 	ft_printf("m :%-5.10x\n", c);
+
+
+
+
+	ft_printf("m :%d\n", 784);
+	printf("t :%d\n", 784);
+	ft_printf("m :% d\n", 784);
+	printf("t :% d\n", 784);
+	ft_printf("m :%+d\n", 784);
+	printf("t :%+d\n", 784);
+	ft_printf("m :%+ d\n", 784);
+	printf("t :%+ d\n", 784);
+	ft_printf("m :%-d\n", 784);
+	printf("t :%-d\n", 784);
+	ft_printf("m :%- d\n", 784);
+	printf("t :%- d\n", 784);
+	ft_printf("m :%0d\n", 784);
+	printf("t :%0d\n", 784);
+	ft_printf("m :%+0d\n", 784);
+	printf("t :%+0d\n", 784);
+	ft_printf("m :%-0d\n", 784);
+	printf("t :%-0d\n", 784);
+	ft_printf("m :%0 d\n", 784);
+	printf("t :%0 d\n", 784);
+	ft_printf("m :%0d\n", 784);
+	printf("t :%0d\n", 784);
 */
-	ft_printf("m :%10.5d\n", 784);
-	printf("t :%10.5d\n", 784);
-	ft_printf("m :% 10.5d\n", 784);
-	printf("t :% 10.5d\n", 784);
-	ft_printf("m :%+10.5d\n", 784);
-	printf("t :%+10.5d\n", 784);
-	ft_printf("m :%-10.5d\n", 784);
-	printf("t :%-10.5d\n", 784);
-	ft_printf("m :%+-10.5d\n", 784);
-	printf("t :%+-10.5d\n", 784);
-	ft_printf("m :%-010.5d\n", 784);
-	printf("t :%-010.5d\n", 784);
-	ft_printf("m :%+010.5d\n", 784);
-	printf("t :%+010.5d\n", 784);
-	ft_printf("m :%-+010.5d\n", 784);
-	printf("t :%-+010.5d\n", 784);
-	ft_printf("m :% 010.5d\n", 784);
-	printf("t :% 010.5d\n", 784);
-
-
-	ft_printf("t :% .5d\n", 784);
-	printf("t :% .5d\n", 784);
-	ft_printf("t :% .5d\n", 784);
-	printf("t :% .5d\n", 784);
-	ft_printf("t :% .5d\n", 784);
-	printf("t :% .5d\n", 784);
-
-	ft_printf("t :% 5d\n", 784);
+	ft_printf("m :%5d\n", 784);
+	printf("t :%5d\n", 784);
+	ft_printf("m :% 5d\n", 784);
 	printf("t :% 5d\n", 784);
-	ft_printf("t :% 5d\n", 784);
-	printf("t :% 5d\n", 784);
-	ft_printf("t :% 5d\n", 784);
-	printf("t :% 5d\n", 784);
+	ft_printf("m :%+5d\n", 784);
+	printf("t :%+5d\n", 784);
+	ft_printf("m :%+ 5d\n", 784);
+	printf("t :%+ 5d\n", 784);
+	ft_printf("m :%-5d\n", 784);
+	printf("t :%-5d\n", 784);
+	ft_printf("m :%- 5d\n", 784);
+	printf("t :%- 5d\n", 784);
+	ft_printf("m :%05d\n", 784);
+	printf("t :%05d\n", 784);
+	ft_printf("m :%+05d\n", 787);
+	printf("t :%+05d\n", 787);
+	ft_printf("m :%-05d\n", 786);
+	printf("t :%-05d\n", 786);
+	ft_printf("m :%0 5d\n", 785);
+	printf("t :%0 5d\n", 785);
+	ft_printf("m :%+- 010d\n", 780);
+	printf("t :%+- 010d\n", 780);
+	ft_printf("m :%01d\n", 784);
+	printf("t :%01d\n", 784);
+	ft_printf("m :%-01d\n", 784);
+	printf("t :%-01d\n", 784);
+	ft_printf("m :% 01d\n", 784);
+	printf("t :% 01d\n", 784);
+	ft_printf("m :%+ 01d\n", 784);
+	printf("t :%+ 01d\n", 784);
+
+	
+//	
+//
+//
 //	printf("% s\n", "14 is a positive number");
 //	printf("% u\n", 747);
 //	printf("% x\n", 784);

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/10 20:29:10 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/10 22:57:27 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,50 @@ void	conv_d(t_printf *pf, t_conv *conv)
 	len = ft_strlen(str = ft_itoa(apint));
 	
 	if (!conv->min_width && !conv->precision)
+	{
+		if(conv->flags->space && !conv->flags->plus)
+			ft_putchar(' ');
+		if(conv->flags->plus)
+			ft_putchar('+');
+		ft_putstr(str);
+		return;
+	}
 
+	if (conv->min_width && !conv->precision)
+	{
+		if(conv->min_width < len)
+		{
+			if(conv->flags->plus)
+			{
+				ft_putchar('+');
+				ft_putstr(str);
+				return;
+			}
+			if(conv->flags->space)
+			{
+				ft_putchar(' ');
+				ft_putstr(str);
+				return;
+			}
+		}
+		else
+		{
+			if (conv->flags->zero)
+			if(conv->flags->space)
+			{
+				ft_putchar(' ');
+				conv->min_width--;
+			}
+			option(conv->min_width - len, '0', conv, str);
+			return;
+		}
+		}
 
-	else if (conv->min_width && !conv->precision)
+		ft_putstr(str);
+	}
+	if (!conv->min_width && conv->precision)
 
-	else if (!conv->min_width && conv->precision)
-
-	else if (conv->min_width && conv->precision)
+	if (conv->min_width && conv->precision)
 
 
 	return;
