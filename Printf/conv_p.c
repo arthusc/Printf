@@ -6,35 +6,19 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 15:58:06 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/07 21:48:19 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/10 14:36:18 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "includes/ft_printf.h"
 
-void	conv_p_minus(t_printf *pf, t_conv *conv, char *str, int len)
+void	print_p(char *str)
 {
 	ft_putstr("0x");
-	if (conv->min_width > conv->precision)
-	{
-		conv->min_width = option(conv->precision - ft_strlen("0x"), '0', 0, str);
-		while(conv->min_width-- > 0)
-			ft_putchar(' ');
-	}
-	if(conv->min_width < conv->precision || conv->min_width == conv->precision)
-		if(conv->min_width && conv->precision)
-			conv->min_width = option(conv->precision - len, '0', 0, str);
-	if(conv->flags->minus == 1 && !conv->precision && conv->min_width)
-	{
-		ft_putstr("0x");
-		conv->min_width = option(conv->min_width - len - ft_strlen("0x"), ' ', 1, str);
-	}
-	if(conv->flags->minus == 1 && !conv->min_width && conv->precision)
-	{
-		ft_putstr("0x");
-		conv->min_width = option(conv->precision - ft_strlen("0x"), '0', 0, str);
-	}
+	ft_putstr(str);
+	return;
 }
+
 
 void	conv_p(t_printf *pf, t_conv *conv)
 {
@@ -44,15 +28,80 @@ void	conv_p(t_printf *pf, t_conv *conv)
 	int len;
 
 	i = 0;
+	conv->ox = 1;
 	if(!(pointer = va_arg(pf->ap, void *)))
 		return (ft_putstr("0x0"));
 	str = ft_itoa_base((long long)pointer, 16);
+	len = ft_strlen(str);
 	while (str[i])
 	{
 		if (ft_isalpha(str[i]))
 			str[i] = ft_tolower((int)str[i]);
 		i++;
 	}
+
+	if (!(conv->min_width) && !(conv->precision))
+		return (print_p(str));
+
+	if(conv->min_width && !(conv->precision))
+	{
+		if (conv->flags->minus == 1)
+		{
+			conv->before = 1;
+			option(conv->min_width - len - 2, ' ', conv, str);
+			return;
+		}
+		if (conv->min_width <= len)
+			return(print_p(str));
+		conv->before = 0;
+		option(conv->min_width - len - 2, ' ', conv, str);
+		return;
+	}
+
+	if(!(conv->min_width) && conv->precision)
+	{
+		if (conv->precision <= len)
+			return(print_p(str));
+		conv->before = 0;
+		conv->precision_set = 2;
+		option(conv->precision - len, '0', conv, str);
+		return;
+	}
+
+	if(conv->min_width && conv->precision)
+	{
+		if(conv->precision <= len && conv->min_width <= len)
+		{
+			print_p(str);
+		}
+			if(conv->precision > conv->min_width && conv->precision > len)
+		{
+			conv->before = 0;
+			conv->precision_set = 2;
+			option(conv->precision - len, '0', conv, str);
+			return;
+		}
+		if(conv->min_width > conv->precision && conv->min_width >= len)
+		{
+			if(conv->flags->minus == 1)
+			{
+				conv->before = 1;
+				option(conv->min_width - len - 2, ' ', conv, str);
+				return;
+			}
+			conv->before = 0;
+			option(conv->min_width - len - 2, ' ', conv, str);
+			return;
+		}
+	}
+
+
+
+
+
+
+
+	/*
 	len = ft_strlen(str);
 	if(conv->flags->minus == 1 && conv->precision && conv->min_width)
 		conv_p_minus(pf, conv, str, len);
@@ -84,7 +133,7 @@ void	conv_p(t_printf *pf, t_conv *conv)
 		ft_putstr("0x");
 		option(conv->precision - len, '0', 0, str);
 	}
-
+*/
 	return;
 }
 

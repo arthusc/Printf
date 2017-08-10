@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/07 23:06:05 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/10 11:51:26 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void	conv_s(t_printf *pf, t_conv *conv)
 	conv->modif == 'l' ? (len = ft_strlen(str = va_arg(pf->ap, wchar_t *))) :
 	(len = ft_strlen(str = va_arg(pf->ap, unsigned char *)));
 	if (conv->flags->zero && !conv->flags->minus)
-		conv->min_width = option(conv->min_width - len, '0', 0, 0);
+		conv->min_width = option(conv->min_width - len, '0', conv, 0);
 	else if (conv->flags->space)
-		conv->min_width = option(conv->min_width - len, ' ', 0, 0);
+		conv->min_width = option(conv->min_width - len, ' ', conv, 0);
 	else if (conv->flags->minus)
 	{
 		conv->modif == 'l' ? print_wstring(conv, str, ft_wstrlen(str)) : ft_putstr(str);
-		conv->min_width = option(conv->min_width - len, ' ', 0, 0);
+		conv->min_width = option(conv->min_width - len, ' ', conv, 0);
 		return;
 	}
 	if (conv->modif == 'l')
