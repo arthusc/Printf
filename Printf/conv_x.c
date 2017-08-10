@@ -6,15 +6,14 @@
 /*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:30:50 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/10 16:25:32 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/10 18:52:16 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "includes/ft_printf.h"
 
-void		print_conv_x(t_printf *pf, t_conv *conv, int len, char *str)
+void		print_conv_x(t_conv *conv, int len, char *str)
 {
-
 	if (!(conv->min_width) && !(conv->precision))
 		return (ft_putstr(str));
 
@@ -99,6 +98,6 @@ void		conv_x(t_printf *pf, t_conv *conv, char height)
 			i++;
 		}
 	}
-	print_conv_x(pf, conv, len, str);
+	print_conv_x(conv, len, str);
 	return;
 }
