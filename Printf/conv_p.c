@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 15:58:06 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/10 14:36:18 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/10 16:28:53 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,114 +26,73 @@ void	conv_p(t_printf *pf, t_conv *conv)
 	char *str;
 	int i;
 	int len;
+	int	end = 0;
 
-	i = 0;
+	i = -1;
 	conv->ox = 1;
 	if(!(pointer = va_arg(pf->ap, void *)))
 		return (ft_putstr("0x0"));
 	str = ft_itoa_base((long long)pointer, 16);
 	len = ft_strlen(str);
-	while (str[i])
-	{
-		if (ft_isalpha(str[i]))
-			str[i] = ft_tolower((int)str[i]);
-		i++;
-	}
-
+	while (str[++i])
+		(ft_isalpha(str[i])) ? str[i] = ft_tolower((int)str[i]): 0;
 	if (!(conv->min_width) && !(conv->precision))
 		return (print_p(str));
-
-	if(conv->min_width && !(conv->precision))
+	else if(!end && conv->min_width && !conv->precision)
 	{
-		if (conv->flags->minus == 1)
+		if (conv->flags->minus)
 		{
 			conv->before = 1;
-			option(conv->min_width - len - 2, ' ', conv, str);
-			return;
+			conv->min_width = option(conv->min_width - len - 2, ' ', conv, str);
+			end += 1;
 		}
-		if (conv->min_width <= len)
+		else if (!end && conv->min_width <= len)
 			return(print_p(str));
-		conv->before = 0;
-		option(conv->min_width - len - 2, ' ', conv, str);
-		return;
+		if (!end)
+		{
+			conv->before = 0;
+			conv->min_width = option(conv->min_width - len - 2, ' ', conv, str);
+			end += 1;
+		}
 	}
-
-	if(!(conv->min_width) && conv->precision)
+	else if(!end && !conv->min_width && conv->precision)
 	{
 		if (conv->precision <= len)
 			return(print_p(str));
 		conv->before = 0;
 		conv->precision_set = 2;
-		option(conv->precision - len, '0', conv, str);
-		return;
+		conv->min_width = option(conv->precision - len, '0', conv, str);
+		end += 1;
 	}
-
-	if(conv->min_width && conv->precision)
+	else if(!end && conv->min_width && conv->precision)
 	{
 		if(conv->precision <= len && conv->min_width <= len)
 		{
 			print_p(str);
 		}
-			if(conv->precision > conv->min_width && conv->precision > len)
+		else if(conv->precision > conv->min_width && conv->precision > len)
 		{
 			conv->before = 0;
 			conv->precision_set = 2;
-			option(conv->precision - len, '0', conv, str);
-			return;
+			conv->min_width = option(conv->precision - len, '0', conv, str);
+			end += 1;
 		}
-		if(conv->min_width > conv->precision && conv->min_width >= len)
+		else if(!end && (conv->min_width > conv->precision) && (conv->min_width >= len))
 		{
 			if(conv->flags->minus == 1)
 			{
 				conv->before = 1;
-				option(conv->min_width - len - 2, ' ', conv, str);
-				return;
+				conv->min_width = option(conv->min_width - len - 2, ' ', conv, str);
+				end += 1;
 			}
-			conv->before = 0;
-			option(conv->min_width - len - 2, ' ', conv, str);
-			return;
+			if (!end)
+			{
+				conv->before = 0;
+				conv->min_width = option(conv->min_width - len - 2, ' ', conv, str);
+				end += 1;
+			}
 		}
 	}
-
-
-
-
-
-
-
-	/*
-	len = ft_strlen(str);
-	if(conv->flags->minus == 1 && conv->precision && conv->min_width)
-		conv_p_minus(pf, conv, str, len);
-	if(conv->flags->minus == 0 && conv->precision && conv->min_width)
-	{
-		if(conv->min_width > conv->precision)
-		{
-			while(conv->min_width-- - len - ft_strlen("0x") > 0)
-				ft_putchar(' ');
-			ft_putstr("0x");
-			option((conv->min_width - conv->precision) - ft_strlen("0x"),'0', 0, str);
-		}
-		if(conv->min_width < conv->precision || conv->min_width == conv->precision)
-		{
-			ft_putstr("0x");
-			option(conv->precision - ft_strlen("0x"), '0', 0, str);
-		}
-	}
-
-	if(!conv->precision && conv->min_width)
-	{
-		while(conv->min_width-- - len - conv->precision - ft_strlen("0x") > 0)
-			ft_putchar(' ');
-		ft_putstr("0x");
-		ft_putstr(str);
-	}
-	if(!conv->min_width && conv->precision)
-	{
-		ft_putstr("0x");
-		option(conv->precision - len, '0', 0, str);
-	}
-*/
 	return;
 }
 
