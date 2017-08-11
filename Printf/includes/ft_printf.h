@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/11 14:29:07 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/11 15:17:36 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_conv		*init_conv(void);
 
 void	conv_c(t_printf *pf, t_conv *conv);
 void	conv_s(t_printf *pf, t_conv *conv);
-void	conv_d(t_printf *pf, t_conv *conv);
+int		conv_d(t_printf *pf, t_conv *conv);
 void	conv_d_l(t_printf *pf, t_conv *conv);
 void	conv_d_h(t_printf *pf, t_conv *conv);
 void	conv_f(t_printf *pf, t_conv *conv);

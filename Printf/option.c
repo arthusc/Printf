@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 19:35:35 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/11 00:22:27 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/11 14:44:48 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	option(int n, char c, t_conv *conv, char *s)
 	while (i < n)
 		tab[i++] = c;
 	write(1, tab, n);
+	if((conv->flag & PLUS) && !(conv->flag & ZERO) && (conv->flag & (TYPE_D + TYPE_U + TYPE_O)))
+		ft_putchar('+');
 	if (conv->before == 0 && s)
 	{
 		if(conv->ox == 1)
