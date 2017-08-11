@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/11 00:57:25 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/11 13:20:33 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,6 @@
 # define SPACE			1
 
 
-
-typedef struct			s_flags
-{
-	int					minus;
-	int					plus;
-	int					sharp;
-	int					zero;
-	int					space;
-}						t_flags;
-
 typedef struct			s_conv
 {
 	int					min_width;
@@ -52,7 +42,6 @@ typedef struct			s_conv
 	char				modif;
 	char				type;
 	char				sign;
-	t_flags				*flags;
 	int					flag;
 }						t_conv;
 
