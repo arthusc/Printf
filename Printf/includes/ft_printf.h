@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/11 13:20:33 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/11 14:29:07 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,28 @@
 
 # include <stdio.h>// to delete
 
-# define PRECISION		2048
-# define MODIFIER_H		1024
-# define MODIFIER_HH	512
-# define MODIFIER_L		256
-# define MODIFIER_LL	128
-# define MODIFIER_J		64
-# define MODIFIER_Z		32
-# define MINUS			16
-# define PLUS			8
-# define SHARP			4
-# define ZERO			2
-# define SPACE			1
+# define TYPE_S 		(1 << 31)
+# define TYPE_C 		(1 << 30)
+# define TYPE_D 		(1 << 29)
+# define TYPE_P 		(1 << 28)
+# define TYPE_X 		(1 << 27)
+# define TYPE_U 		(1 << 26)
+# define TYPE_O 		(1 << 25)
 
+# define PRECISION		(1 << 11)
+
+# define MODIFIER_H		(1 << 10)
+# define MODIFIER_HH	(1 << 9)
+# define MODIFIER_L		(1 << 8)
+# define MODIFIER_LL	(1 << 7)
+# define MODIFIER_J		(1 << 6)
+# define MODIFIER_Z		(1 << 5)
+
+# define MINUS			(1 << 4)
+# define PLUS			(1 << 3)
+# define SHARP			(1 << 2)
+# define ZERO			(1 << 1)
+# define SPACE			(1 << 0)
 
 typedef struct			s_conv
 {
