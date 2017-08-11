@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 19:35:35 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/10 16:07:59 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/11 00:55:37 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void print_conv_o(char *str, t_conv *conv)
 
 	if(conv->min_width && !(conv->precision))
 	{
-		if (conv->flags->minus == 1)
+		if (conv->flag & MINUS)
 		{
 			conv->before = 1;
 			option(conv->min_width - len , ' ', conv, str);
@@ -59,7 +59,7 @@ void print_conv_o(char *str, t_conv *conv)
 		}
 		if(conv->min_width > conv->precision && conv->min_width >= len)
 		{
-			if(conv->flags->minus == 1)
+			if(conv->flag & MINUS)
 			{
 				while (conv->precision-- - len)
 					ft_putchar('0');

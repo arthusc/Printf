@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_x.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:30:50 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/10 18:52:16 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/11 00:54:05 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_conv_x(t_conv *conv, int len, char *str)
 
 	if(conv->min_width && !(conv->precision))
 	{
-		if (conv->flags->minus == 1)
+		if (conv->flag & MINUS)
 		{
 			conv->before = 1;
 			option(conv->min_width - len , ' ', conv, str);
@@ -55,7 +55,7 @@ void		print_conv_x(t_conv *conv, int len, char *str)
 		}
 		if(conv->min_width > conv->precision && conv->min_width >= len)
 		{
-			if(conv->flags->minus == 1)
+			if(conv->flag & MINUS)
 			{
 				while (conv->precision-- - len)
 					ft_putchar('0');

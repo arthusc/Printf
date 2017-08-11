@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/10 16:24:25 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/11 00:57:25 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 # include <wchar.h>
 
 # include <stdio.h>// to delete
+
+# define PRECISION		2048
+# define MODIFIER_H		1024
+# define MODIFIER_HH	512
+# define MODIFIER_L		256
+# define MODIFIER_LL	128
+# define MODIFIER_J		64
+# define MODIFIER_Z		32
+# define MINUS			16
+# define PLUS			8
+# define SHARP			4
+# define ZERO			2
+# define SPACE			1
+
 
 
 typedef struct			s_flags
@@ -39,6 +53,7 @@ typedef struct			s_conv
 	char				type;
 	char				sign;
 	t_flags				*flags;
+	int					flag;
 }						t_conv;
 
 typedef struct			s_printf

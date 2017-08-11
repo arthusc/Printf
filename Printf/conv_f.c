@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_f.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/02 18:17:08 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/04 12:52:18 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/11 00:57:21 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	conv_f_L(t_printf *pf, t_conv *conv)
 	if (!(apint = va_arg(pf->ap, long double)))
 		ft_error("error_conv_d\n");
 	len = ft_strlen(str = ft_itoa(apint));
-	if (conv->flags->zero == 1 && conv->flags->minus == 0)
+	if ((conv->flag & ZERO) && !(conv->flag & MINUS))
 		while (conv->min_width-- > 0 + len)
 			ft_putchar('0');
-	if (conv->flags->space == 1)
+	if ((conv->flag & SPACE))
 		while ( conv->min_width-- > 0 + len)
 			ft_putchar(' ');
-	if (conv->flags->minus == 1)
+	if ((conv->flag & MINUS))
 	{
 		ft_putnbr(apint);
 		while (conv->min_width-- > 0 + len)
@@ -50,10 +50,10 @@ void	conv_f(t_printf *pf, t_conv *conv)
 	if(!(apint = va_arg(pf->ap, double)))
 		ft_error("error_conv_f\n");
 	len = ft_strlen(str = ft_itoa(apint));
-	if (conv->flags->zero == 1 && conv->flags->minus == 0)
+	if ((conv->flag & ZERO) && !(conv->flag & MINUS))
 		while (conv->min_width-- > 0 + len)
 			ft_putchar(' ');
-	if (conv->flags->minus == 1)
+	if ((conv->flag & MINUS))
 	{
 		ft_putnbr(apint);
 		while (conv->min_width-- > 0 + len)

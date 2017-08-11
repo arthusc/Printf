@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/10 16:25:25 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/10 22:44:01 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ static t_conv		*parse_flags(t_printf *pf, t_conv *conv)
 		pf->format[pf->i] == '-' ? conv->flags->minus = 1 : 0;
 		pf->format[pf->i] == '+' ? conv->flags->plus = 1 : 0;
 		pf->format[pf->i] == ' ' ? conv->flags->space = 1 : 0;
+
+		pf->format[pf->i] == '-' ? conv->flag += MINUS : 0;
+		pf->format[pf->i] == '+' ? conv->flag += PLUS : 0;
+		pf->format[pf->i] == '#' ? conv->flag += SHARP : 0;
+		pf->format[pf->i] == '0' ? conv->flag += ZERO : 0;
+		pf->format[pf->i] == ' ' ? conv->flag += SPACE : 0;
 		if (pf->format[pf->i] == '\0')
 			break;
 		pf->i++;

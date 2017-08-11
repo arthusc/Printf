@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/10 11:51:26 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/11 00:52:25 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,20 @@ void	conv_s(t_printf *pf, t_conv *conv)
 	void *str;
 	int len;
 
-	conv->modif == 'l' ? (len = ft_strlen(str = va_arg(pf->ap, wchar_t *))) :
-	(len = ft_strlen(str = va_arg(pf->ap, unsigned char *)));
-	if (conv->flags->zero && !conv->flags->minus)
+	conv->modif == 'l' ? (str = va_arg(pf->ap, wchar_t *)) : (str = va_arg(pf->ap, unsigned char *));
+	len = (conv->modif == 'l' ? count_wchars(conv, str, ft_strlen(str)) : ft_strlen(str));
+	if ((conv->flag & ZERO) && !(conv->flag & MINUS))
 		conv->min_width = option(conv->min_width - len, '0', conv, 0);
-	else if (conv->flags->space)
+	else if ((conv->flag & SPACE))
 		conv->min_width = option(conv->min_width - len, ' ', conv, 0);
-	else if (conv->flags->minus)
+	else if ((conv->flag & MINUS))
 	{
 		conv->modif == 'l' ? print_wstring(conv, str, ft_wstrlen(str)) : ft_putstr(str);
 		conv->min_width = option(conv->min_width - len, ' ', conv, 0);
 		return;
 	}
 	if (conv->modif == 'l')
-			print_wstring(conv, str, ft_wstrlen(str));
+		print_wstring(conv, str, ft_wstrlen(str));
 	else
 		ft_putstr(str);
 }
