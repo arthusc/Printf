@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/02 18:17:08 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/11 00:57:21 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/11 14:54:02 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	conv_f(t_printf *pf, t_conv *conv)
 
 	if (conv->precision_set == 0)
 		conv->precision = 6;
-	if(conv->modif == 'L')
+	if(conv->flag & MODIFIER_LL)
 		conv_f_L(pf, conv);
 	if(!(apint = va_arg(pf->ap, double)))
 		ft_error("error_conv_f\n");

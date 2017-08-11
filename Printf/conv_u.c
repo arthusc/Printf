@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/07 13:05:40 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/11 00:54:35 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/11 14:57:31 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	conv_u(t_printf *pf, t_conv *conv)
 	unsigned int ptr;
 
 	ptr = 0;
-	conv->modif == 'l' ? ptr = (unsigned long int)ptr : 0 ;
-	conv->modif == 'L' ? ptr = (unsigned long long int)ptr : 0;
-	conv->modif == 'h' ? ptr = (uint16_t)ptr : 0;
-	conv->modif == 'H' ? ptr = (uint8_t)ptr : 0;
-	conv->modif == 'z' ? ptr = (size_t)ptr : 0;
-	conv->modif == 'j' ? ptr = (uintmax_t)ptr : 0;
+	conv->flag & MODIFIER_L ? ptr = (unsigned long int)ptr : 0 ;
+	conv->flag & MODIFIER_LL ? ptr = (unsigned long long int)ptr : 0;
+	conv->flag & MODIFIER_H ? ptr = (uint16_t)ptr : 0;
+	conv->flag & MODIFIER_HH ? ptr = (uint8_t)ptr : 0;
+	conv->flag & MODIFIER_Z ? ptr = (size_t)ptr : 0;
+	conv->flag & MODIFIER_J ? ptr = (uintmax_t)ptr : 0;
 	ptr = va_arg(pf->ap, uintmax_t);
 	print_conv_u(ft_itoa_base((long long)ptr, 10), conv);
 	return;

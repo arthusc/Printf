@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/11 00:44:29 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/11 14:52:52 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	conv_c(t_printf *pf, t_conv *conv)
 	(conv->min_width = option(conv->min_width, '0', conv, 0)) : 0;
 	conv->flag & SPACE ?
 	(conv->min_width = option(conv->min_width, ' ', conv, 0)) : 0;
-	conv->modif == 'l' ? print_wint(va_arg(pf->ap, wint_t)) :
+	conv->flag & MODIFIER_L ? print_wint(va_arg(pf->ap, wint_t)) :
 	ft_putchar(va_arg(pf->ap, unsigned));
 	conv->flag & MINUS ?
 	(conv->min_width = option(conv->min_width, ' ', conv, 0)) : 0;
