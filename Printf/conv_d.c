@@ -39,27 +39,110 @@ void	conv_d_h(t_printf *pf, t_conv *conv)
 	return;
 }
 
-void	conv_d_minus(t_conv *conv, int len, char *str)
+int	conv_d_minus(t_conv *conv, int len, char *str)
 {
-	return;
-/*	if (conv->min_width && !conv->precision)
+	//	if (!conv->min_width && !conv->precision)
+
+
+	if (conv->min_width && !conv->precision)
 	{
 		if(conv->min_width < len)
-
+			return(0);
 		else if(conv->min_width > len)
+		{
+			if(conv->flag & SPACE)
+			{
+				ft_putchar(' ');
+				conv->min_width--;
+			}
+			if(conv->flag & PLUS && !(conv->flag & ZERO) && !(conv->flag & SPACE))
+			{
+				conv->min_width--;
+				conv->before = 1;
+				ft_putchar('+');
+				return(option(conv->min_width - len, ' ', conv, str));
+			}
+			if(conv->flag & PLUS && !(conv->flag & ZERO))
+			{
+				conv->min_width--;
+			}
+			else if(conv->flag & PLUS && conv->flag & ZERO)
+			{
+				conv->before = 1;
+				ft_putchar('+');
+				return(option(conv->min_width - 1 - len, ' ', conv, str));
+			}
+			else if(conv->flag & ZERO)
+			{
+				conv->before = 1;
+				return(option(conv->min_width - len, ' ', conv, str));
+			}
+		}
+		if (!(conv->flag & PLUS))
+		{
+			conv->before = 1;
+			return(option(conv->min_width - len, ' ', conv, str));
+		}
+		option(conv->min_width - len, ' ', conv, str);
+		return(len + conv->min_width);
 	}
+
 	if (!conv->min_width && conv->precision)
 	{
-
+		conv->before = 3;
+		if (conv->flag & SPACE)
+			ft_putchar(' ');
+		if (conv->flag & PLUS)
+			ft_putchar('+');
+		return(option(conv->precision - len, '0', conv, str));
 	}
 	if (conv->min_width && conv->precision)
-*/}
+	{
+		if(conv->min_width > conv->precision)
+		{
+			conv->before = 0;
+			if(conv->flag & SPACE)
+			{
+				conv->min_width--;
+				ft_putchar(' ');
+			}
+				if(conv->flag & PLUS)
+			{
+				conv->min_width--;
+				ft_putchar('+');
+			}
+			option(conv->precision - len, '0', conv, str);
+			while((conv->min_width-- - conv->precision))
+				ft_putchar(' ');
+			return(0);
+		}
+		if (conv->min_width < conv->precision)
+		{
+			if(conv->flag & PLUS)
+			{
+				conv->min_width--;
+				ft_putchar('+');
+			}
+			if(conv->flag & SPACE)
+			{
+				conv->min_width--;
+				ft_putchar(' ');
+			}
+			conv->before = 3;
+			option(conv->precision - len, '0', conv, str);
+			return(0);
+		}
+	}
+	ft_putstr(str);
+	return(0);
+
+}
 int		conv_d(t_printf *pf, t_conv *conv)
 {
 	int		len;
 	int		apint;
 	char	*str;
-	
+
 
 	if(conv->modif == 'h' || conv->modif == 'l')
 	{
@@ -81,9 +164,19 @@ int		conv_d(t_printf *pf, t_conv *conv)
 	}
 
 	if (conv->flag & MINUS)
-		conv_d_minus(conv, len, str);
-	
+	{
+		(conv_d_minus(conv, len, str));
+		if (conv->min_width > len)
+			return (0);
+		if(conv->min_width < len && !(conv->flag & SPACE) && !(conv->flag & PLUS) && !conv->precision)
+		{
+			ft_putstr(str);
+			return(0);
+		}
+	}
+
 	if (conv->min_width && !conv->precision)
+	
 	{
 		if(conv->min_width < len)
 		{
@@ -121,67 +214,67 @@ int		conv_d(t_printf *pf, t_conv *conv)
 		}
 	}
 
-		ft_putstr(str);
-//	if (!conv->min_width && conv->precision)
+	//	ft_putstr(str);
+	//	if (!conv->min_width && conv->precision)
 
-//	if (conv->min_width && conv->precision)
+	//	if (conv->min_width && conv->precision)
 
 
 	return(0);
 }
 /*
-	if (conv->flags->zero && !conv->flags->minus)
-		conv->min_width = option(conv->min_width - len, '0', conv, 0);
+   if (conv->flags->zero && !conv->flags->minus)
+   conv->min_width = option(conv->min_width - len, '0', conv, 0);
 
-	if (conv->flags->space == 1)
-	{
-		if(conv->precision && !conv->min_width)
-		{
-			ft_putchar(' ');
-			
-		}
-		while ( conv->min_width-- > 0 + len)
-			ft_putchar(' ');
-	}
-	if (conv->flags->minus == 1)
-	{
-		if(conv->precision_set > 0)
-			while ((conv->precision-- - len) >= 1)
-			{
-				ft_putchar('0');
-				conv->min_width = conv->min_width - 1;
-			}
-		ft_putnbr(apint);
-		while (conv->min_width-- > 0 + len)
-			ft_putchar(' ');
-		return;
-	}
-	
-	if (conv->min_width && !conv->precision)
-	{
-		option(conv->min_width - len, ' ', conv, str);
-		return;
-	}
+   if (conv->flags->space == 1)
+   {
+   if(conv->precision && !conv->min_width)
+   {
+   ft_putchar(' ');
 
-	if(conv->min_width && conv->precision)
-	{
-		if (conv->flags->plus)
-			conv->min_width--;
-		while (conv->min_width-- - conv->precision)
-			ft_putchar(' ');
-		if (conv->flags->plus)
-			ft_putchar('+');
-		while(conv->precision-- - len)
-			ft_putchar('0');
-		ft_putstr(str);
-		return;
-	}
+   }
+   while ( conv->min_width-- > 0 + len)
+   ft_putchar(' ');
+   }
+   if (conv->flags->minus == 1)
+   {
+   if(conv->precision_set > 0)
+   while ((conv->precision-- - len) >= 1)
+   {
+   ft_putchar('0');
+   conv->min_width = conv->min_width - 1;
+   }
+   ft_putnbr(apint);
+   while (conv->min_width-- > 0 + len)
+   ft_putchar(' ');
+   return;
+   }
+
+   if (conv->min_width && !conv->precision)
+   {
+   option(conv->min_width - len, ' ', conv, str);
+   return;
+   }
+
+   if(conv->min_width && conv->precision)
+   {
+   if (conv->flags->plus)
+   conv->min_width--;
+   while (conv->min_width-- - conv->precision)
+   ft_putchar(' ');
+   if (conv->flags->plus)
+   ft_putchar('+');
+   while(conv->precision-- - len)
+   ft_putchar('0');
+   ft_putstr(str);
+   return;
+   }
 
 
-	while (conv->min_width-- > 0 + conv->precision)
-			ft_putchar(' ');
-	if(conv->precision_set > 0)
-		while ((conv->precision-- - len) >= 1)
-			ft_putchar('0');
+   while (conv->min_width-- > 0 + conv->precision)
+   ft_putchar(' ');
+   if(conv->precision_set > 0)
+   while ((conv->precision-- - len) >= 1)
+   ft_putchar('0');
 
-	ft_putnbr(apint);*/
+   ft_putnbr(apint);*/

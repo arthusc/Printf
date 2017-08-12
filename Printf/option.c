@@ -21,7 +21,7 @@ int	option(int n, char c, t_conv *conv, char *s)
 	tab[n] = '\0';
 	if (!n)
 		return(0);
-	if (conv->before && s)
+	if (!(conv->before == 3) && conv->before && s)
 	{
 		if(conv->ox == 1)
 			ft_putstr("0x");
@@ -32,16 +32,25 @@ int	option(int n, char c, t_conv *conv, char *s)
 		ft_putstr("0x");
 		conv->ox = 0;
 	}
-	while (i < n)
-		tab[i++] = c;
-	write(1, tab, n);
-	if((conv->flag & PLUS) && !(conv->flag & ZERO) && (conv->flag & (TYPE_D + TYPE_U + TYPE_O)))
+	if(!(conv->flag & MINUS) || (conv->flag & MINUS && conv->min_width > conv->precision) || conv->before == 3)
+	{
+		while (i < n)
+			tab[i++] = c;
+		write(1, tab, n);
+	}
+	if((conv->flag & PLUS) && !(conv->flag & ZERO) && !(conv->flag & MINUS) && (conv->flag & (TYPE_D + TYPE_U + TYPE_O)))
 		ft_putchar('+');
-	if (conv->before == 0 && s)
+	if ((conv->before == 0 && s) || conv->before == 3)
 	{
 		if(conv->ox == 1)
 			ft_putstr("0x");
 		ft_putstr(s);
+	}
+	if((conv->flag & MINUS && !(conv->min_width > conv->precision)) && !(conv->before == 3))
+	{
+		while (i < n)
+			tab[i++] = c;
+		write(1, tab, n);
 	}
 		return (n - i);
 }
