@@ -64,15 +64,15 @@ void	conv_s(t_printf *pf, t_conv *conv)
 	int len;
 
 	conv->flag & MODIFIER_L ? (str = va_arg(pf->ap, wchar_t *)) : (str = va_arg(pf->ap, unsigned char *));
-	len = (conv->flag & MODIFIER_L ? count_wchars(conv, str, ft_strlen(str)) : ft_strlen(str));
+	len = (conv->flag & MODIFIER_L ? ft_wstrlen(str) : ft_strlen(str));
 	if ((conv->flag & ZERO) && !(conv->flag & MINUS))
-		conv->min_width = option(conv->min_width - len, '0', conv, 0);
+		conv = option_print(len, '0', conv, 0);
 	else if ((conv->flag & SPACE))
-		conv->min_width = option(conv->min_width - len, ' ', conv, 0);
+		conv = option_print(len, ' ', conv, 0);
 	else if ((conv->flag & MINUS))
 	{
 		conv->flag & MODIFIER_L ? print_wstring(conv, str, ft_wstrlen(str)) : ft_putstr(str);
-		conv->min_width = option(conv->min_width - len, ' ', conv, 0);
+		conv = option_print(len, ' ', conv, 0);
 		return;
 	}
 	if (conv->flag & MODIFIER_L)

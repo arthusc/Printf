@@ -81,3 +81,5 @@ void	conv_x(t_printf *pf, t_conv *conv, char height);
 void	conv_o(t_printf *pf, t_conv *conv);
 void	conv_u(t_printf *pf, t_conv *conv);
 int		option(int n, char c, t_conv *conv, char *s);
+t_conv	*option_print(int print_size, char c, t_conv *conv, char *s);
+

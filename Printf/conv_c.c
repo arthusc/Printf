@@ -12,6 +12,7 @@
 
 #include "includes/ft_printf.h"
 
+//nb_bytes <= MB_CUR_MAX define in stdlib.h
 void	print_wint(wint_t wint)
 {
 	char	str[4];
@@ -44,12 +45,12 @@ void	print_wint(wint_t wint)
 void	conv_c(t_printf *pf, t_conv *conv)
 {
 	(conv->flag & ZERO && !(conv->flag & MINUS)) ?
-	(conv->min_width = option(conv->min_width, '0', conv, 0)) : 0;
+	(conv = option_print(1, '0', conv, 0)) : 0;
 	conv->flag & SPACE ?
-	(conv->min_width = option(conv->min_width, ' ', conv, 0)) : 0;
+	(conv = option_print(1, ' ', conv, 0)) : 0;
 	conv->flag & MODIFIER_L ? print_wint(va_arg(pf->ap, wint_t)) :
 	ft_putchar(va_arg(pf->ap, unsigned));
 	conv->flag & MINUS ?
-	(conv->min_width = option(conv->min_width, ' ', conv, 0)) : 0;
+	(conv = option_print(1, ' ', conv, 0)) : 0;
 	return ;
 }
