@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   option.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 19:35:35 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/11 14:44:48 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/14 20:49:31 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ t_conv	*option_print(int print_size, char c, t_conv *conv, char *s)
 			write(1, tab, size);
 		}
 		if((conv->flag & PLUS) && !(conv->flag & ZERO) && !(conv->flag & MINUS) && (conv->flag & (TYPE_D + TYPE_U + TYPE_O)))
+		{
 			ft_putchar('+');
-		if ((conv->before == 0 && s) || conv->before == 3)
+		}
+			if ((conv->before == 0 && s) || conv->before == 3)
 		{
 			if(conv->ox == 1)
 				ft_putstr("0x");
@@ -88,7 +90,7 @@ int	option(int n, char c, t_conv *conv, char *s)
 			tab[i++] = c;
 		write(1, tab, n);
 	}
-	if((conv->flag & PLUS) && !(conv->flag & ZERO) && !(conv->flag & MINUS) && (conv->flag & (TYPE_D + TYPE_U + TYPE_O)))
+	if((conv->flag & PLUS) && !(conv->flag & ZERO) && !(conv->flag & MINUS) && (conv->flag & (TYPE_D + TYPE_U + TYPE_O)) && !(conv->before == 3))
 		ft_putchar('+');
 	if ((conv->before == 0 && s) || conv->before == 3)
 	{
@@ -102,5 +104,6 @@ int	option(int n, char c, t_conv *conv, char *s)
 			tab[i++] = c;
 		write(1, tab, n);
 	}
-		return (n - i);
+	
+	return (n - i);
 }
