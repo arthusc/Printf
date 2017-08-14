@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/14 20:49:47 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/14 23:31:44 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define TYPE_X 		(1 << 27)
 # define TYPE_U 		(1 << 26)
 # define TYPE_O 		(1 << 25)
+# define TYPE_B 		(1 << 24)
+
 
 # define PRECISION		(1 << 11)
 
@@ -80,6 +82,7 @@ void	conv_mx(t_printf *pf, t_conv *conv);
 void	conv_x(t_printf *pf, t_conv *conv, char height);
 void	conv_o(t_printf *pf, t_conv *conv);
 void	conv_u(t_printf *pf, t_conv *conv);
+void		conv_b(t_printf *pf, t_conv *conv);
 int  	option(int n, char c, t_conv *conv, char *s);
 t_conv	*option_print(int print_size, char c, t_conv *conv, char *s);
 

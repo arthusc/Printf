@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/11 14:56:07 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/14 22:40:38 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ static int		count_wchars(t_conv *conv, wchar_t *wstr, int size)
 	total = 0;
 	while (i < size)
 	{
-		(wstr[i] <= 0x7F) ? add = 1 : 0;
-		(wstr[i] <= 0x7FF) ? add = 2 : 0;
-		(wstr[i] <= 0xFFFF) ? add = 3 : 0;
-		(wstr[i] <= 0x10FFFF) ? add = 4 : 0;
+		if (wstr[i] <= 0x7F)
+			add = 1;
+		else if (wstr[i] <= 0x7FF)
+			add = 2;
+		else if (wstr[i] <= 0xFFFF)
+			add = 3;
+		else if (wstr[i] <= 0x10FFFF)
+			add = 4;
 		if (conv->precision_set && conv->type == 's'
 			&& (total + add) > conv->precision)
 			break ;
@@ -64,7 +68,7 @@ void	conv_s(t_printf *pf, t_conv *conv)
 	int len;
 
 	conv->flag & MODIFIER_L ? (str = va_arg(pf->ap, wchar_t *)) : (str = va_arg(pf->ap, unsigned char *));
-	len = (conv->flag & MODIFIER_L ? ft_wstrlen(str) : ft_strlen(str));
+	len = (conv->flag & MODIFIER_L ? count_wchars(conv, str ,ft_wstrlen(str)) : ft_strlen(str));
 	if ((conv->flag & ZERO) && !(conv->flag & MINUS))
 		conv = option_print(len, '0', conv, 0);
 	else if ((conv->flag & SPACE))

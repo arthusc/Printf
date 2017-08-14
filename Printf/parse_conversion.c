@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/11 15:18:27 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/14 23:33:32 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static int parse_type(char c)
 	c == 'o' || c == 'O'? ret = TYPE_O : 0;
 	c == 'p' ? ret = TYPE_P : 0;
 	c == 'u' ? ret = TYPE_U : 0;
+	c == 'b' ? ret = TYPE_B : 0;
 	return (ret);
 }
 
@@ -102,5 +103,6 @@ t_printf	*parse_conversion(t_printf *pf)
 	((conv->flag & TYPE_X) & (conv->flag & MODIFIER_L)) ? conv_x(pf, conv, 'X') : 0;
 	conv->flag & TYPE_O ? conv_o(pf, conv) : 0;
 	conv->flag & TYPE_U ? conv_u(pf, conv) : 0;
+	conv->flag & TYPE_B ? conv_b(pf, conv) : 0;
 	return (pf);
 }
