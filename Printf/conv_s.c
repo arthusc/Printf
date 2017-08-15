@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/14 22:40:38 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/15 02:39:29 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_wstrlen(wchar_t *s)
 {
-		int		i;
+	int		i;
 
 	i = 0;
 	while (s[i])
@@ -62,6 +62,36 @@ static void	print_wstring(t_conv *conv, wchar_t *wstr, int size)
 	}
 }
 
+static t_conv	*option_s(int print_size, char c, t_conv *conv, char *s)
+{
+	int			i;
+	char		tab[(conv->min_width - print_size) + 1];
+	int 		size;
+
+	size = (conv->min_width - print_size);
+	i = 0;
+	tab[size] = '\0';
+	if (!size)
+		return (conv);
+	if (size)
+	{
+		if(!(conv->flag & MINUS) || (conv->flag & MINUS && size > conv->precision) || conv->before == 3)
+		{
+			while (i < size)
+				tab[i++] = c;
+			write(1, tab, size);
+		}
+		if((conv->flag & MINUS && !(size > conv->precision)) && !(conv->before == 3))
+		{
+			while (i < size)
+				tab[i++] = c;
+			write(1, tab, size);
+		}
+	}
+	conv->min_width = 0;
+	return (conv);
+}
+
 void	conv_s(t_printf *pf, t_conv *conv)
 {
 	void *str;
@@ -70,13 +100,13 @@ void	conv_s(t_printf *pf, t_conv *conv)
 	conv->flag & MODIFIER_L ? (str = va_arg(pf->ap, wchar_t *)) : (str = va_arg(pf->ap, unsigned char *));
 	len = (conv->flag & MODIFIER_L ? count_wchars(conv, str ,ft_wstrlen(str)) : ft_strlen(str));
 	if ((conv->flag & ZERO) && !(conv->flag & MINUS))
-		conv = option_print(len, '0', conv, 0);
-	else if ((conv->flag & SPACE))
-		conv = option_print(len, ' ', conv, 0);
+		option_s(len, '0', &*conv, 0);
+	else if (conv->flag & SPACE && conv->min_width > len)
+		option_s(len, ' ', &*conv, 0);
 	else if ((conv->flag & MINUS))
 	{
 		conv->flag & MODIFIER_L ? print_wstring(conv, str, ft_wstrlen(str)) : ft_putstr(str);
-		conv = option_print(len, ' ', conv, 0);
+		option_s(len, ' ', &*conv, 0);
 		return;
 	}
 	if (conv->flag & MODIFIER_L)

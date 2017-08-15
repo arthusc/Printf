@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/14 23:33:32 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/15 02:42:02 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,22 @@ t_printf	*parse_conversion(t_printf *pf)
 	t_conv		*conv;
 
 	conv = init_conv();
-	conv = parse_flags(&*pf, conv);
-	conv = parse_minimal_width(&*pf, conv);
-	conv = (pf->format[pf->i] == '.' ? parse_precision(&*pf, conv) : conv);
+	parse_flags(&*pf, &*conv);
+	parse_minimal_width(&*pf, &*conv);
+	(pf->format[pf->i] == '.' ? parse_precision(&*pf, &*conv) : 0);
 	conv = parse_modifier(&*pf, conv);
 	(!pf->format[pf->i]) ? ft_error("error_format_type") : 0;
 	conv->flag += parse_type(pf->format[pf->i]);
 	while (!(ft_strchr("cCsSdDipxXuUoO", conv->type)))
 		pf->i += 1;
-	conv->flag & TYPE_D ? conv_d(pf, conv) : 0;
-	conv->flag & TYPE_S ? conv_s(pf, conv) : 0;
-	conv->flag & TYPE_C ? conv_c(pf, conv) : 0;
-	conv->flag & TYPE_P ? conv_p(pf, conv) : 0;
-	((conv->flag & TYPE_X) & !(conv->flag & MODIFIER_L)) ? conv_x(pf, conv, 'x') : 0;
-	((conv->flag & TYPE_X) & (conv->flag & MODIFIER_L)) ? conv_x(pf, conv, 'X') : 0;
-	conv->flag & TYPE_O ? conv_o(pf, conv) : 0;
-	conv->flag & TYPE_U ? conv_u(pf, conv) : 0;
-	conv->flag & TYPE_B ? conv_b(pf, conv) : 0;
+	conv->flag & TYPE_D ? conv_d(pf, &*conv) : 0;
+	conv->flag & TYPE_S ? conv_s(pf, &*conv) : 0;
+	conv->flag & TYPE_C ? conv_c(pf, &*conv) : 0;
+	conv->flag & TYPE_P ? conv_p(pf, &*conv) : 0;
+	((conv->flag & TYPE_X) & !(conv->flag & MODIFIER_L)) ? conv_x(pf, &*conv, 'x') : 0;
+	((conv->flag & TYPE_X) & (conv->flag & MODIFIER_L)) ? conv_x(pf, &*conv, 'X') : 0;
+	conv->flag & TYPE_O ? conv_o(pf, &*conv) : 0;
+	conv->flag & TYPE_U ? conv_u(pf, &*conv) : 0;
+	conv->flag & TYPE_B ? conv_b(pf, &*conv) : 0;
 	return (pf);
 }
