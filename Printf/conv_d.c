@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/15 18:28:20 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/15 19:28:07 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -433,11 +433,17 @@ int		conv_d(t_printf *pf, t_conv *conv)
 				ft_putstr(str);
 				return(0);
 			}
+			if(conv->flag & PLUS && !(conv->flag & ZERO) && !(conv->flag & SPACE))
+				conv->before = 4;
 			return(option(conv->min_width - len, ' ', conv, str));
 		}
 	}
 //JUSTE PRECISION
-	if (!conv->min_width && conv->precision)
+	if (!conv->min_width && conv->precision && conv->flag & MINUS)
+	{
+		return(0);
+	}
+	if (!conv->min_width && conv->precision && !(conv->flag & MINUS))
 	{
 		conv->before = 3;
 		if (conv->flag & SPACE && !(conv->flag & PLUS) && !(conv->flag & MODIFIER_HH))
