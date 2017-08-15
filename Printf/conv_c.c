@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/15 02:30:02 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/15 17:42:01 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	conv_c(t_printf *pf, t_conv *conv)
 	c = 0;
 	if (conv->flag & MODIFIER_L)
 	{	
+		if (MB_CUR_MAX == 1)
+			return;
 		c = va_arg(pf->ap, wint_t);
 		len = count_wint(c);
 		conv->flag & ZERO && !(conv->flag & MINUS) ? option_c(len, '0', &*conv, 0) : 0;

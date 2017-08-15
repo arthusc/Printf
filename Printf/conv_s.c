@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/15 02:39:29 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/15 17:08:36 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	conv_s(t_printf *pf, t_conv *conv)
 	if ((conv->flag & ZERO) && !(conv->flag & MINUS))
 		option_s(len, '0', &*conv, 0);
 	else if (conv->flag & SPACE && conv->min_width > len)
+		option_s(len, ' ', &*conv, 0);
+	else if (conv->min_width > len && !(conv->flag & MINUS))
 		option_s(len, ' ', &*conv, 0);
 	else if ((conv->flag & MINUS))
 	{
