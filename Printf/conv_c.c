@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/15 17:42:01 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/16 01:21:25 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	print_wint(wint_t wint)
 	}
 }
 
-static t_conv	*option_c(int print_size, char c, t_conv *conv, char print)
+static t_conv	*option_c(t_printf *pf, int print_size, char c, t_conv *conv, char print)
 {
 	int			i;
 	char		tab[(conv->min_width - print_size) + 1];
@@ -69,7 +69,7 @@ static t_conv	*option_c(int print_size, char c, t_conv *conv, char print)
 	if (print)
 	{
 		conv->flag & MODIFIER_L ?
-		print_wint(c) : ft_putchar(print);
+		print_wint(c) : buffer(&*pf, &c, 1);
 	}
 	if (!size)
 		return (conv);
@@ -77,7 +77,7 @@ static t_conv	*option_c(int print_size, char c, t_conv *conv, char print)
 	{
 		while (i < size)
 			tab[i++] = c;
-		write(1, tab, size);
+		buffer(&*pf, tab, size);
 	}
 	conv->min_width = 0;
 	return (conv);
@@ -96,20 +96,24 @@ void	conv_c(t_printf *pf, t_conv *conv)
 			return;
 		c = va_arg(pf->ap, wint_t);
 		len = count_wint(c);
-		conv->flag & ZERO && !(conv->flag & MINUS) ? option_c(len, '0', &*conv, 0) : 0;
-		conv->flag & SPACE ? option_c(len, ' ', &*conv, 0) : 0;
-		conv->min_width > len && !(conv->flag & MINUS) ? option_c(len, ' ', &*conv, 0) : 0;
+		conv->flag & ZERO && !(conv->flag & MINUS) ? option_c(&*pf, len, '0', &*conv, 0) : 0;
+		conv->flag & SPACE ? option_c(&*pf, len, ' ', &*conv, 0) : 0;
+		conv->min_width > len && !(conv->flag & MINUS) ? option_c(&*pf, len, ' ', &*conv, 0) : 0;
 		conv->flag & MINUS ? print_wint(c) : 0 ;
-		conv->flag & MINUS ? option_c(len, ' ', &*conv, 0) : print_wint(c);
+		conv->flag & MINUS ? option_c(&*pf, len, ' ', &*conv, 0) : print_wint(c);
 	}
 	else
 	{
+		c = (char)c;
 		c = va_arg(pf->ap, unsigned);
 		(conv->flag & ZERO && !(conv->flag & MINUS)) ?
-		option_c(1, '0', &*conv, 0) : 0;
-		conv->flag & SPACE ? option_c(1, ' ', &*conv, 0) : 0;
-		conv->min_width > 1 && !(conv->flag & MINUS) ? option_c(1, ' ', &*conv, 0) : 0;
-		conv->flag & MINUS ? option_c(1, ' ', &*conv, c) : ft_putchar(c);
+		option_c(&*pf, 1, '0', &*conv, 0) : 0;
+		conv->flag & SPACE ? option_c(&*pf, 1, ' ', &*conv, 0) : 0;
+		conv->min_width > 1 && !(conv->flag & MINUS) ? option_c(&*pf, 1, ' ', &*conv, 0) : 0;
+		if (conv->flag & MINUS)
+			option_c(&*pf, 1, ' ', &*conv, c);
+		else
+			(buffer(&*pf, ((char*)&c), 1));
 	}
 	return ;
 }

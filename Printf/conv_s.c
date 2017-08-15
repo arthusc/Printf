@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/15 17:08:36 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/16 01:12:55 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,34 @@ void	conv_s(t_printf *pf, t_conv *conv)
 		option_s(len, ' ', &*conv, 0);
 	else if ((conv->flag & MINUS))
 	{
-		conv->flag & MODIFIER_L ? print_wstring(conv, str, ft_wstrlen(str)) : ft_putstr(str);
+		conv->flag & MODIFIER_L ? print_wstring(conv, str, ft_wstrlen(str)) : buffer(&*pf, str, len);
 		option_s(len, ' ', &*conv, 0);
 		return;
 	}
 	if (conv->flag & MODIFIER_L)
 		print_wstring(conv, str, ft_wstrlen(str));
 	else
-		ft_putstr(str);
+		buffer(&*pf, str, len);
 }
+
+// if (conv->flag & MODIFIER_L)
+// 	{	
+// 		if (MB_CUR_MAX == 1)
+// 			return;
+// 		c = va_arg(pf->ap, wint_t);
+// 		len = count_wint(c);
+// 		conv->flag & ZERO && !(conv->flag & MINUS) ? option_c(len, '0', &*conv, 0) : 0;
+// 		conv->flag & SPACE ? option_c(len, ' ', &*conv, 0) : 0;
+// 		conv->min_width > len && !(conv->flag & MINUS) ? option_c(len, ' ', &*conv, 0) : 0;
+// 		conv->flag & MINUS ? print_wint(c) : 0 ;
+// 		conv->flag & MINUS ? option_c(len, ' ', &*conv, 0) : print_wint(c);
+// 	}
+// 	else
+// 	{
+// 		c = va_arg(pf->ap, unsigned);
+// 		(conv->flag & ZERO && !(conv->flag & MINUS)) ?
+// 		option_c(1, '0', &*conv, 0) : 0;
+// 		conv->flag & SPACE ? option_c(1, ' ', &*conv, 0) : 0;
+// 		conv->min_width > 1 && !(conv->flag & MINUS) ? option_c(1, ' ', &*conv, 0) : 0;
+// 		conv->flag & MINUS ? option_c(1, ' ', &*conv, c) : ft_putchar(c);
+// 	}

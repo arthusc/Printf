@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/14 23:31:44 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/16 01:21:17 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <wchar.h>
 
 # include <stdio.h>// to delete
+
+# define BUFFER_SIZE	1000
 
 # define TYPE_S 		(1 << 31)
 # define TYPE_C 		(1 << 30)
@@ -43,6 +45,7 @@
 # define ZERO			(1 << 1)
 # define SPACE			(1 << 0)
 
+
 typedef struct			s_conv
 {
 	int					min_width;
@@ -61,28 +64,31 @@ typedef struct			s_printf
 	char 		*format;
 	va_list		ap;
 	int			i;
+	char		*buffer;
+	int 		i_buf;
 }						t_printf;
 
 
-int		ft_printf(char *format, ...);
+int			ft_printf(char *format, ...);
 t_printf	*parse_conversion(t_printf *pf);
 t_conv		*init_conv(void);
+void		print_wint(wint_t wint);
+void		print_p(char *str);
+int			option(int n, char c, t_conv *conv, char *s);
+t_conv		*option_print(int print_size, char c, t_conv *conv, char *s);
+t_printf	*buffer(t_printf *pf, char *saved, int len);
 
-void	conv_c(t_printf *pf, t_conv *conv);
-void	conv_s(t_printf *pf, t_conv *conv);
-int		conv_d(t_printf *pf, t_conv *conv);
-int		conv_d_l(t_printf *pf, t_conv *conv);
-int		conv_d_h(t_printf *pf, t_conv *conv);
-void	conv_f(t_printf *pf, t_conv *conv);
-void	conv_f_L(t_printf *pf, t_conv *conv);
-void	print_wint(wint_t wint);
-void	conv_p(t_printf *pf, t_conv *conv);
-void	print_p(char *str);
-void	conv_mx(t_printf *pf, t_conv *conv);
-void	conv_x(t_printf *pf, t_conv *conv, char height);
-void	conv_o(t_printf *pf, t_conv *conv);
-void	conv_u(t_printf *pf, t_conv *conv);
+void		conv_c(t_printf *pf, t_conv *conv);
+void		conv_s(t_printf *pf, t_conv *conv);
+int			conv_d(t_printf *pf, t_conv *conv);
+int			conv_d_l(t_printf *pf, t_conv *conv);
+int			conv_d_h(t_printf *pf, t_conv *conv);
+void		conv_f(t_printf *pf, t_conv *conv);
+void		conv_f_L(t_printf *pf, t_conv *conv);
+void		conv_p(t_printf *pf, t_conv *conv);
+void		conv_mx(t_printf *pf, t_conv *conv);
+void		conv_x(t_printf *pf, t_conv *conv, char height);
+void		conv_o(t_printf *pf, t_conv *conv);
+void		conv_u(t_printf *pf, t_conv *conv);
 void		conv_b(t_printf *pf, t_conv *conv);
-int  	option(int n, char c, t_conv *conv, char *s);
-t_conv	*option_print(int print_size, char c, t_conv *conv, char *s);
 
