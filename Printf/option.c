@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 19:35:35 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/14 20:49:31 by achambon         ###   ########.fr       */
+/*   Updated: 2017/08/15 19:20:40 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,15 @@ int	option(int n, char c, t_conv *conv, char *s)
 	tab[n] = '\0';
 	if (!n)
 		return(0);
+	if (conv->before == 4)
+	{
+		while (i < n)
+			tab[i++] = c;
+		write(1, tab, n);
+		ft_putchar('+');
+		ft_putstr(s);
+		return(0);
+	}
 	if (!(conv->before == 3) && conv->before && s)
 	{
 		if(conv->ox == 1)
@@ -90,7 +99,7 @@ int	option(int n, char c, t_conv *conv, char *s)
 			tab[i++] = c;
 		write(1, tab, n);
 	}
-	if((conv->flag & PLUS) && !(conv->flag & ZERO) && !(conv->flag & MINUS) && (conv->flag & (TYPE_D + TYPE_U + TYPE_O)) && !(conv->before == 3))
+	if(((conv->flag & PLUS) && !(conv->flag & ZERO) && !(conv->flag & MINUS) && (conv->flag & (TYPE_D + TYPE_U + TYPE_O)) && !(conv->before == 3) && !conv->flag & MODIFIER_HH))
 		ft_putchar('+');
 	if ((conv->before == 0 && s) || conv->before == 3)
 	{
