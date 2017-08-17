@@ -33,7 +33,8 @@ FILES = 		ft_printf.c \
 				option.c \
 				conv_u.c \
 				conv_b.c \
-				init_conv.c 
+				init_conv.c \
+				call_buffer.c \
 
 all : $(NAME)
 

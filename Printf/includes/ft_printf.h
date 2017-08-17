@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/16 01:21:17 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/16 19:06:38 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,6 @@ void		conv_x(t_printf *pf, t_conv *conv, char height);
 void		conv_o(t_printf *pf, t_conv *conv);
 void		conv_u(t_printf *pf, t_conv *conv);
 void		conv_b(t_printf *pf, t_conv *conv);
-
+int			add_char_and_string_2_buff(t_printf *pf, char c, char *str, int len);
+int			minwidth_decr_add_char_2_buf(t_printf *pf, char c, t_conv *conv);
+int			special_hhd_reverse_0_n_minus(t_printf *pf, char *str, char c);
