@@ -101,7 +101,7 @@ int	conv_d_minus(t_printf *pf, t_conv *conv, int len, char *str)
 			}
 			if(conv->flag & PLUS && !(conv->flag & ZERO) && !(conv->flag & SPACE) && !(conv->flag & MODIFIER_HH))
 			{
-				minwidth_decr_add_char_2_buf(&pf, '+', &*conv);
+				minwidth_decr_add_char_2_buf(&*pf, '+', &*conv);
 				conv->before = 1;
 				option_d(&*pf, conv->min_width - len, ' ', conv, str);
 				return(pf->i_buf);
@@ -482,7 +482,7 @@ int		conv_d(t_printf *pf, t_conv *conv)
 		}
 		if (conv->min_width <= conv->precision)
 		{
-			conv->flag & PLUS ? buffer(&*pf, " ", 1) : 0;
+			conv->flag & PLUS ? buffer(&*pf, "+", 1) : 0;
 			conv->flag & PLUS ? conv->min_width-- : 0; 
 			if(conv->flag & SPACE && !(conv->flag & PLUS))
 			{
