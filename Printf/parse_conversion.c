@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/16 00:09:11 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/17 17:20:31 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_conv	*parse_minimal_width(t_printf *pf, t_conv *conv)
 	while (ft_isdigit(pf->format[pf->i]))
 		pf->i++;
 	if (!(pf->format))
-		ft_error("error_parse_minimal_width");
+		ft_error_pf(INFO, "error_parse_minimal_width");
 	return (conv);
 }
 
@@ -45,7 +45,7 @@ static t_conv	*parse_precision(t_printf *pf, t_conv *conv)
 	while (ft_isdigit(pf->format[pf->i]))
 		pf->i++;
 	if (!pf->format[pf->i]) 
-		ft_error("Invalid format. (After Precision)");
+		ft_error_pf(INFO, "Invalid format. (After Precision)");
 	return (conv);
 }
 
@@ -91,7 +91,7 @@ t_printf	*parse_conversion(t_printf *pf)
 	parse_minimal_width(&*pf, &*conv);
 	(pf->format[pf->i] == '.' ? parse_precision(&*pf, &*conv) : 0);
 	conv = parse_modifier(&*pf, conv);
-	(!pf->format[pf->i]) ? ft_error("error_format_type") : 0;
+	(!pf->format[pf->i]) ? ft_error_pf(INFO, "error_format_type") : 0;
 	conv->flag += parse_type(pf->format[pf->i]);
 	while (!(ft_strchr("cCsSdDipxXuUoO", conv->type)))
 		pf->i += 1;
@@ -104,5 +104,6 @@ t_printf	*parse_conversion(t_printf *pf)
 	conv->flag & TYPE_O ? conv_o(pf, &*conv) : 0;
 	conv->flag & TYPE_U ? conv_u(pf, &*conv) : 0;
 	conv->flag & TYPE_B ? conv_b(pf, &*conv) : 0;
+	pf->i++;
 	return (pf);
 }

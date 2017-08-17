@@ -20,5 +20,6 @@ t_conv				*init_conv(void)
 		ft_error("error_malloc_init_conv");
 	ft_bzero(conv, sizeof(t_conv));
 	conv->modif = '0';
+	conv->flag = 0;
 	return (conv);
 }

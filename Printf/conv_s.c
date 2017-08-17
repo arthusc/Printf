@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/16 01:12:55 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/17 18:17:17 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	print_wstring(t_conv *conv, wchar_t *wstr, int size)
 	}
 }
 
-static t_conv	*option_s(int print_size, char c, t_conv *conv, char *s)
+static t_conv	*option_s(t_printf *pf, int print_size, char c, t_conv *conv, char *s)
 {
 	int			i;
 	char		tab[(conv->min_width - print_size) + 1];
@@ -79,13 +79,15 @@ static t_conv	*option_s(int print_size, char c, t_conv *conv, char *s)
 		{
 			while (i < size)
 				tab[i++] = c;
-			write(1, tab, size);
+			// write(1, tab, size);
+			buffer(&*pf, tab, size);
 		}
 		if((conv->flag & MINUS && !(size > conv->precision)) && !(conv->before == 3))
 		{
 			while (i < size)
 				tab[i++] = c;
-			write(1, tab, size);
+			// write(1, tab, size);
+			buffer(&*pf, tab, size);
 		}
 	}
 	conv->min_width = 0;
@@ -100,15 +102,15 @@ void	conv_s(t_printf *pf, t_conv *conv)
 	conv->flag & MODIFIER_L ? (str = va_arg(pf->ap, wchar_t *)) : (str = va_arg(pf->ap, unsigned char *));
 	len = (conv->flag & MODIFIER_L ? count_wchars(conv, str ,ft_wstrlen(str)) : ft_strlen(str));
 	if ((conv->flag & ZERO) && !(conv->flag & MINUS))
-		option_s(len, '0', &*conv, 0);
+		option_s(&*pf, len, '0', &*conv, 0);
 	else if (conv->flag & SPACE && conv->min_width > len)
-		option_s(len, ' ', &*conv, 0);
+		option_s(&*pf, len, ' ', &*conv, 0);
 	else if (conv->min_width > len && !(conv->flag & MINUS))
-		option_s(len, ' ', &*conv, 0);
+		option_s(&*pf, len, ' ', &*conv, 0);
 	else if ((conv->flag & MINUS))
 	{
 		conv->flag & MODIFIER_L ? print_wstring(conv, str, ft_wstrlen(str)) : buffer(&*pf, str, len);
-		option_s(len, ' ', &*conv, 0);
+		option_s(&*pf, len, ' ', &*conv, 0);
 		return;
 	}
 	if (conv->flag & MODIFIER_L)
