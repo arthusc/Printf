@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:41:18 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/17 18:22:24 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/18 00:17:27 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int		ft_printf(char *format, ...)
 			print_until(&pf, pf.format, pf.i, '%');
 		//pf.format[pf.i] != 0 ? print_until(&pf, pf.format, pf.i, '%') : 0;
 	}
-	pf.buffer ? print_buffer(pf.buffer, pf.i_buf) : 0;
+	// printf("%d\n", pf.i_buf);
+	pf.buffer &&  pf.i_buf? print_buffer(pf.buffer, pf.i_buf) : 0;
 	va_end(pf.ap);
 	return (0);
 }
@@ -70,12 +71,14 @@ int		ft_printf(char *format, ...)
  */
 t_printf	*buffer(t_printf *pf, char *saved, int len)
 {
+	// printf("ok\n");
 	int i;
 	static int a = 0;
 
 	i = 0;
 	while (saved && (len - i) && (pf->i_buf < BUFFER_SIZE))
 	{
+		// printf("%c|", saved[i]);
 		pf->buffer[pf->i_buf] = saved[i];
 		pf->i_buf++;
 		i++;

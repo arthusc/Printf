@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/14 20:13:45 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/17 18:51:49 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/08/18 00:17:46 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,24 @@ int		main(int ac, char **av)
 
 // ft_printf("Hello%s\n", " world!");
 //-------------TEST_S-----------------
-	// ft_printf("->%011s\n", "abc");
-	// printf("+>%011s\n", "abc");
-	// ft_printf("->%011s\n", "abc");
-	// printf("+>%011s\n", "abc");
-	// ft_printf("->%011ls\n", L"aらが");
-	// printf("+>%011ls\n", L"らが");
-	// ft_printf("->%011ls\n", L"ひらが");
-	// printf("+>%011ls\n", L"ひらが");
-	// ft_printf("->%-11S|\n", L"ひらが");
-	// printf("+>%-11S|\n", L"ひらが");
-	// ft_printf("->%+11S\n", L"ひらが");
-	// printf("+>%+11S\n", L"ひらが");
-	// ft_printf("->%011S\n", L"ひらが");
-	// printf("+>%011S\n", L"ひらが");
-	// ft_printf("->% 11S\n", L"ひらが");
-	// printf("+>% 11S\n", L"ひらが");
-
-	// printf("+>%011s\n", "abc");
-	// printf("+>%011s\n", "abc");
-	// printf("+>%011ls\n", L"らが");
-	// printf("+>%011ls\n", L"ひらが");
-	// printf("+>%-11S|\n", L"ひらが");
-	// printf("+>%+11S\n", L"ひらが");
-	// printf("+>%011S\n", L"ひらが");
-	// printf("+>% 11S\n", L"ひらが");
+	ft_printf("->%011s\n", "abc");
+	printf("+>%011s\n", "abc");
+	ft_printf("->%011s\n", "abc");
+	printf("+>%011s\n", "abc");
+	ft_printf("->%011ls\n", L"aらが");
+	printf("+>%011ls\n", L"らが");
+	ft_printf("->%011ls\n", L"ひらが");
+	printf("+>%011ls\n", L"ひらが");
+	ft_printf("->%-11S|\n", L"ひらが");
+	printf("+>%-11S|\n", L"ひらが");
+	ft_printf("->%+11S\n", L"ひらが");
+	printf("+>%+11S\n", L"ひらが");
+	ft_printf("->%03S\n", L"ひらが");
+	printf("+>%03S\n", L"ひらが");
+	ft_printf("->% 3S\n", L"ひらが");
+	printf("+>% 3S\n", L"ひらが");
+	ft_printf("->% S\n", L"ひらが");
+	printf("+>% S\n", L"ひらが");
 
 	ft_printf("o>%05s\n", "abc");
 	printf("x>%05s\n", "abc");
@@ -61,52 +54,45 @@ int		main(int ac, char **av)
 	printf("x>%+5s\n", "abc");
 	ft_printf("o>%05s\n", "abc");
 	printf("x>%05s\n", "abc");
-	ft_printf("o>% 5s\n", "abc");
-	printf("x>% 5s\n", "abc");
-
-	
-	
-	
-	
-	
-	
-	
+	ft_printf("o>% s\n", "abc");
+	printf("x>% s\n", "abc");	
 	
 //------------TEST_C-----------------
-	// ft_printf("->%05c\n", L's');
-	// ft_printf("->%010c\n", L'b');
-	// ft_printf("->%05lc\n", L'ひ');
-	// ft_printf("->%03lc\n", L'ひ');
-	// ft_printf("->%-2C|\n", L'ひ');
-	// ft_printf("->%+5C\n", L'ひ');
-	// ft_printf("->%02C\n", L'ひ');
-	// ft_printf("->% 2C\n", L'ひ');
+	ft_printf("->%05c\n", L's');
+	printf("+>%05c\n", L's');
+	ft_printf("->%010c\n", L'b');
+	printf("+>%010c\n", L'b');
+	ft_printf("->%05lc\n", L'ひ');
+	printf("+>%05lc\n", L'ひ');
+	ft_printf("->%03lc\n", L'ひ');
+	printf("+>%03lc\n", L'ひ');
+	ft_printf("->%-2C|\n", L'ひ');
+	printf("+>%-2C|\n", L'ひ');
+	ft_printf("->%+10C\n", L'ひ');
+	printf("+>%+10C\n", L'ひ');
+	ft_printf("->%02C\n", L'ひ');
+	printf("+>%02C\n", L'ひ');
+	ft_printf("->% 2C\n", L'ひ');
+	printf("+>% 2C\n", L'ひ');
+	ft_printf("->% C\n", L"が");//bad format double cote
+	// printf("+>% C\n", L"が");//bad format double cote
 
-	// printf("+>%05c\n", L's');
-	// printf("+>%010c\n", L'b');
-	// printf("+>%05lc\n", L'ひ');
-	// printf("+>%03lc\n", L'ひ');
-	// printf("+>%-2C|\n", L'ひ');
-	// printf("+>%+5C\n", L'ひ');
-	// printf("+>%02C\n", L'ひ');
-	// printf("+>% 2C\n", L'ひ');
-
-	ft_printf("o>%05c\n", 's');
-	printf("x>%05c\n", 's');//
-	ft_printf("o>%010c\n", 'b');
-	printf("x>%010c\n", 'b');//
-	ft_printf("o>%05c\n", 'a');
-	printf("x>%05c\n", 'a');//
-	ft_printf("o>%03c\n", 'a');
-	printf("x>%03c\n", 'a');//
-	ft_printf("o>%-2c|\n", 'a');
-	printf("x>%-2c|\n", 'a');//
-	ft_printf("o>%+10c\n", 'a');
-	printf("x>%+10c\n", 'a');//
-	ft_printf("o>%02c\n", 'a');
-	printf("x>%02c\n", 'a');//
-	ft_printf("o>% 2c\n", 'a');
-	printf("x>% 2c\n", 'a');//
+	// ft_printf("o>%05c\n", 's');
+	// printf("x>%05c\n", 's');//
+	// ft_printf("o>%010c\n", 'b');
+	// printf("x>%010c\n", 'b');//
+	// ft_printf("o>%05c\n", 'a');
+	// printf("x>%05c\n", 'a');//
+	// ft_printf("o>%03c\n", 'a');
+	// printf("x>%03c\n", 'a');//
+	// ft_printf("o>%-5c|\n", 'a');/////////////////////////////////////////////////////////
+	// printf("x>%-5c|\n", 'a');//
+	// ft_printf("o>%+10c\n", 'a');
+	// printf("x>%+10c\n", 'a');//
+	// ft_printf("o>%02c\n", 'a');
+	// printf("x>%02c\n", 'a');//
+	// ft_printf("o>% 2c\n", 'a');
+	// printf("x>% 2c\n", 'a');//
 
 	
 	
