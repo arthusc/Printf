@@ -99,8 +99,8 @@ t_printf	*parse_conversion(t_printf *pf)
 	conv->flag & TYPE_S ? conv_s(pf, &*conv) : 0;
 	conv->flag & TYPE_C ? conv_c(pf, &*conv) : 0;
 	conv->flag & TYPE_P ? conv_p(pf, &*conv) : 0;
-	((conv->flag & TYPE_X) & !(conv->flag & MODIFIER_L)) ? conv_x(pf, &*conv, 'x') : 0;
-	((conv->flag & TYPE_X) & (conv->flag & MODIFIER_L)) ? conv_x(pf, &*conv, 'X') : 0;
+	((conv->flag & TYPE_X) && !(conv->flag & MODIFIER_L)) ? conv_x(pf, &*conv, 'x') : 0;
+	((conv->flag & TYPE_X) && (conv->flag & MODIFIER_L)) ? conv_x(pf, &*conv, 'X') : 0;
 	conv->flag & TYPE_O ? conv_o(pf, &*conv) : 0;
 	conv->flag & TYPE_U ? conv_u(pf, &*conv) : 0;
 	conv->flag & TYPE_B ? conv_b(pf, &*conv) : 0;
