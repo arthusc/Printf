@@ -24,57 +24,9 @@ static t_conv	option_p(t_printf *pf, int n, char c, t_conv *conv, char *s)
 	tab[n] = '\0';
 	if (!n)
 		return(*conv);
-	if (conv->before == 4)
-	{
-		while (i < n)
-			tab[i++] = c;
-	//	write(1, tab, n);
-		buffer(&*pf, tab, n);
-		buffer(&*pf, " ", 1);
-		buffer(&*pf, s, len);
-	//	ft_putchar('+');
-	//	ft_putstr(s);
-		return(*conv);
-	}
-	if (!(conv->before == 3) && conv->before && s)
-	{
-		if(conv->ox == 1)
-			buffer(&*pf, "0x", 2);
-			//ft_putstr("0x");
-		buffer(&*pf, s, len);
-	//	ft_putstr(s);
-	}
-	if (conv->precision_set == 2)
-	{
-		buffer(&*pf, "0x", 2);
-		//ft_putstr("0x");
-		conv->ox = 0;
-	}
-	if(!(conv->flag & MINUS) || (conv->flag & MINUS && conv->min_width > conv->precision) || conv->before == 3)
-	{
-		while (i < n)
-			tab[i++] = c;
-		buffer(&*pf, tab, n);
-	//	write(1, tab, n);
-	}
-	if(((conv->flag & PLUS) && !(conv->flag & ZERO) && !(conv->flag & MINUS) && (conv->flag & (TYPE_D + TYPE_U + TYPE_O)) && !(conv->before == 3) && !conv->flag & MODIFIER_HH))
-		buffer(&*pf, "+", 1);
-	//	ft_putchar('+');
-	if ((conv->before == 0 && s) || conv->before == 3)
-	{
-		if(conv->ox == 1)
-			buffer(&*pf, "0x", 2);
-		//	ft_putstr("0x");
-		buffer(&*pf, &*s, len);
-	//	ft_putstr(s);
-	}
-	if((conv->flag & MINUS && !(conv->min_width > conv->precision)) && !(conv->before == 3))
-	{
-		while (i < n)
-			tab[i++] = c;
-		buffer(&*pf, tab, n);
-	//	write(1, tab, n);
-	}
+	while (i < n)
+		tab[i++] = c;
+	buffer(&*pf, tab, n);
 	
 	return (*conv);
 }
@@ -99,32 +51,35 @@ int	conv_p_minus(t_printf *pf, t_conv *conv, int len, char *str)
 		if(conv->min_width < len)
 		{
 			return(0);
-		}
-		else if(conv->min_width > len)
-		{
-	
-		}
-		option_p(&*pf, conv->min_width - len, ' ', conv, str);
+		 }
+		print_p(&*pf, len, str);
+		option_p(&*pf, conv->min_width - len - 2, ' ', conv, str);
 		return(0);
 	}
 //JUSTE PRECISION
 	if (!conv->min_width && conv->precision)
 	{
-		option_p(&*pf, conv->precision - len, '0', conv, str);
+		buffer(&*pf, "0x", 2);
+		option_p(&*pf, conv->precision - len - 2, '0', conv, str);
 		return(pf->i_buf);
 	}
 //LARGEUR MINIMALE ET PRECISION PRESENTES
 	if (conv->min_width && conv->precision)
 	{
+		buffer(&*pf, "0x", 2);
 		if(conv->min_width > conv->precision)
 		{
+			option_p(&*pf, conv->precision - len, '0', conv, str);
+			buffer(&*pf, str, len);
+			option_p(&*pf, conv->min_width - conv->precision - 2, ' ', conv, str);
+			return(0);
 		}
 		if (conv->min_width <= conv->precision)
 		{
+			option_p(&*pf, conv->precision - len, '0', conv, str);
 		}
 	}
 	buffer(&*pf, str, len);
-	//ft_putstr(str);
 	return(0);
 }
 
@@ -162,9 +117,9 @@ int	conv_p(t_printf *pf, t_conv *conv)
 			
 			return (0);
 		}
-		if(conv->min_width < len && !(conv->flag & SPACE) && !(conv->flag & PLUS) && !conv->precision)
+		if(conv->min_width < len )
 		{
-			buffer(&*pf, str, len);
+			print_p(&*pf, len, str);
 			return(0);
 		}
 	}
@@ -173,32 +128,49 @@ int	conv_p(t_printf *pf, t_conv *conv)
 	{
 		if(conv->min_width < len)
 		{
-			buffer(&*pf, "0x", 2);
-			buffer(&*pf, str, len);
+			print_p(&*pf, len, str);
 			return(0);
 		}
 		if(conv->min_width >= len)
 		{
+			if(conv->flag & ZERO)
+			{
+				buffer(&*pf, "0x", 2);
+				option_p(&*pf, conv->min_width - len - 2, '0', conv, str);
+				buffer(&*pf, str, len);
+				return(0);
+			}
+			option_p(&*pf, conv->min_width - len - 2, ' ', conv, str);
+			print_p(&*pf, len, str);
 			return(pf->i_buf);
 		}
 	}
 //JUSTE PRECISION
 	if (!conv->min_width && conv->precision && conv->flag & MINUS)
 	{
+		buffer(&*pf, str, len);
 		return(0);
 	}
 	if (!conv->min_width && conv->precision && !(conv->flag & MINUS))
 	{
-			return(pf->i_buf);
+		buffer(&*pf, "0x", 2);
+		option_p(&*pf, conv->precision - len, '0', conv, str);
+		buffer(&*pf, str, len);
+		return(pf->i_buf);
 	}
 //LARGEUR MINIMALE ET PRECISION PRESENTES
 	if (conv->min_width && conv->precision)
 	{
 		if(conv->min_width > conv->precision)
 		{
+			option_p(&*pf, conv->min_width - conv->precision - 2, ' ', conv, str);
+			buffer(&*pf, "0x", 2);
+			option_p(&*pf, conv->precision - len, '0', conv, str);
 		}
 		if (conv->min_width <= conv->precision)
 		{
+			buffer(&*pf, "0x", 2);
+			option_p(&*pf, conv->precision - len, '0', conv, str);
 		}
 	}
 	buffer(&*pf, str, len);	
