@@ -269,12 +269,10 @@ int		print_conv_x(t_printf *pf, t_conv *conv, int len, char *str)
 		{
 			if(conv->flag & SPACE && !(conv->flag & PLUS))
 			{
-				if (conv->flag & ZERO && !(conv->flag & SHARP))
-					minwidth_decr_add_char_2_buf(&*pf, '0', &*conv);
-				else if(!(conv->flag & SHARP))
-					minwidth_decr_add_char_2_buf(&*pf, ' ', &*conv);
-			//	ft_putchar(' ');
-			//	conv->min_width--;
+				// if (conv->flag & ZERO && !(conv->flag & SHARP))
+				// 	minwidth_decr_add_char_2_buf(&*pf, '0', &*conv);
+				// else if(!(conv->flag & SHARP))
+					// minwidth_decr_add_char_2_buf(&*pf, ' ', &*conv);
 			}
 			if(conv->flag & PLUS && !(conv->flag & ZERO + MODIFIER_HH + SHARP))
 				conv->min_width--;
@@ -355,7 +353,7 @@ int		print_conv_x(t_printf *pf, t_conv *conv, int len, char *str)
 			conv->before = 0;
 			if(conv->flag & SPACE && !(conv->flag & PLUS + SHARP))
 			{
-				minwidth_decr_add_char_2_buf(&*pf, ' ', &*conv);
+				// minwidth_decr_add_char_2_buf(&*pf, ' ', &*conv);
 			}
 			if(conv->flag & PLUS)
 				conv->min_width--;
