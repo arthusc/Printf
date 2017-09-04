@@ -91,7 +91,7 @@ t_printf	*parse_conversion(t_printf *pf)
 	parse_minimal_width(&*pf, &*conv);
 	(pf->format[pf->i] == '.' ? parse_precision(&*pf, &*conv) : 0);
 	conv = parse_modifier(&*pf, conv);
-	(!pf->format[pf->i]) ? ft_error_pf(INFO, "error_format_type") : 0;
+	// (!pf->format[pf->i]) ? ft_error_pf(INFO, "error_format_type") : 0;
 	conv->flag += parse_type(pf->format[pf->i]);// si il ny a rien apres -> option
 	while (!(ft_strchr("cCsSdDipxXuUoO", conv->type)))
 		pf->i += 1;
