@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:30:50 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/28 16:21:12 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/04 15:42:25 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,7 +397,14 @@ void		conv_x(t_printf *pf, t_conv *conv, char height)
 	i = 0;
 
 	if(!(pointer_x = va_arg(pf->ap, unsigned int)))
-		return(ft_putstr("0x0"));
+	{
+		return((void)buffer(&*pf, "0", 1));
+	}
+	if(pointer_x == 0)
+	{
+		buffer(&*pf, "0", 1);
+		return;
+	}
 	str = ft_itoa_base((long long)pointer_x, 16);
 	len = ft_strlen(str);
 

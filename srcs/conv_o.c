@@ -292,6 +292,11 @@ int print_conv_o(t_printf *pf, char *str, t_conv *conv)
 		}
 		if(conv->min_width >= len || width_temp >= len)
 		{
+			if(conv->precision_tick && conv->precision_set == 0 && !ft_strcmp("0", str))
+			{	while(conv->min_width--)
+					buffer(&*pf, " ", 1);
+				return(pf->i_buf);
+			}
 			if(conv->flag & SHARP)
 				conv->min_width--;
 			if(conv->flag & SPACE && !(conv->flag & PLUS) && !(conv->flag & SHARP))
@@ -332,6 +337,8 @@ int print_conv_o(t_printf *pf, char *str, t_conv *conv)
 			return(pf->i_buf);
 		}
 	}
+	if(conv->precision_tick && conv->precision_set == 0 && !ft_strcmp("0", str))	
+				return(pf->i_buf);
 //JUSTE PRECISION
 	if (!conv->min_width && conv->precision && conv->flag & MINUS)
 		return(0);

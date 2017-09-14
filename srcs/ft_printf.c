@@ -59,8 +59,6 @@ int		ft_printf(char *format, ...)
 	{
 		if (pf.format[pf.i] == '%')
 		{
-			if (pf.format[pf.i + 1] == '%')
-				buffer(&pf, "%", 1);
 			pf.i++;
 			if (pf.format)
 				parse_conversion(&pf);
