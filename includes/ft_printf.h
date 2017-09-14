@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/28 17:07:23 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/14 21:24:52 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct			s_conv
 	int					min_width;
 	int					precision;
 	int					precision_set;
+	int					precision_tick;
 	int					ox;
 	int					before;
 	char				modif;
