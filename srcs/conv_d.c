@@ -402,8 +402,18 @@ int		conv_d(t_printf *pf, t_conv *conv)
 			}
 			if(conv->flag & PLUS)
 				conv->min_width--;
+			if(conv->flag & ZERO && str[0] == '-')
+			{
+				str[0] = '0';
+				buffer(&*pf, "-", 1);
+				while(conv->min_width-- - len - 1)
+						buffer(&*pf, "0", 1);
+				buffer(&*pf, str, len);
+				return (pf->i_buf);
+			}
+			printf("%d\n", conv->min_width);
 			while((conv->min_width-- - conv->precision))
-				buffer(&*pf, " ", 1);
+					buffer(&*pf, " ", 1);
 			if(conv->flag & PLUS)
 			{
 				conv->before = 3;
