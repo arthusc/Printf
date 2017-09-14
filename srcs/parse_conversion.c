@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/14 22:30:27 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/14 23:01:42 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_conv		*parse_flags(t_printf *pf, t_conv *conv)
 	while (ft_strchr("#0-+ ", pf->format[pf->i]))
 	{ 	
 		pf->format[pf->i] == '-' ? conv->flag += MINUS : 0;
-		pf->format[pf->i] == '+' ? conv->flag += PLUS : 0;
+		pf->format[pf->i] == '+' && !(conv->flag & PLUS) ? conv->flag += PLUS : 0;
 		pf->format[pf->i] == '#' ? conv->flag += SHARP : 0;
 		pf->format[pf->i] == '0' ? conv->flag += ZERO : 0;
 		pf->format[pf->i] == ' ' ? conv->flag += SPACE : 0;
@@ -92,7 +92,7 @@ t_printf	*parse_conversion(t_printf *pf)
 	parse_minimal_width(&*pf, &*conv);
 	(pf->format[pf->i] == '.' ? parse_precision(&*pf, &*conv) : 0);
 	conv = parse_modifier(&*pf, conv);
-	// (!pf->format[pf->i]) ? ft_error_pf(INFO, "error_format_type") : 0;
+	(!pf->format[pf->i]) ? ft_error_pf(INFO, "error_format_type") : 0;
 	conv->flag += parse_type(pf->format[pf->i]);// si il ny a rien apres -> option
 	while (!(ft_strchr("cCsSdDipxXuUoO", conv->type)))
 		pf->i += 1;
