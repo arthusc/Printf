@@ -411,7 +411,7 @@ int		conv_d(t_printf *pf, t_conv *conv)
 				buffer(&*pf, str, len);
 				return (pf->i_buf);
 			}
-			printf("%d\n", conv->min_width);
+			// printf("%d\n", conv->min_width);
 			while((conv->min_width-- - conv->precision))
 					buffer(&*pf, " ", 1);
 			if(conv->flag & PLUS)
