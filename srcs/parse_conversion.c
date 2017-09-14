@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/23 19:10:36 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/14 22:30:27 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_conv		*parse_flags(t_printf *pf, t_conv *conv)
 	while (ft_strchr("#0-+ ", pf->format[pf->i]))
 	{ 	
 		pf->format[pf->i] == '-' ? conv->flag += MINUS : 0;
-		pf->format[pf->i] == '+' && !(conv->flag & PLUS) ? conv->flag += PLUS : 0;
+		pf->format[pf->i] == '+' ? conv->flag += PLUS : 0;
 		pf->format[pf->i] == '#' ? conv->flag += SHARP : 0;
 		pf->format[pf->i] == '0' ? conv->flag += ZERO : 0;
 		pf->format[pf->i] == ' ' ? conv->flag += SPACE : 0;
@@ -30,7 +30,7 @@ static t_conv		*parse_flags(t_printf *pf, t_conv *conv)
 
 static t_conv	*parse_minimal_width(t_printf *pf, t_conv *conv)
 {
-	conv->min_width = atoi(&pf->format[pf->i]);
+	conv->min_width = ft_atoi(&pf->format[pf->i]);
 	while (ft_isdigit(pf->format[pf->i]))
 		pf->i++;
 	if (!(pf->format))
@@ -40,9 +40,8 @@ static t_conv	*parse_minimal_width(t_printf *pf, t_conv *conv)
 
 static t_conv	*parse_precision(t_printf *pf, t_conv *conv)
 {
-	conv->precision_tick = 1; 
-	conv->precision = atoi(&pf->format[++pf->i]);
-	conv->precision > 0 ? conv->precision_set = 1 : 0;
+	conv->precision = ft_atoi(&pf->format[++pf->i]);
+	conv->precision > 0 ? conv->precision_set = 1 : 0 ;
 	while (ft_isdigit(pf->format[pf->i]))
 		pf->i++;
 	if (!pf->format[pf->i]) 
@@ -80,6 +79,7 @@ static int parse_type(char c)
 	c == 'p' ? ret = TYPE_P : 0;
 	c == 'u' ? ret = TYPE_U : 0;
 	c == 'b' ? ret = TYPE_B : 0;
+	c == '%' ? ret = TYPE_PERCENT : 0;
 	return (ret);
 }
 
