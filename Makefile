@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/10 16:46:50 by achambon          #+#    #+#              #
-#    Updated: 2017/09/14 22:18:06 by mbriffau         ###   ########.fr        #
+#    Updated: 2017/09/14 22:42:11 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,13 @@ fclean: clean
 re : fclean all
 
 test :
-	$(CC) srcs/main.c $(NAME) -I $(HEADER)
+	@$(CC) srcs/main.c $(NAME) -I $(HEADER)
+	@echo "a.out \033[0;32mcreated.\033[0m"
+
+testc:
+	@rm -f a.out
+	@echo "has been \033[1;31mdeleted\033[0m."
+
+testre: testc test
 
 .PHONY.: all clean fclean re
