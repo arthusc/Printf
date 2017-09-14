@@ -3,139 +3,74 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: achambon <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/10 16:46:50 by achambon          #+#    #+#              #
-#    Updated: 2017/08/28 16:29:57 by achambon         ###   ########.fr        #
+#    Updated: 2017/09/14 14:48:20 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = $(FT_LIB)
-
-FT_LIB_NAME = ftprintf
-
-FT_LIB = lib$(FT_LIB_NAME).a
+NAME = libftprintf.a
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -O2
 
-HEADER = $(SRC_DIR)libft.h
+LIBFT = libft
 
-FT_SRC_DIR = libft/srcs
+HEADER = includes
 
-PRINTF_HEADER = $(PRINTF_DIR)ft_printf.h
+DIR_S = srcs
 
-PRINTF_DIR = includes/
+DIR_O = obj
 
-LIBFT_COMPILED = libft/srcs/ft_putchar.o \
-				 libft/srcs/ft_memdel.o \
-				 libft/srcs/ft_strclr.o \
-				 libft/srcs/ft_strmap.o \
-				 libft/srcs/ft_strstr.o \
-				 libft/srcs/ft_itoa_base.o \
-				 libft/srcs/ft_memmove.o \
-				 libft/srcs/ft_strcmp.o \
-				 libft/srcs/ft_strmapi.o \
-				 libft/srcs/ft_strsub.o \
-				 libft/srcs/ft_atoi.o \
-				 libft/srcs/ft_lstadd.o \
-				 libft/srcs/ft_memset.o \
-				 libft/srcs/ft_strcpy.o \
-				 libft/srcs/ft_strncat.o \
-				 libft/srcs/ft_strtrim.o \
-				 libft/srcs/ft_bzero.o \
-				 libft/srcs/ft_lstdel.o \
-				 libft/srcs/ft_itoa.o\
-				 libft/srcs/ft_strcut.o\
-				 libft/srcs/ft_strncmp.o\
-				 libft/srcs/ft_swap.o\
-				 libft/srcs/ft_count_word.o\
-				 libft/srcs/ft_lstdelone.o\
-				 libft/srcs/ft_putchar_fd.o\
-				 libft/srcs/ft_strdel.o\
-				 libft/srcs/ft_strncpy.o\
-				 libft/srcs/ft_tolower.o\
-				 libft/srcs/ft_double_memalloc.o\
-				 libft/srcs/ft_lstiter.o\
-				 libft/srcs/ft_putendl.o\
-				 libft/srcs/ft_strdup.o\
-				 libft/srcs/ft_strndup.o\
-				 libft/srcs/ft_toupper.o\
-				 libft/srcs/ft_error.o\
-				 libft/srcs/ft_lstmap.o\
-				 libft/srcs/ft_putendl_fd.o\
-				 libft/srcs/ft_strequ.o\
-				 libft/srcs/ft_strnequ.o\
-				 libft/srcs/ft_wordlen.o\
-				 libft/srcs/ft_isalnum.o\
-				 libft/srcs/ft_lstnew.o\
-				 libft/srcs/ft_putnbr.o\
-				 libft/srcs/ft_striter.o\
-				 libft/srcs/ft_strnew.o\
-				 libft/srcs/ft_isalpha.o\
-				 libft/srcs/ft_memalloc.o\
-				 libft/srcs/ft_putnbr_fd.o\
-				 libft/srcs/ft_striteri.o\
-				 libft/srcs/ft_strnjoinfree.o\
-				 libft/srcs/ft_isascii.o\
-				 libft/srcs/ft_memccpy.o\
-				 libft/srcs/ft_putstr.o\
-				 libft/srcs/ft_strjoin.o\
-				 libft/srcs/ft_strnstr.o\
-				 libft/srcs/ft_isdigit.o\
-				 libft/srcs/ft_memchr.o\
-				 libft/srcs/ft_putstr_fd.o\
-				 libft/srcs/ft_strlcat.o\
-				 libft/srcs/ft_strrchr.o\
-				 libft/srcs/ft_isprint.o\
-				 libft/srcs/ft_memcmp.o\
-				 libft/srcs/ft_strcat.o\
-				 libft/srcs/ft_strlen.o\
-				 libft/srcs/ft_strrev.o\
-				 libft/srcs/ft_iterative_factorial.o\
-				 libft/srcs/ft_memcpy.o\
-				 libft/srcs/ft_strchr.o\
-				 libft/srcs/ft_strlen_c.o\
-				 libft/srcs/ft_strsplit.o
+COMPILED = $(LIBFT_COMPILED) $(SOURCES)
 
-PRINTF_COMPILED =	srcs/conv_b.o\
-					srcs/ft_error_management.o\
-					srcs/no_conv.o\
-					srcs/conversion_specifier.o\
-					srcs/call_buffer.o\
-					srcs/ft_printf.o\
-					srcs/conv_c.o\
-					srcs/conv_d.o\
-					srcs/conv_o.o\
-					srcs/conv_p.o\
-					srcs/conv_s.o\
-					srcs/conv_u.o\
-					srcs/conv_x.o\
-					srcs/init_conv.o\
-					srcs/option.o\
-					srcs/parse_conversion.o\
+SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
+OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
-COMPILED = $(LIBFT_COMPILED) $(PRINTF_COMPILED)
+SOURCES =	ft_printf.c \
+			parse_conversion.c \
+			ft_error_management.c \
+			conversion_specifier.c \
+			init_conv.c \
+			call_buffer.c \
+			option.c \
+			conv_c.c \
+			conv_d.c \
+			conv_o.c \
+			conv_p.c \
+			conv_s.c \
+			conv_u.c \
+			conv_x.c \
+			conv_b.c \
+			no_conv.c
 
-all: $(FT_LIB)
+all: $(NAME)
 
-$(FT_LIB):  $(COMPILED)
-	@ar rc $(FT_LIB) $(COMPILED)
+$(NAME): $(OBJS)
+	@make -C $(LIBFT)
+	@cp libft/libft.a ./$(NAME)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
+	@echo "libftprintf.a \033[0;32mcreated.\033[0m"
 
-$(FT_COMPILED): %.o : $(FT_SRC_DIR)%.c $(HEADER)
-	$(CC) -c $(FLAGS) -I $(FT_SRC_DIR) $< -o $@
-
-$(PRINTF_COMPILED): %.o : %.c $(PRINTF_HEADER)
-	$(CC) -c $(FLAGS) -I $(FT_SRC_DIR) -I $(PRINTF_DIR) $< -o $@
+$(DIR_O)/%.o: $(DIR_S)/%.c
+	@mkdir -p obj
+	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
 
 clean:
-	-/bin/rm -f $(COMPILED)
+	@make clean -C $(LIBFT)
+	@-/bin/rm -f $(OBJS)
+	@-/bin/rm -rf $(DIR_O)
+	@echo "All files .o have been \033[1;31mdeleted\033[0m."
 
 fclean: clean
-	-/bin/rm -f $(FT_LIB)
+	@make fclean -C $(LIBFT)
+	@-/bin/rm -f $(NAME)
+	@echo "$(NAME) has been \033[1;31mdeleted\033[0m."
 
-re: fclean all
+re : fclean all
 
 .PHONY.: all clean fclean re
