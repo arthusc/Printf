@@ -17,7 +17,7 @@ static t_conv		*parse_flags(t_printf *pf, t_conv *conv)
 	while (ft_strchr("#0-+ ", pf->format[pf->i]))
 	{ 	
 		pf->format[pf->i] == '-' ? conv->flag += MINUS : 0;
-		pf->format[pf->i] == '+' ? conv->flag += PLUS : 0;
+		pf->format[pf->i] == '+' && !(conv->flag & PLUS) ? conv->flag += PLUS : 0;
 		pf->format[pf->i] == '#' ? conv->flag += SHARP : 0;
 		pf->format[pf->i] == '0' ? conv->flag += ZERO : 0;
 		pf->format[pf->i] == ' ' ? conv->flag += SPACE : 0;
@@ -40,8 +40,9 @@ static t_conv	*parse_minimal_width(t_printf *pf, t_conv *conv)
 
 static t_conv	*parse_precision(t_printf *pf, t_conv *conv)
 {
+	conv->precision_tick = 1; 
 	conv->precision = atoi(&pf->format[++pf->i]);
-	conv->precision > 0 ? conv->precision_set = 1 : 0 ;
+	conv->precision > 0 ? conv->precision_set = 1 : 0;
 	while (ft_isdigit(pf->format[pf->i]))
 		pf->i++;
 	if (!pf->format[pf->i]) 
