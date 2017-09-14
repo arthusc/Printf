@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/10 16:46:50 by achambon          #+#    #+#              #
-#    Updated: 2017/09/14 14:48:20 by mbriffau         ###   ########.fr        #
+#    Updated: 2017/09/14 22:18:06 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SOURCES =	ft_printf.c \
 			conv_u.c \
 			conv_x.c \
 			conv_b.c \
+			conv_percent.c \
 			no_conv.c
 
 all: $(NAME)
@@ -72,5 +73,8 @@ fclean: clean
 	@echo "$(NAME) has been \033[1;31mdeleted\033[0m."
 
 re : fclean all
+
+test :
+	$(CC) srcs/main.c $(NAME) -I $(HEADER)
 
 .PHONY.: all clean fclean re
