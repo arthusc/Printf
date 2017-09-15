@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/14 21:28:19 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/14 22:58:40 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/15 13:59:45 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,16 @@ void	conv_percent(t_printf *pf, t_conv *conv)
 	char c;
 
 	c = '%';
-	if (conv)
-	{
+	(conv->flag & ZERO && !(conv->flag & MINUS)) ? option_percent(&*pf, 1, '0', &*conv) : 0;
 
-	}
-	(conv->flag & ZERO && !(conv->flag & MINUS)) ?
-	option_percent(&*pf, 1, '0', &*conv) : 0;
-	conv->flag & SPACE ? option_percent(&*pf, 1, ' ', &*conv) : 0;
 	conv->min_width > 1 && !(conv->flag & MINUS) ? option_percent(&*pf, 1, ' ', &*conv) : 0;
+
 	if (conv->min_width > 1 && conv->flag & MINUS)
 	{
-		buffer(&*pf, ((char*)&c), 1);
+		buffer(&*pf, &c, 1);
 		option_percent(&*pf, 1, ' ', &*conv);
 	}
+
 	else
-		buffer(&*pf, ((char*)&c), 1);
+		buffer(&*pf, &c, 1);
 }
