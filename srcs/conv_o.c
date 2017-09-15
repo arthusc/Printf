@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_o.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 19:35:35 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/28 16:20:39 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/15 15:47:58 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,17 @@ int print_conv_o(t_printf *pf, char *str, t_conv *conv)
 
 	len = ft_strlen(str);
 	width_temp = conv->min_width;
+	if(!conv->precision && conv->precision_tick && !conv->min_width)
+	{
+			if(conv->min_width)
+				while(conv->min_width--)
+					buffer(&*pf, " ", 1);
+			if((!(ft_strncmp("0", str, len)) && conv->flag & SHARP))
+			{
+				buffer(&*pf, str, len);
+			 	return(pf->i_buf);
+			}
+	}
 	if (!conv->min_width && !conv->precision)
 	{
 		if(conv->flag & SHARP)
