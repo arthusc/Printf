@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/18 16:43:02 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/15 14:23:46 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,16 @@ int		conv_d(t_printf *pf, t_conv *conv)
 	// !apint ? ft_error_pf(INFO, "error_conv_d\n"): 0;
 	len = ft_strlen(str = ft_itoa(apint));
 	
+	if(!conv->precision && conv->precision_tick)
+	{
+			if(conv->min_width)
+				while(conv->min_width--)
+					buffer(&*pf, " ", 1);
+			if(!(ft_strncmp("0", str, len)))
+			{
+			 return(pf->i_buf);
+			}
+	}
 	if (!conv->min_width && !conv->precision)
 	{
 		if(conv->flag & PLUS && str[0] != '-')
@@ -372,7 +382,7 @@ int		conv_d(t_printf *pf, t_conv *conv)
 	if (!conv->min_width && conv->precision && conv->flag & MINUS)
 	{
 		return(0);
-	}
+	}	
 	if (!conv->min_width && conv->precision && !(conv->flag & MINUS))
 	{
 		conv->before = 3;
