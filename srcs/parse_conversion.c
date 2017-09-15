@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_conversion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/15 14:47:23 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/15 14:59:18 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static t_conv	*parse_minimal_width(t_printf *pf, t_conv *conv)
 
 static t_conv	*parse_precision(t_printf *pf, t_conv *conv)
 {
+	conv->precision_tick = 1;
 	conv->precision = ft_atoi(&pf->format[++pf->i]);
 	conv->precision > 0 ? conv->precision_set = 1 : 0 ;
 	while (ft_isdigit(pf->format[pf->i]))
