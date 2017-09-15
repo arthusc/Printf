@@ -376,13 +376,26 @@ int		conv_d(t_printf *pf, t_conv *conv)
 	if (!conv->min_width && conv->precision && !(conv->flag & MINUS))
 	{
 		conv->before = 3;
+		if(str[0] == '-')
+			{
+				str[0] = '0';
+				buffer(&*pf, "-", 1);
+				while(conv->precision-- - len)
+						buffer(&*pf, "0", 1);
+				buffer(&*pf, str, len);
+				// return(add_char_and_string_2_buff(&*pf, '-', str, len));
+				return(pf->i_buf);
+			}
 		if (conv->flag & SPACE && !(conv->flag & PLUS) && !(conv->flag & MODIFIER_HH))
 			buffer(&*pf, " ", 1);
 		if (conv->flag & PLUS && !(conv->flag & MODIFIER_HH))
 			buffer(&*pf, "+", 1);
 		if(!(conv->flag & MODIFIER_HH))
 		{
-			option_d(&*pf, conv->precision - len, '0', &*conv, str);
+			if (conv->precision > len)
+				option_d(&*pf, conv->precision - len, '0', &*conv, str);
+			else
+				buffer(&*pf, str, len);
 			return(pf->i_buf);
 		}
 		else
