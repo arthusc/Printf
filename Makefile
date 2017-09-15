@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/10 16:46:50 by achambon          #+#    #+#              #
-#    Updated: 2017/09/14 22:42:11 by mbriffau         ###   ########.fr        #
+#    Updated: 2017/09/15 14:06:59 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ $(NAME): $(OBJS)
 	@cp libft/libft.a ./$(NAME)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@echo "libftprintf.a \033[0;32mcreated.\033[0m"
+	@echo "libftprintf.a \033[0;32mcreated.\033[0m"~
 
 $(DIR_O)/%.o: $(DIR_S)/%.c
 	@mkdir -p obj
@@ -72,7 +72,7 @@ fclean: clean
 	@-/bin/rm -f $(NAME)
 	@echo "$(NAME) has been \033[1;31mdeleted\033[0m."
 
-re : fclean all
+re : fclean all testre
 
 test :
 	@$(CC) srcs/main.c $(NAME) -I $(HEADER)
