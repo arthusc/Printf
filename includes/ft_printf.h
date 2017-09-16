@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/16 15:04:55 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/17 00:05:21 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@
 # define TYPE_B			(1 << 24)
 # define TYPE_PERCENT 	(1 << 23)
 
+
 # define PRECISION		(1 << 11)
 
+# define MODIFIER_X		(1 << 12)
 # define MODIFIER_H		(1 << 10)
 # define MODIFIER_HH	(1 << 9)
 # define MODIFIER_L		(1 << 8)
@@ -67,8 +69,8 @@ typedef struct			s_conv
 {
 	int					min_width;
 	int					precision;
-	int					precision_set;
-	int					precision_tick;
+	int					precision_set;//////////
+	int					precision_tick;////////////
 	int					ox;
 	int					before;
 	char				modif;
@@ -107,7 +109,7 @@ void		conv_f(t_printf *pf, t_conv *conv);
 void		conv_f_L(t_printf *pf, t_conv *conv);
 int			conv_p(t_printf *pf, t_conv *conv);
 void		conv_mx(t_printf *pf, t_conv *conv);
-void		conv_x(t_printf *pf, t_conv *conv, char height);
+void		conv_x(t_printf *pf, t_conv *conv);
 void		conv_o(t_printf *pf, t_conv *conv);
 void		conv_u(t_printf *pf, t_conv *conv);
 void		conv_b(t_printf *pf, t_conv *conv);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_conversion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/15 14:59:18 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/17 00:01:39 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ static t_conv	*parse_precision(t_printf *pf, t_conv *conv)
 
 static t_conv	*parse_modifier(t_printf *pf, t_conv *conv)
 {	
-	if (ft_strchr("CSDUOX", pf->format[pf->i]))
+	if (ft_strchr("CSDUO", pf->format[pf->i]))
 		conv->flag += MODIFIER_L;
+	else if (ft_strchr("X", pf->format[pf->i]))
+		!(conv->flag & MODIFIER_X) ? (conv->flag += MODIFIER_X) : 0;
 	else if (ft_strchr("hljz", pf->format[pf->i]))
 	{
 		if (pf->format[pf->i] == 'h')
@@ -61,7 +63,7 @@ static t_conv	*parse_modifier(t_printf *pf, t_conv *conv)
 		if (pf->format[pf->i] == 'l')
 			(pf->format[pf->i + 1] == 'l') ? (conv->flag += MODIFIER_LL) && (pf->i++) : (conv->flag += MODIFIER_L);
 		(pf->format[pf->i] == 'j') ? (conv->flag += MODIFIER_J) : 0;
-		(pf->format[pf->i] == 'z') ? (conv->flag += (1 << 5)) : 0;
+		(pf->format[pf->i] == 'z') ? (conv->flag += MODIFIER_Z) : 0;
 		pf->i++;
 	}
 	return (conv);
