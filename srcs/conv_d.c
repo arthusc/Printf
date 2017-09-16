@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/15 14:49:03 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/16 15:23:58 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,16 +246,17 @@ int		conv_d(t_printf *pf, t_conv *conv)
 	char	*str;
 	int		flag_hh;
 	int		width_temp;
-	apint = (conv->flag & MODIFIER_H ? va_arg(pf->ap, uintmax_t) : 0); /*short */
-	apint = (conv->flag & MODIFIER_HH ? va_arg(pf->ap, unsigned) : 0); /*char */
-	apint = (conv->flag & MODIFIER_L ? va_arg(pf->ap, long) : 0);
-	apint = (conv->flag & MODIFIER_LL ? va_arg(pf->ap, long long) : 0);
-	apint = (conv->flag & MODIFIER_Z ? va_arg(pf->ap, size_t) : 0);
-	apint = (conv->flag & MODIFIER_J ? va_arg(pf->ap, uintmax_t) : 0);
-	apint = !(conv->flag & 2016) ? va_arg(pf->ap, int) : 0;
+	// (intmax_t)((short)va_arg(*ap, int))
+	(conv->flag & MODIFIER_H ? apint = (intmax_t)((short)va_arg(pf->ap, int)) : 0); /*short */
+	(conv->flag & MODIFIER_HH ? apint = va_arg(pf->ap, unsigned) : 0); /*char */
+	(conv->flag & MODIFIER_L ? apint = va_arg(pf->ap, long) : 0);
+	(conv->flag & MODIFIER_LL ? apint = va_arg(pf->ap, long long) : 0);
+	(conv->flag & MODIFIER_Z ? apint = va_arg(pf->ap, size_t) : 0);
+	(conv->flag & MODIFIER_J ? apint = va_arg(pf->ap, uintmax_t) : 0);
+	!(conv->flag & 2016) ? apint = va_arg(pf->ap, int) : 0;
 	// !apint ? ft_error_pf(INFO, "error_conv_d\n"): 0;
-	len = ft_strlen(str = ft_itoa(apint));
 
+	len = ft_strlen(str = ft_itoa(apint));
 	if(!conv->precision && conv->precision_tick)
 	{
 			if(conv->min_width)
