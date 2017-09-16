@@ -12,6 +12,36 @@
 
 #include "../includes/ft_printf.h"
 
+char	*ft_itoa_pf(long long n)
+{
+	int			i;
+	long long	a;
+	int			neg;
+	char		*str;
+
+	i = 1;
+	neg = (n < 0) ? 1 : 0;
+	if (n > 0)
+		n = n * -1;
+	a = n;
+	while ((a = a / 10) < 0)
+		i++;
+	str = (char *)malloc((sizeof(char) * i) + neg + 1);
+	if (str == NULL)
+		return (NULL);
+	ft_bzero(str, i + neg + 1);
+	if (neg == 1)
+		str[0] = '-';
+	i -= 1 - neg;
+	while (i-- >= neg)
+	{
+		str[i + 1] = (-(n % 10) + '0');
+		n = n / 10;
+	}
+	return (str);
+}
+
+
 static t_conv	option_d(t_printf *pf, int n, char c, t_conv *conv, char *s)
 {
 	int		i;
@@ -242,21 +272,22 @@ static int		conv_d_hh_nominus(t_printf *pf, t_conv *conv, char *str, int len)
 int		conv_d(t_printf *pf, t_conv *conv)
 {
 	int		len;
-	int		apint;
+	uintmax_t		apint;
 	char	*str;
 	int		flag_hh;
 	int		width_temp;
 	// (intmax_t)((short)va_arg(*ap, int))
 	(conv->flag & MODIFIER_H ? apint = (intmax_t)((short)va_arg(pf->ap, int)) : 0); /*short */
-	(conv->flag & MODIFIER_HH ? apint = va_arg(pf->ap, unsigned) : 0); /*char */
-	(conv->flag & MODIFIER_L ? apint = va_arg(pf->ap, long) : 0);
+	(conv->flag & MODIFIER_HH ? apint = (intmax_t)((char)va_arg(pf->ap, int)) : 0); /*char */
+	conv->flag & MODIFIER_L ? apint = va_arg(pf->ap, long) : 0;
 	(conv->flag & MODIFIER_LL ? apint = va_arg(pf->ap, long long) : 0);
-	(conv->flag & MODIFIER_Z ? apint = va_arg(pf->ap, size_t) : 0);
+	(conv->flag & MODIFIER_Z ? apint = (intmax_t)(va_arg(pf->ap, ssize_t)) : 0);
 	(conv->flag & MODIFIER_J ? apint = va_arg(pf->ap, uintmax_t) : 0);
 	!(conv->flag & 2016) ? apint = va_arg(pf->ap, int) : 0;
 	// !apint ? ft_error_pf(INFO, "error_conv_d\n"): 0;
-
-	len = ft_strlen(str = ft_itoa(apint));
+	
+	len = ft_strlen(str = ft_itoa_pf((long long)apint));
+	
 	if(!conv->precision && conv->precision_tick)
 	{
 			if(conv->min_width)
@@ -459,7 +490,8 @@ int		conv_d(t_printf *pf, t_conv *conv)
 			return(0);
 		}
 	}
-	
+	// printf("%ld at the end\n", apint);
+	// printf("%s at the end\n", str);
 	buffer(&*pf, str, len);	
 	return(0);
 }
