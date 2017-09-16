@@ -6,11 +6,33 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/07 13:05:40 by achambon          #+#    #+#             */
-/*   Updated: 2017/08/28 16:20:58 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/16 18:53:34 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/ft_printf.h"
+
+static char	*ft_itoa_pf(uintmax_t n)
+{
+	int			i;
+	uintmax_t	a;
+	char		*str;
+
+	i = 1;
+	a = n;
+	while ((a = a / 10) > 0)
+		i++;
+	if (!(str = (char *)malloc((sizeof(char) * i) + 1)))
+		return (0);
+	ft_bzero(str, i + 1);
+	str[i] = '\0';
+	while (i-- >= 0)
+	{
+		str[i] = ((n % 10) + '0');
+		n = n / 10;
+	}
+	return (str);
+}
 
 static t_conv	option_u(t_printf *pf, int n, char c, t_conv *conv, char *s)
 {
@@ -368,16 +390,45 @@ int	print_conv_u(t_printf *pf, char *str, t_conv *conv)
 
 void	conv_u(t_printf *pf, t_conv *conv)
 {
-	unsigned long long ptr;
+	unsigned long int ptr;
 
 	ptr = 0;
-	conv->flag & MODIFIER_L ? ptr = (unsigned long int)ptr : 0 ;
-	conv->flag & MODIFIER_LL ? ptr = (unsigned long long int)ptr : 0;
-	conv->flag & MODIFIER_H ? ptr = (uint16_t)ptr : 0;
-	conv->flag & MODIFIER_HH ? ptr = (uint8_t)ptr : 0;
-	conv->flag & MODIFIER_Z ? ptr = (size_t)ptr : 0;
-	conv->flag & MODIFIER_J ? ptr = (uintmax_t)ptr : 0;
+	if (conv->flag & MODIFIER_L)
+	{
+		ptr = (unsigned long int)ptr;
+		// printf("MODIFIER_L\n");
+	}
+	else if (conv->flag & MODIFIER_LL)
+	{
+		ptr = (unsigned long long int)ptr;
+		// printf("MODIFIER_LL\n");
+	}
+	else if (conv->flag & MODIFIER_H)
+	{
+		ptr = (uint16_t)ptr;
+		// printf("MODIFIER_H\n");
+	}
+	else if (conv->flag & MODIFIER_HH)
+	{
+		ptr = (uint8_t)ptr;
+		// printf("MODIFIER_HH\n");
+	}
+	else if (conv->flag & MODIFIER_Z)
+	{
+		ptr = (size_t)ptr;
+		// printf("MODIFIER_Z\n");
+	}
+	else if (conv->flag & MODIFIER_J)
+	{
+		ptr = (uintmax_t)ptr;
+		// printf("MODIFIER_J\n");
+	}
+	else 
+	{
+		ptr = (unsigned)ptr;
+		// printf("NO_MODIFIER\n");
+	}
 	ptr = va_arg(pf->ap, uintmax_t);
-	print_conv_u(pf, ft_itoa_base((long long)ptr, 10), conv);
+	print_conv_u(pf, ft_itoa_pf((uintmax_t)ptr), conv);
 	return;
 }
