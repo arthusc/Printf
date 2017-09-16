@@ -6,13 +6,13 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/07 13:05:40 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/16 18:53:34 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/16 19:33:25 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/ft_printf.h"
 
-static char	*ft_itoa_pf(uintmax_t n)
+static char	*ft_itoa_pf(unsigned long long n)
 {
 	int			i;
 	uintmax_t	a;
@@ -394,39 +394,23 @@ void	conv_u(t_printf *pf, t_conv *conv)
 
 	ptr = 0;
 	if (conv->flag & MODIFIER_L)
-	{
 		ptr = (unsigned long int)ptr;
-		// printf("MODIFIER_L\n");
-	}
 	else if (conv->flag & MODIFIER_LL)
-	{
 		ptr = (unsigned long long int)ptr;
-		// printf("MODIFIER_LL\n");
-	}
 	else if (conv->flag & MODIFIER_H)
-	{
 		ptr = (uint16_t)ptr;
-		// printf("MODIFIER_H\n");
-	}
 	else if (conv->flag & MODIFIER_HH)
-	{
 		ptr = (uint8_t)ptr;
-		// printf("MODIFIER_HH\n");
-	}
 	else if (conv->flag & MODIFIER_Z)
-	{
 		ptr = (size_t)ptr;
-		// printf("MODIFIER_Z\n");
-	}
 	else if (conv->flag & MODIFIER_J)
-	{
 		ptr = (uintmax_t)ptr;
-		// printf("MODIFIER_J\n");
-	}
 	else 
 	{
-		ptr = (unsigned)ptr;
-		// printf("NO_MODIFIER\n");
+		ptr = (unsigned int)ptr;
+		ptr = va_arg(pf->ap, unsigned int);
+		print_conv_u(pf, ft_itoa_pf(ptr), conv);
+		return;
 	}
 	ptr = va_arg(pf->ap, uintmax_t);
 	print_conv_u(pf, ft_itoa_pf((uintmax_t)ptr), conv);
