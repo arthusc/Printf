@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/16 15:04:57 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/16 17:30:12 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void			conv_s(t_printf *pf, t_conv *conv)
 
 	conv->flag & MODIFIER_L && MB_CUR_MAX > 1 ?
 	(str = va_arg(pf->ap, wchar_t *)) : (str = va_arg(pf->ap, unsigned char *));
-	(str == NULL) ? (str = strdup("(null)")) : 0;
+	(str == NULL) ? (str = ft_strdup("(null)")) : 0;
 	len = (conv->flag & MODIFIER_L ? count_wchars(conv, str, ft_wstrlen(str)) :
 	ft_strlen(str));
 	if (conv->precision && conv->precision < len)
