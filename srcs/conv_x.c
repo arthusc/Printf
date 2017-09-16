@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:30:50 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/16 19:32:12 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/16 20:26:54 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,41 +400,34 @@ void		conv_x(t_printf *pf, t_conv *conv, char height)
 	i = 0;
 	pointer_x = 1;
 	if (conv->flag & MODIFIER_L)
-	{
 		pointer_x = (unsigned long int)pointer_x;
-		// printf("MODIFIER_L\n");
-	}
 	else if (conv->flag & MODIFIER_LL)
-	{
 		pointer_x = (unsigned long long int)pointer_x;
-		// printf("MODIFIER_LL\n");
-	}
 	else if (conv->flag & MODIFIER_H)
 	{
 		pointer_x = (uint16_t)pointer_x;
-		// printf("MODIFIER_H\n");
+		pointer_x = va_arg(pf->ap, unsigned int);
+		str = ft_itoa_base((long long)pointer_x, 16);
+		len = ft_strlen(str);
+		print_conv_x(pf, conv, len, str);
+		return;
 	}
 	else if (conv->flag & MODIFIER_HH)
 	{
 		pointer_x = (uint8_t)pointer_x;
-		// printf("MODIFIER_HH\n");
+		pointer_x = va_arg(pf->ap, unsigned int);
+		str = ft_itoa_base((long long)pointer_x, 16);
+		len = ft_strlen(str);
+		print_conv_x(pf, conv, len, str);
+		return;
 	}
 	else if (conv->flag & MODIFIER_Z)
-	{
 		pointer_x = (size_t)pointer_x;
-		// printf("MODIFIER_Z\n");
-	}
 	else if (conv->flag & MODIFIER_J)
-	{
 		pointer_x = (uintmax_t)pointer_x;
-		// printf("MODIFIER_J\n");
-	}
 	else 
-	{
 		pointer_x = (unsigned)pointer_x;
-		// printf("NO_MODIFIER\n");
-	}
-	if(!(pointer_x = va_arg(pf->ap, unsigned long long)))
+	if(!(pointer_x = va_arg(pf->ap, unsigned long)))
 	{
 		if(conv->min_width)
 			while(conv->min_width--)
