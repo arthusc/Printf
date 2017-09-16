@@ -203,13 +203,13 @@ int	print_conv_u(t_printf *pf, char *str, t_conv *conv)
 
 	len = ft_strlen(str);
 	width_temp = conv->min_width;
-	if (!conv->min_width && !conv->precision)
-	{
-		if(conv->flag & SPACE && !(conv->flag & PLUS))
-			return(add_char_and_string_2_buff(&*pf, ' ', str, len));
-		if(conv->flag & PLUS)
-			return(add_char_and_string_2_buff(&*pf, '+', str, len));
-	}
+	// if (!conv->min_width && !conv->precision)
+	// {
+	// 	if(conv->flag & SPACE && !(conv->flag & PLUS))
+	// 		return(add_char_and_string_2_buff(&*pf, ' ', str, len));
+	// 	if(conv->flag & PLUS)
+	// 		return(add_char_and_string_2_buff(&*pf, '+', str, len));
+	// }
 	if (conv->flag & MINUS)
 	{
 		(conv_u_minus(&*pf, conv, len, str));
@@ -368,7 +368,7 @@ int	print_conv_u(t_printf *pf, char *str, t_conv *conv)
 
 void	conv_u(t_printf *pf, t_conv *conv)
 {
-	unsigned int ptr;
+	unsigned long ptr;
 
 	ptr = 0;
 	conv->flag & MODIFIER_L ? ptr = (unsigned long int)ptr : 0 ;
