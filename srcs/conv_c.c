@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/15 14:38:11 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/16 15:18:57 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,13 @@ void	conv_c(t_printf *pf, t_conv *conv)
 		c = (char)c;
 		c = va_arg(pf->ap, unsigned);
 		len = 1;
+		if (c == 0)
+		{
+			conv->min_width > len && !(conv->flag & MINUS) ? option_c(&*pf, len, ' ', &*conv) : 0;
+			buffer(*&pf, "^@", 2);// taille 2 mais 1 pour return buff
+			pf->subtract_buffer += 1;
+			return;
+		}
 		(conv->flag & ZERO && !(conv->flag & MINUS)) ?
 		option_c(&*pf, len, '0', &*conv) : 0;
 		conv->flag & SPACE ? option_c(&*pf, len, ' ', &*conv) : 0;

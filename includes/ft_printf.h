@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/15 13:00:54 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/16 15:04:55 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct			s_printf
 	int					i;
 	char				*buffer;
 	int 				i_buf;
+	int					subtract_buffer;
 }						t_printf;
 
 void		ft_error_pf(char *file, char *func, int line, char *s);

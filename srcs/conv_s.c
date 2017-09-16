@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/15 14:43:36 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/16 15:04:57 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,15 @@ void			conv_s(t_printf *pf, t_conv *conv)
 	(str == NULL) ? (str = strdup("(null)")) : 0;
 	len = (conv->flag & MODIFIER_L ? count_wchars(conv, str, ft_wstrlen(str)) :
 	ft_strlen(str));
+	if (conv->precision && conv->precision < len)
+		len = conv->precision;
 	if (conv->min_width > len && (conv->flag & ZERO) && !(conv->flag & MINUS))
 		option_s(&*pf, len, '0', &*conv);
 	else if (conv->min_width > len && conv->flag & SPACE)
 		option_s(&*pf, len, ' ', &*conv);
 	else if (conv->min_width > len && !(conv->flag & MINUS))
 		option_s(&*pf, len, ' ', &*conv);
-	else if ((conv->flag & MINUS))
+	else if (conv->min_width > len && conv->flag & MINUS)
 	{
 		conv->flag & MODIFIER_L ?
 		print_wstring(&*pf, conv, str, ft_wstrlen(str)) : buffer(&*pf, str, len);
