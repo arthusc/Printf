@@ -91,7 +91,7 @@ static t_conv	option_x(t_printf *pf, int n, char c, t_conv *conv, char *s)
 
 t_printf	*add_0x(t_printf *pf, t_conv *conv)
 {
-	if (conv->flag & MODIFIER_L)
+	if (conv->flag & MODIFIER_X)
 	{
 		buffer(&*pf, "0X", 2);
 		return(pf);
@@ -207,14 +207,23 @@ int		print_conv_x(t_printf *pf, t_conv *conv, int len, char *str)
 
 	len = ft_strlen(str);
 	width_temp = conv->min_width;
-
+	if(!conv->precision && conv->precision_tick)
+	{
+			if(conv->min_width)
+				while(conv->min_width--)
+					buffer(&*pf, " ", 1);
+			if(!(ft_strncmp("0", str, len)))
+			{
+			 return(pf->i_buf);
+			}
+	}
 	if (!conv->min_width && !conv->precision)
 	{
 		if(conv->flag & SPACE && !(conv->flag & PLUS))
 			return(add_char_and_string_2_buff(&*pf, ' ', str, len));
 		if(conv->flag & PLUS)
 			return(add_char_and_string_2_buff(&*pf, '+', str, len));
-		if(conv->flag & SHARP)
+		if(conv->flag & SHARP && str[0] != '0')
 			add_0x(&*pf, &*conv);
 	}
 	if (conv->flag & MINUS)
