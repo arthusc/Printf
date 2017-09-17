@@ -102,6 +102,7 @@ t_printf	*buffer(t_printf *pf, char *saved, int len);
 t_printf	*conversion_specifier(t_printf *pf, t_conv *conv);
 void		conv_c(t_printf *pf, t_conv *conv);
 void		conv_s(t_printf *pf, t_conv *conv);
+int 		conv_d_bis(t_printf *pf, t_conv *conv, char *str, int len);
 int			conv_d(t_printf *pf, t_conv *conv);
 int			conv_d_l(t_printf *pf, t_conv *conv);
 int			conv_d_h(t_printf *pf, t_conv *conv);
@@ -115,6 +116,8 @@ void		conv_u(t_printf *pf, t_conv *conv);
 void		conv_b(t_printf *pf, t_conv *conv);
 void		conv_percent(t_printf *pf, t_conv *conv);
 void		no_conv(t_printf *pf, t_conv *conv);
+
 int			add_char_and_string_2_buff(t_printf *pf, char c, char *str, int len);
 int			minwidth_decr_add_char_2_buff(t_printf *pf, char c, t_conv *conv);
 int			special_hhd_reverse_0_n_minus(t_printf *pf, char *str, char c);
+int			if_tick_but_no_prec(t_printf *pf, t_conv *conv);
