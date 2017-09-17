@@ -32,3 +32,11 @@ int		special_hhd_reverse_0_n_minus(t_printf *pf, char *str, char c)
 	buffer(pf, &c, 1);
 	return(pf->i_buf);
 }
+
+int		if_tick_but_no_prec(t_printf *pf, t_conv *conv)
+{
+	if(conv->min_width)
+				while(conv->min_width--)
+					buffer(&*pf, " ", 1);
+	return(pf->i_buf);
+}
