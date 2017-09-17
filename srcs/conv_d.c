@@ -69,7 +69,7 @@ static t_conv	option_d(t_printf *pf, int n, char c, t_conv *conv, char *s)
 }
 int				conv_d_minus_width_only2(t_printf *pf, t_conv *conv, int len, char *str)
 {
-	if (conv->flag & PLUS && !(conv->flag & ZERO))
+		if (conv->flag & PLUS && !(conv->flag & ZERO))
 		{
 			conv->min_width--;
 		}
@@ -81,11 +81,12 @@ int				conv_d_minus_width_only2(t_printf *pf, t_conv *conv, int len, char *str)
 		}
 		else if (conv->flag & ZERO)
 		{
+			printf("YAY2");
 			conv->before = 1;
 			option_d(&*pf, conv->min_width - len, ' ', conv, str);
 			return (pf->i_buf);
 		}
-	return(pf->i_buf);
+		return(pf->i_buf);
 }
 int				conv_d_minus_width_only(t_printf *pf, t_conv *conv, int len, char *str)
 {
@@ -100,7 +101,7 @@ int				conv_d_minus_width_only(t_printf *pf, t_conv *conv, int len, char *str)
 			conv->before = 1;
 			option_d(&*pf, conv->min_width - len, ' ', conv, str);
 		}
-		conv_d_minus_width_only(&*pf, conv, len, str);
+		conv_d_minus_width_only2(&*pf, conv, len, str);
 		// if (conv->flag & PLUS && !(conv->flag & ZERO))
 		// {
 		// 	conv->min_width--;
@@ -117,7 +118,7 @@ int				conv_d_minus_width_only(t_printf *pf, t_conv *conv, int len, char *str)
 		// 	option_d(&*pf, conv->min_width - len, ' ', conv, str);
 		// 	return (pf->i_buf);
 		// }
-	}
+	 }
 	if (!(conv->flag & PLUS))
 	{
 		conv->before = 1;
@@ -125,6 +126,7 @@ int				conv_d_minus_width_only(t_printf *pf, t_conv *conv, int len, char *str)
 	}
 	return (pf->i_buf);
 }
+
 int				conv_d_minus_width_and_prec(t_printf *pf, t_conv *conv, int len, char *str)
 {
 	if (conv->min_width > conv->precision)
