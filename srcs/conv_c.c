@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/17 12:25:36 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/17 12:36:32 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int		count_wint(wint_t c)
 	return (size);
 }
 
-t_printf	*print_wint(t_printf *pf, wint_t wint) ////////////////////////
+t_printf	*print_wint(t_printf *pf, wint_t wint)
 {
 	char	str[4];
 
@@ -79,7 +79,6 @@ static t_conv	*option_c(t_printf *pf, int print_size, char c, t_conv *conv)//(ch
 	conv->min_width = 0;
 	return (conv);
 }
-
 
 void	conv_c(t_printf *pf, t_conv *conv)
 {
