@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 21:57:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/19 00:59:14 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/19 01:15:53 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void		call_option_b(t_printf *pf, t_conv *conv)
 	else if (conv->min_width > 8 && conv->flag & PLUS)
 	{
 		option_b(&*pf, 9, ' ', &*conv);
-		buffer(&*pf, "+", 1);	
+		buffer(&*pf, "+", 1);
 	}
 	else if (conv->min_width > 8 && !(conv->flag & MINUS))
 		option_b(&*pf, 8, ' ', &*conv);
