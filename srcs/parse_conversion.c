@@ -6,70 +6,66 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/18 22:34:31 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/18 23:52:10 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static t_conv		*parse_flags(t_printf *pf, t_conv *conv)
+static t_conv		*parse_flags(t_conv *conv, char *s, int *i)
 {
-	while (ft_strchr("#0-+ ", pf->format[pf->i]))
-	{ 	
-		pf->format[pf->i] == '-'  && !(conv->flag & MINUS) ? conv->flag += MINUS : 0;
-		pf->format[pf->i] == '+' && !(conv->flag & PLUS) ? conv->flag += PLUS : 0;
-		pf->format[pf->i] == '#' && !(conv->flag & SHARP)? conv->flag += SHARP : 0;
-		pf->format[pf->i] == '0' && !(conv->flag & ZERO) ? conv->flag += ZERO : 0;
-		pf->format[pf->i] == ' ' && !(conv->flag & SPACE) ? conv->flag += SPACE : 0;
-		if (pf->format[pf->i] == '\0')
-			break;
-		pf->i++;
+	while (ft_strchr("#0-+ ", s[*i]))
+	{
+		s[*i] == '-' && !(conv->flag & MINUS) ? conv->flag += MINUS : 0;
+		s[*i] == '+' && !(conv->flag & PLUS) ? conv->flag += PLUS : 0;
+		s[*i] == '#' && !(conv->flag & SHARP) ? conv->flag += SHARP : 0;
+		s[*i] == '0' && !(conv->flag & ZERO) ? conv->flag += ZERO : 0;
+		s[*i] == ' ' && !(conv->flag & SPACE) ? conv->flag += SPACE : 0;
+		if (s[*i] == '\0')
+			break ;
+		*i += 1;
 	}
 	return (conv);
 }
 
-static t_conv	*parse_minimal_width(t_printf *pf, t_conv *conv)
-{
-	conv->min_width = ft_atoi(&pf->format[pf->i]);
-	while (ft_isdigit(pf->format[pf->i]))
-		pf->i++;
-	if (!(pf->format))
-		ft_error_pf(INFO, "error_parse_minimal_width");
-	return (conv);
-}
-
-static t_conv	*parse_precision(t_printf *pf, t_conv *conv)
+static t_conv		*parse_precision(t_printf *pf, t_conv *conv)
 {
 	conv->precision_tick = 1;
 	conv->precision = ft_atoi(&pf->format[++pf->i]);
-	conv->precision > 0 ? conv->precision_set = 1 : 0 ;
+	conv->precision > 0 ? conv->precision_set = 1 : 0;
 	while (ft_isdigit(pf->format[pf->i]))
 		pf->i++;
-	if (!pf->format[pf->i]) 
+	if (!pf->format[pf->i])
 		ft_error_pf(INFO, "Invalid format. (After Precision)");
 	return (conv);
 }
 
-static t_conv	*parse_modifier(t_printf *pf, t_conv *conv)
-{	
-	if (ft_strchr("CSDUO", pf->format[pf->i]))
+static t_conv		*parse_modifier(t_printf *pf, t_conv *conv, char *s)
+{
+	if (ft_strchr("CSDUO", s[pf->i]))
 		conv->flag += MODIFIER_L;
-	else if (ft_strchr("X", pf->format[pf->i]))
+	else if (ft_strchr("X", s[pf->i]))
 		!(conv->flag & MODIFIER_X) ? (conv->flag += MODIFIER_X) : 0;
-	else if (ft_strchr("hljz", pf->format[pf->i]))
+	else if (ft_strchr("hljz", s[pf->i]))
 	{
-		if (pf->format[pf->i] == 'h')
-			(pf->format[pf->i + 1] == 'h') ? (conv->flag += MODIFIER_HH) && (pf->i++) : (conv->flag += MODIFIER_H);
-		if (pf->format[pf->i] == 'l')
-			(pf->format[pf->i + 1] == 'l') ? (conv->flag += MODIFIER_LL) && (pf->i++) : (conv->flag += MODIFIER_L);
-		(pf->format[pf->i] == 'j') ? (conv->flag += MODIFIER_J) : 0;
-		(pf->format[pf->i] == 'z') ? (conv->flag += MODIFIER_Z) : 0;
+		if (s[pf->i] == 'h')
+		{
+			(s[pf->i + 1] == 'h') ? (conv->flag += MODIFIER_HH)
+			&& (pf->i++) : (conv->flag += MODIFIER_H);
+		}
+		if (s[pf->i] == 'l')
+		{
+			(s[pf->i + 1] == 'l') ? (conv->flag += MODIFIER_LL)
+			&& (pf->i++) : (conv->flag += MODIFIER_L);
+		}
+		(s[pf->i] == 'j') ? (conv->flag += MODIFIER_J) : 0;
+		(s[pf->i] == 'z') ? (conv->flag += MODIFIER_Z) : 0;
 		pf->i++;
 	}
 	return (conv);
 }
 
-static int parse_type(char c)
+static int			parse_type(char c)
 {
 	int ret;
 
@@ -86,24 +82,21 @@ static int parse_type(char c)
 	return (ret);
 }
 
-t_printf	*parse_conversion(t_printf *pf)
+t_printf			*parse_conversion(t_printf *pf)
 {
 	t_conv		*conv;
-	int			add;
 
-	add = 0;
 	conv = init_conv();
-	parse_flags(&*pf, &*conv);
-	parse_minimal_width(&*pf, &*conv);
+	parse_flags(&*conv, pf->format, &pf->i);
+	conv->min_width = ft_atoi(&pf->format[pf->i]);
+	while (ft_isdigit(pf->format[pf->i]))
+		pf->i++;
+	if (!(pf->format))
+		ft_error_pf(INFO, "error_parse_minimal_width");
 	(pf->format[pf->i] == '.' ? parse_precision(&*pf, &*conv) : 0);
-	conv = parse_modifier(&*pf, conv);
+	conv = parse_modifier(&*pf, conv, pf->format);
 	(!pf->format[pf->i]) ? ft_error_pf(INFO, "error_format_type") : 0;
 	conv->flag += parse_type(pf->format[pf->i]);
-	while (!(ft_strchr("cCsSdDipxXuUoOb%", pf->format[pf->i + add])))
-		add++;
-	if (ft_strchr("cCsSdDipxXuUoOb%", pf->format[pf->i + add]))
-		pf->i += add;
 	conversion_specifier(&*pf, &*conv);
 	return (pf);
 }
-
