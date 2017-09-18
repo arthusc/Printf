@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 18:00:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/16 22:34:20 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/18 22:35:23 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ t_printf	*conversion_specifier(t_printf *pf, t_conv *conv)
 	else if (!(conv->flag & (TYPE_S + TYPE_C + TYPE_D + TYPE_P + TYPE_X + TYPE_U + TYPE_O + TYPE_B + TYPE_PERCENT)))
 	{
 		if ((conv->flag & (MINUS + PLUS + SHARP + ZERO + SPACE)) && conv->min_width)
-		{
 			no_conv(&*pf, &*conv);
-			pf->i++;
-		}
 	}
 	return(pf);
 }

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:41:18 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/16 15:04:49 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/18 22:37:01 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,3 @@ t_printf	*buffer(t_printf *pf, char *saved, int len)
 	pf->buffer[pf->i_buf] = '\0';
 	return (pf);
 }
-
-//option 0 -1 tent qu'il y a un caractere deriere.

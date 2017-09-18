@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/17 00:01:39 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/18 22:34:31 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,20 @@ static int parse_type(char c)
 t_printf	*parse_conversion(t_printf *pf)
 {
 	t_conv		*conv;
+	int			add;
 
+	add = 0;
 	conv = init_conv();
 	parse_flags(&*pf, &*conv);
 	parse_minimal_width(&*pf, &*conv);
 	(pf->format[pf->i] == '.' ? parse_precision(&*pf, &*conv) : 0);
 	conv = parse_modifier(&*pf, conv);
 	(!pf->format[pf->i]) ? ft_error_pf(INFO, "error_format_type") : 0;
-	conv->flag += parse_type(pf->format[pf->i]);// si il ny a rien apres -> option
-	while (!(ft_strchr("cCsSdDipxXuUoOb%", pf->format[pf->i])))
-		pf->i += 1;
+	conv->flag += parse_type(pf->format[pf->i]);
+	while (!(ft_strchr("cCsSdDipxXuUoOb%", pf->format[pf->i + add])))
+		add++;
+	if (ft_strchr("cCsSdDipxXuUoOb%", pf->format[pf->i + add]))
+		pf->i += add;
 	conversion_specifier(&*pf, &*conv);
 	return (pf);
 }

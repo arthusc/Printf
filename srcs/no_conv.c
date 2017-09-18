@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 17:32:12 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/08/23 19:09:22 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/18 22:35:18 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void 	no_conv(t_printf *pf, t_conv *conv)
 			option_no_conv(&*pf, 1, ' ', &*conv);
 		}
 	else
-		(buffer(&*pf, &pf->format[pf->i], 1));
+		(buffer(&*pf, &pf->format[pf->i-1], 1));
 }
