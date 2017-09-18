@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/17 22:10:00 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/18 17:48:16 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,52 +71,51 @@ static t_conv	*option_c(t_printf *pf, int print_size, char c, t_conv *conv)
 	return (conv);
 }
 
+static void		conv_c_wint(t_printf *pf, t_conv *conv)
+{
+	char	c;
+	int		len;
+
+	if (MB_CUR_MAX == 1)
+		return ;
+	c = va_arg(pf->ap, wint_t);
+	len = count_wint(c);
+	conv->min_width > len && conv->flag & ZERO && !(conv->flag & MINUS)
+	? option_c(&*pf, len, '0', &*conv) : 0;
+	conv->min_width > len && conv->flag & SPACE
+	? option_c(&*pf, len, ' ', &*conv) : 0;
+	conv->min_width > len && !(conv->flag & MINUS)
+	? option_c(&*pf, len, ' ', &*conv) : 0;
+	print_wint(&*pf, c);
+	(conv->min_width > len && conv->flag & MINUS)
+	? option_c(&*pf, len, ' ', &*conv) : 0;
+}
+
 void			conv_c(t_printf *pf, t_conv *conv)
 {
-	int		len;
-	wint_t	c;
+	char	c;
 
-	c = 0;
 	if (conv->flag & MODIFIER_L && MB_CUR_MAX > 1)
-	{
-		if (MB_CUR_MAX == 1)
-			return ;
-		c = va_arg(pf->ap, wint_t);
-		len = count_wint(c);
-		conv->min_width > len && conv->flag & ZERO && !(conv->flag & MINUS) ? option_c(&*pf, len, '0', &*conv) : 0;
-		conv->min_width > len && conv->flag & SPACE ? option_c(&*pf, len, ' ', &*conv) : 0;
-		conv->min_width > len && !(conv->flag & MINUS) ? option_c(&*pf, len, ' ', &*conv) : 0;
-		if (conv->min_width > len && conv->flag & MINUS)
-		{
-			print_wint(&*pf, c);
-			option_c(&*pf, len, ' ', &*conv);
-		}
-		else
-			print_wint(&*pf, c);
-	}
+		conv_c_wint(&*pf, &*conv);
 	else
 	{
-		c = (char)c;
 		c = va_arg(pf->ap, unsigned);
-		len = 1;
 		if (c == 0)
 		{
-			conv->min_width > len && !(conv->flag & MINUS) ? option_c(&*pf, len, ' ', &*conv) : 0;
+			conv->min_width > 1 && !(conv->flag & MINUS)
+			? option_c(&*pf, 1, ' ', &*conv) : 0;
 			buffer(*&pf, "^@", 2);
 			pf->subtract_buffer += 1;
-			return;
+			return ;
 		}
-		(conv->flag & ZERO && !(conv->flag & MINUS)) ?
-		option_c(&*pf, len, '0', &*conv) : 0;
-		conv->flag & SPACE ? option_c(&*pf, len, ' ', &*conv) : 0;
-		conv->min_width > len && !(conv->flag & MINUS) ? option_c(&*pf, len, ' ', &*conv) : 0;
-		if (conv->min_width > len && conv->flag & MINUS)
-		{
-			(buffer(&*pf, ((char*)&c), len));
-			option_c(&*pf, len, ' ', &*conv);
-		}
-		else
-			(buffer(&*pf, ((char*)&c), len));
+		(conv->flag & ZERO && !(conv->flag & MINUS))
+		? option_c(&*pf, 1, '0', &*conv) : 0;
+		conv->flag & SPACE ? option_c(&*pf, 1, ' ', &*conv) : 0;
+		conv->min_width > 1 && !(conv->flag & MINUS)
+		? option_c(&*pf, 1, ' ', &*conv) : 0;
+		buffer(&*pf, ((char*)&c), 1);
+		(conv->min_width > 1 && conv->flag & MINUS)
+		? option_c(&*pf, 1, ' ', &*conv) : 0;
 	}
 	return ;
 }
