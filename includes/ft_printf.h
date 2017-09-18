@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/18 22:11:50 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/18 23:01:05 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void		print_p(t_printf *pf, int len, char *str);
 int			option(t_printf *pf, int n, char c, t_conv *conv, char *s);
 t_conv		*option_print(int print_size, char c, t_conv *conv, char *s);
 t_printf	*buffer(t_printf *pf, char *saved, int len);
-int			ft_wstrlen(wchar_t *s);
 
 t_printf	*conversion_specifier(t_printf *pf, t_conv *conv);
 void		conv_c(t_printf *pf, t_conv *conv);

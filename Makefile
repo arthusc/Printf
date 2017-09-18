@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/10 16:46:50 by achambon          #+#    #+#              #
-#    Updated: 2017/09/18 22:12:26 by mbriffau         ###   ########.fr        #
+#    Updated: 2017/09/18 23:01:59 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,7 @@ SOURCES =	ft_printf.c \
 			conv_x.c \
 			conv_b.c \
 			conv_percent.c \
-			no_conv.c \
-			ft_wstrlen.c
+			no_conv.c
 
 all: $(NAME)
 

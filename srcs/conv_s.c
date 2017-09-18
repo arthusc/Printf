@@ -6,11 +6,21 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/18 22:58:35 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/18 23:00:23 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+static int		ft_wstrlen(wchar_t *s)
+{
+	int		i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
 
 static int		count_wchars(t_conv *conv, wchar_t *wstr, int size)
 {
