@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/18 17:48:16 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/18 17:55:27 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 
 static int		count_wint(wint_t c)
 {
-	int		size;
-
-	size = 0;
 	if (c <= 0x7F)
-		size = 1;
+		return (1);
 	else if (c <= 0x7FF)
-		size = 2;
+		return (2);
 	else if (c <= 0xFFFF)
-		size = 3;
+		return (3);
 	else if (c <= 0x10FFFF)
-		size = 4;
-	return (size);
+		return (4);
+	return (0);
 }
 
 t_printf		*print_wint(t_printf *pf, wint_t wint)
