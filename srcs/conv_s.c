@@ -6,21 +6,11 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/16 17:30:12 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/18 18:52:44 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-int		ft_wstrlen(wchar_t *s)
-{
-	int		i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 static int		count_wchars(t_conv *conv, wchar_t *wstr, int size)
 {
@@ -51,12 +41,11 @@ static int		count_wchars(t_conv *conv, wchar_t *wstr, int size)
 	return (total);
 }
 
-static void		print_wstring(t_printf *pf, t_conv *conv, wchar_t *wstr, int n)
+static void		print_wstring(t_printf *pf, wchar_t *wstr, int n)
 {
 	int i;
 
 	i = 0;
-	count_wchars(conv, wstr, n);
 	while (i < n)
 	{
 		print_wint(&*pf, wstr[i]);
@@ -85,16 +74,8 @@ static t_conv	*option_s(t_printf *pf, int print_size, char c, t_conv *conv)
 	return (conv);
 }
 
-void			conv_s(t_printf *pf, t_conv *conv)
+static int		call_option(t_printf *pf, t_conv *conv, int len)
 {
-	void	*str;
-	int		len;
-
-	conv->flag & MODIFIER_L && MB_CUR_MAX > 1 ?
-	(str = va_arg(pf->ap, wchar_t *)) : (str = va_arg(pf->ap, unsigned char *));
-	(str == NULL) ? (str = ft_strdup("(null)")) : 0;
-	len = (conv->flag & MODIFIER_L ? count_wchars(conv, str, ft_wstrlen(str)) :
-	ft_strlen(str));
 	if (conv->precision && conv->precision < len)
 		len = conv->precision;
 	if (conv->min_width > len && (conv->flag & ZERO) && !(conv->flag & MINUS))
@@ -103,15 +84,29 @@ void			conv_s(t_printf *pf, t_conv *conv)
 		option_s(&*pf, len, ' ', &*conv);
 	else if (conv->min_width > len && !(conv->flag & MINUS))
 		option_s(&*pf, len, ' ', &*conv);
-	else if (conv->min_width > len && conv->flag & MINUS)
+	return (len);
+}
+
+void			conv_s(t_printf *pf, t_conv *conv)
+{
+	void	*str;
+	int		len;
+
+	if (conv->flag & MODIFIER_L && MB_CUR_MAX > 1)
 	{
-		conv->flag & MODIFIER_L ?
-		print_wstring(&*pf, conv, str, ft_wstrlen(str)) : buffer(&*pf, str, len);
-		option_s(&*pf, len, ' ', &*conv);
-		return ;
+		str = va_arg(pf->ap, wchar_t *);
+		str == NULL ? (str = ft_strdup("(null)")) : 0;
+		len = count_wchars(conv, str, ft_strlen(str));
 	}
-	if (conv->flag & MODIFIER_L)
-		print_wstring(&*pf, conv, str, ft_wstrlen(str));
 	else
-		buffer(&*pf, str, len);
+	{
+		str = va_arg(pf->ap, unsigned char *);
+		str == NULL ? (str = ft_strdup("(null)")) : 0;
+		len = ft_strlen(str);
+	}
+	len = call_option(&*pf, &*conv, len);
+	conv->flag & MODIFIER_L ? print_wstring(&*pf, str, len)
+	: buffer(&*pf, str, len);
+	if (conv->min_width > len && conv->flag & MINUS)
+		option_s(&*pf, len, ' ', &*conv);
 }
