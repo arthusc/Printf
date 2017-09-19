@@ -68,6 +68,7 @@
 typedef struct			s_conv
 {
 	int					min_width;
+	int 				width_temp;
 	int					precision;
 	int					precision_set;//////////
 	int					precision_tick;////////////
@@ -84,6 +85,8 @@ typedef struct			s_printf
 	va_list				ap;
 	int					i;
 	char 				*str;
+	int 				len;
+	int 				n;
 	char				*buffer;
 	int 				i_buf;
 	int					subtract_buffer;
@@ -131,8 +134,24 @@ char		*ft_itoa_printf(long long n);
 void		conv_f(t_printf *pf, t_conv *conv);
 void		conv_f_L(t_printf *pf, t_conv *conv);
 int			conv_p(t_printf *pf, t_conv *conv);
+
 void		conv_mx(t_printf *pf, t_conv *conv);
 void		conv_x(t_printf *pf, t_conv *conv);
+int	conv_x_minus(t_printf *pf, t_conv *conv, int len, char *str);
+int		conv_x_nowidth_noprec(t_printf *pf, t_conv *conv, char *str, int len);
+int		conv_x_minus2(t_printf *pf, t_conv *conv, char *str, int len);
+int 	conv_x_width_only3(t_printf *pf, t_conv *conv, int len, char *str);
+int		conv_x_width_only2(t_printf *pf, t_conv *conv, int len, char *str);
+t_conv	option_x(t_printf *pf, int n, char c, t_conv *conv);
+t_printf	*add_0x(t_printf *pf, t_conv *conv);
+int	conv_x_minus_width_sup_len(t_printf *pf, t_conv *conv, int len);
+int	conv_x_minus_width_only(t_printf *pf, t_conv *conv, int len);
+int	conv_x_minus_width_and_prec(t_printf *pf, t_conv *conv, int len, char *str);
+char			*ft_str_tolower(char *s);
+int		fill_tab_with_c(t_printf *pf, char *tab, char c);
+t_conv	option_x3(t_printf *pf, char *tab, char c, t_conv *conv);
+t_conv	option_x2(t_printf *pf, int n, char c, t_conv *conv);
+
 void		conv_o(t_printf *pf, t_conv *conv);
 void		conv_u(t_printf *pf, t_conv *conv);
 void		conv_b(t_printf *pf, t_conv *conv);

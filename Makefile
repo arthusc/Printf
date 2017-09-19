@@ -47,6 +47,9 @@ SOURCES =	ft_printf.c \
 			conv_s.c \
 			conv_u.c \
 			conv_x.c \
+			conv_x2.c \
+			conv_x3.c \
+			conv_x4.c \
 			conv_b.c \
 			conv_percent.c \
 			no_conv.c
