@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   conv_d2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/19 16:04:41 by achambon          #+#    #+#             */
+/*   Updated: 2017/09/19 16:06:12 by achambon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
-int				conv_d_minus2(t_printf *pf, t_conv *conv, int width_temp,
+int		conv_d_minus2(t_printf *pf, t_conv *conv, int width_temp,
 char *str)
 {
 	int		len;
@@ -16,7 +28,7 @@ char *str)
 				width_temp++;
 		}
 		if (conv->flag & MODIFIER_HH && !(conv->flag & SPACE + ZERO) &&
-		conv->flag & PLUS && !(conv->precision))
+				conv->flag & PLUS && !(conv->precision))
 		{
 			buffer(&*pf, str, len);
 			while (width_temp-- - len)
@@ -25,12 +37,12 @@ char *str)
 		return (0);
 	}
 	if (conv->min_width < len && !(conv->flag & SPACE) && !(conv->flag & PLUS)
-	&& !conv->precision)
+			&& !conv->precision)
 		buffer(&*pf, str, len);
 	return (0);
 }
 
-int			conv_d_width_only3(t_printf *pf, t_conv *conv, int len, char *str)
+int		conv_d_width_only3(t_printf *pf, t_conv *conv, int len, char *str)
 {
 	if (conv->flag & ZERO)
 	{
@@ -55,17 +67,17 @@ int			conv_d_width_only3(t_printf *pf, t_conv *conv, int len, char *str)
 	}
 	if (conv->flag & PLUS && !(conv->flag & ZERO) && !(conv->flag & SPACE))
 		conv->before = 4;
-	return(pf->i_buf);
+	return (pf->i_buf);
 }
 
-int			conv_d_width_only2(t_printf *pf, t_conv *conv, int len, char *str)
+int		conv_d_width_only2(t_printf *pf, t_conv *conv, int len, char *str)
 {
 	if (conv->flag & SPACE && !(conv->flag & PLUS))
 		minwidth_decr_add_char_2_buff(&*pf, ' ', &*conv);
 	if (conv->flag & PLUS && !(conv->flag & ZERO + MODIFIER_HH))
 		conv->min_width--;
 	else if (conv->flag & PLUS && conv->flag & ZERO &&
-	!(conv->flag & MODIFIER_HH))
+			!(conv->flag & MODIFIER_HH))
 	{
 		if (str[0] == '-')
 		{
@@ -81,7 +93,7 @@ int			conv_d_width_only2(t_printf *pf, t_conv *conv, int len, char *str)
 		return (pf->i_buf);
 	}
 	if (conv_d_width_only3(&*pf, conv, len, str) == 1)
-		return(pf->i_buf);
+		return (pf->i_buf);
 	option_d(&*pf, conv->min_width - len, ' ', &*conv);
 	return (pf->i_buf);
 }
@@ -96,7 +108,7 @@ int		conv_d_width_only(t_printf *pf, t_conv *conv, int width_temp, char *str)
 		if (conv->flag & PLUS && width_temp < len)
 			return (add_char_and_string_2_buff(&*pf, '+', str, len));
 		if (conv->flag & SPACE || ((conv->flag & MODIFIER_HH) &&
-		!(conv->flag & ZERO)))
+					!(conv->flag & ZERO)))
 			return (add_char_and_string_2_buff(&*pf, ' ', str, len));
 		buffer(&*pf, str, len);
 		return (0);
@@ -106,7 +118,7 @@ int		conv_d_width_only(t_printf *pf, t_conv *conv, int width_temp, char *str)
 	return (pf->i_buf);
 }
 
-int				conv_d_prec_only(t_printf *pf, t_conv *conv, int len, char *str)
+int		conv_d_prec_only(t_printf *pf, t_conv *conv, int len, char *str)
 {
 	conv->before = 3;
 	if (str[0] == '-')
@@ -119,7 +131,7 @@ int				conv_d_prec_only(t_printf *pf, t_conv *conv, int len, char *str)
 		return (pf->i_buf);
 	}
 	if (conv->flag & SPACE && !(conv->flag & PLUS) &&
-	!(conv->flag & MODIFIER_HH))
+			!(conv->flag & MODIFIER_HH))
 		buffer(&*pf, " ", 1);
 	if (conv->flag & PLUS && !(conv->flag & MODIFIER_HH))
 		buffer(&*pf, "+", 1);

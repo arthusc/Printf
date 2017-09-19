@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   conv_d3.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/19 16:07:29 by achambon          #+#    #+#             */
+/*   Updated: 2017/09/19 16:07:43 by achambon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 int		conv_d_minus(t_printf *pf, t_conv *conv, int len, char *str)
@@ -27,7 +39,7 @@ int		conv_d_minus(t_printf *pf, t_conv *conv, int len, char *str)
 	return (0);
 }
 
-int				conv_d_hh_nominus_width_only2(t_printf *pf, t_conv *conv,
+int		conv_d_hh_nominus_width_only2(t_printf *pf, t_conv *conv,
 char *str, int len)
 {
 	if (conv->flag & PLUS && !(conv->flag & ZERO + MODIFIER_HH))
@@ -53,7 +65,7 @@ char *str, int len)
 	return (pf->i_buf);
 }
 
-int				conv_d_hh_nominus_width_only(t_printf *pf, t_conv *conv,
+int		conv_d_hh_nominus_width_only(t_printf *pf, t_conv *conv,
 char *str, int len)
 {
 	if (conv->min_width < len)
@@ -69,7 +81,7 @@ char *str, int len)
 	return (pf->i_buf);
 }
 
-int			conv_d_hh_nominus_width_and_prec(t_printf *pf, t_conv *conv,
+int		conv_d_hh_nominus_width_and_prec(t_printf *pf, t_conv *conv,
 char *str, int len)
 {
 	if (conv->min_width > conv->precision)
