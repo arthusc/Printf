@@ -153,6 +153,20 @@ t_conv	option_x3(t_printf *pf, char *tab, char c, t_conv *conv);
 t_conv	option_x2(t_printf *pf, int n, char c, t_conv *conv);
 
 void		conv_o(t_printf *pf, t_conv *conv);
+int		conv_o_nowidth_noprec(t_printf *pf, t_conv *conv, char *str, int len);
+int		conv_o_minus2(t_printf *pf, t_conv *conv, int len, char *str);
+int	conv_o_width_only3(t_printf *pf, t_conv *conv, int len, char *str);
+int	conv_o_width_only2(t_printf *pf, t_conv *conv, int len, char *str);
+int	conv_o_width_only(t_printf *pf, t_conv *conv, int len, char *str);
+int	conv_ominus_width_only2(t_printf *pf, t_conv *conv, int len);
+int	conv_ominus_width_only(t_printf *pf, t_conv *conv, int len);
+int conv_ominus_prec_only(t_printf *pf, t_conv *conv, int len, char *str);
+int conv_ominus_width_and_prec(t_printf *pf, t_conv *conv, int len, char *str);
+int	conv_o_minus(t_printf *pf, t_conv *conv, int len, char *str);
+t_conv	option_o(t_printf *pf, int n, char c, t_conv *conv);
+t_conv	option_o2(t_printf *pf, int i, char c, t_conv *conv);
+t_conv	option_o3(t_printf *pf, char *tab, char c, t_conv *conv);
+
 void		conv_u(t_printf *pf, t_conv *conv);
 void		conv_b(t_printf *pf, t_conv *conv);
 void		conv_percent(t_printf *pf, t_conv *conv);
