@@ -98,7 +98,6 @@ int			ft_printf(char *format, ...);
 t_printf	*parse_conversion(t_printf *pf);
 t_conv		*init_conv(void);
 t_printf	*print_wint(t_printf *pf, wint_t wint);
-void		print_p(t_printf *pf, int len, char *str);
 int			option(t_printf *pf, int n, char c, t_conv *conv, char *s);
 t_conv		*option_print(int print_size, char c, t_conv *conv, char *s);
 t_printf	*buffer(t_printf *pf, char *saved, int len);
