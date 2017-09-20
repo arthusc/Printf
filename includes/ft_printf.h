@@ -168,6 +168,16 @@ t_conv	option_o2(t_printf *pf, int i, char c, t_conv *conv);
 t_conv	option_o3(t_printf *pf, char *tab, char c, t_conv *conv);
 
 void		conv_u(t_printf *pf, t_conv *conv);
+char	*ft_itoa_pf(unsigned long long n);
+int conv_u_minus_width_only2(t_printf *pf, t_conv *conv, int len);
+t_conv	option_u(t_printf *pf, int n, char c, t_conv *conv);
+t_conv	option_u2(t_printf *pf, char *tab, char c, t_conv *conv);
+int conv_u_width_only2(t_printf *pf, t_conv *conv, char *str, int len);
+int	conv_u_minus2(t_printf *pf, char *str, int len, t_conv *conv);
+int	conv_u_minus(t_printf *pf, t_conv *conv, int len, char *str);
+int conv_u_minus_width_and_prec(t_printf *pf, t_conv *conv, int len);
+int conv_u_minus_width_only(t_printf *pf, t_conv *conv, int len);
+
 void		conv_b(t_printf *pf, t_conv *conv);
 void		conv_percent(t_printf *pf, t_conv *conv);
 void		no_conv(t_printf *pf, t_conv *conv);
