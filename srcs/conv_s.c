@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/25 00:43:15 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/26 18:34:58 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,16 @@ void			conv_s(t_printf *pf, t_conv *conv)
 		!(MB_CUR_MAX > 1) ? exit (-1) : 0;
 	}
 	(!(conv->flag & MODIFIER_L)) ? str = va_arg(pf->ap, unsigned char *) : 0;
-	(str == NULL) ? (str = ft_strdup("(null)")) : 0;
+	(str == NULL) ? (str = ft_strdup("(null)")) && (conv->flag -= MODIFIER_L) : 0;
 	len = (conv->flag & MODIFIER_L ? count_wchars(conv, str, ft_wstrlen(str)) :
 	ft_strlen(str));
-	if (conv->precision && conv->precision < len)
+	if (conv->flag & PRECISION && conv->precision < len)
 		len = conv->precision;
 	if (conv->min_width > len && (conv->flag & ZERO) && !(conv->flag & MINUS))
 		option_char(&*pf, len, '0', &*conv);
 	else if (conv->min_width > len && (conv->flag & SPACE || !(conv->flag & MINUS)))
 		option_char(&*pf, len, ' ', &*conv);
-	conv->flag & MODIFIER_L ? print_wstring(&*pf, str, ft_wstrlen(str))
+	conv->flag & MODIFIER_L ? print_wstring(&*pf, str, len)
 	: buffer(&*pf, str, len);
 	(conv->min_width > len && conv->flag & MINUS)
 	? option_char(&*pf, len, ' ', &*conv) : 0;
