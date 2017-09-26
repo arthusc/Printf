@@ -27,9 +27,7 @@ int		conv_d_minus(t_printf *pf, t_conv *conv, int len, char *str)
 		if (conv->flag & PLUS && !(conv->flag & MODIFIER_HH))
 			buffer(&*pf, "+", 1);
 		if (str[0] == '-')
-		{
 			special_hhd_reverse_0_n_minus(pf, str, '-');
-		}
 		option_d(&*pf, conv->precision - len, '0', conv);
 		return (pf->i_buf);
 	}

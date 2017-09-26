@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   conv_d4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 16:08:01 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/19 16:08:03 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/21 13:21:44 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-char	*ft_itoa_printf(long long n)
-{
-	int			i;
-	long long	a;
-	int			neg;
-	char		*str;
-
-	i = 1;
-	neg = (n < 0) ? 1 : 0;
-	if (n > 0)
-		n = n * -1;
-	a = n;
-	while ((a = a / 10) < 0)
-		i++;
-	str = (char *)malloc((sizeof(char) * i) + neg + 1);
-	if (str == NULL)
-		return (NULL);
-	ft_bzero(str, i + neg + 1);
-	if (neg == 1)
-		str[0] = '-';
-	i -= 1 - neg;
-	while (i-- >= neg)
-	{
-		str[i + 1] = (-(n % 10) + '0');
-		n = n / 10;
-	}
-	return (str);
-}
 
 t_conv	option_dbis_convbefore4(t_printf *pf, t_conv *conv, char *s)
 {
@@ -83,6 +54,7 @@ int		conv_d_minus_width_only(t_printf *pf, t_conv *conv, int len, char *str)
 		return (0);
 	else if (conv->min_width > len)
 	{
+		(conv->flag & PLUS + MINUS + ZERO) ? conv->before = 1 : 0;
 		(conv->flag & SPACE && !(conv->flag & PLUS) &&
 		!(conv->flag & MODIFIER_HH)) ?
 		minwidth_decr_add_char_2_buff(&*pf, ' ', &*conv) : 0;
@@ -91,8 +63,10 @@ int		conv_d_minus_width_only(t_printf *pf, t_conv *conv, int len, char *str)
 		{
 			minwidth_decr_add_char_2_buff(&*pf, '+', &*conv);
 			conv->before = 1;
-			option_d(&*pf, conv->min_width - len, ' ', conv);
+			// option_d(&*pf, conv->min_width - len, ' ', conv);
 		}
+		option_d(&*pf, conv->min_width - len, ' ', conv);
+		return (0);
 	}
 	if (!(conv->flag & PLUS))
 	{

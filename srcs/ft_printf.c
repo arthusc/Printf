@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:41:18 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/19 00:26:59 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/25 22:45:38 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ static t_printf	*print_until(t_printf *pf, char *format, int i, int c)
 
 	n = 0;
 	while (format[i + n] != '\0' && format[i + n] != c)
+	{
 		n++;
+		if (format[i + n] == '{')
+			break ;
+	}
 	buffer(&*pf, &format[pf->i], n);
 	pf->i += n;
 	return (pf);
@@ -42,18 +46,20 @@ int				ft_printf(char *format, ...)
 	pf.i_buf = 0;
 	while (pf.format[pf.i])
 	{
+		if (pf.format[pf.i] == '{')
+			while (pf.format[pf.i] == '{')
+				parsing_color(&pf);
 		if (pf.format[pf.i] == '%')
 		{
 			pf.i++;
-			if (pf.format)
-				parse_conversion(&pf);
+			pf.format ? parse_conversion(&pf) : 0;
 		}
-		if (pf.format[pf.i])
+		else if (pf.format[pf.i])
 			print_until(&pf, pf.format, pf.i, '%');
 	}
 	pf.buffer && pf.i_buf ? print_buffer(pf.buffer, pf.i_buf) : 0;
 	va_end(pf.ap);
-	return (pf.i_buf - pf.subtract_buffer);
+	return (pf.i_buf + pf.add_buffer - pf.subtract_buffer);
 }
 
 t_printf		*buffer(t_printf *pf, char *saved, int len)
@@ -63,6 +69,12 @@ t_printf		*buffer(t_printf *pf, char *saved, int len)
 	i = 0;
 	while (saved && (len - i) && (pf->i_buf < BUFFER_SIZE))
 	{
+		if (pf->i_buf == (BUFFER_SIZE - 1))
+		{
+			pf->add_buffer += pf->i_buf;
+			print_buffer(pf->buffer, pf->i_buf);
+			pf->i_buf = 0;
+		}
 		pf->buffer[pf->i_buf] = saved[i];
 		pf->i_buf++;
 		i++;

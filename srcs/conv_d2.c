@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_d2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 16:04:41 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/19 16:06:12 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/20 16:32:23 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ int		conv_d_width_only3(t_printf *pf, t_conv *conv, int len, char *str)
 			buffer(&*pf, str, len);
 			return (1);
 		}
-		option_d(&*pf, conv->min_width - len, '0', &*conv);
+		if (conv->flag & PRECISION && !(conv->precision))
+			option_d(&*pf, conv->min_width - len, ' ', &*conv);
+		else
+			option_d(&*pf, conv->min_width - len, '0', &*conv);
 		return (1);
 	}
 	if (conv->flag & MODIFIER_HH)
@@ -120,7 +123,7 @@ int		conv_d_width_only(t_printf *pf, t_conv *conv, int width_temp, char *str)
 
 int		conv_d_prec_only(t_printf *pf, t_conv *conv, int len, char *str)
 {
-	conv->before = 3;
+	conv->before = 3;// ??????????????????????????????
 	if (str[0] == '-')
 	{
 		str[0] = '0';

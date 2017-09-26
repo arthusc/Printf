@@ -33,7 +33,7 @@ int					fill_tab_with_c(t_printf *pf, char *tab, char c)
 	i = 0;
 	while (i < pf->n)
 		tab[i++] = c;
-	buffer(&*pf, tab, pf->n);
+	buffer(&*pf, tab, i);
 	return (pf->i_buf);
 }
 
@@ -63,6 +63,7 @@ t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
 	if (!(conv->before == 3) && conv->before && pf->str)
 	{
 		(conv->ox == 1) ? buffer(&*pf, "0x", 2) : 0;
+		conv->flag & TYPE_O && conv->flag & SHARP ? buffer(&*pf, "0", 1) : 0;
 		buffer(&*pf, pf->str, len);
 	}
 	(conv->precision_set == 2) ? (buffer(&*pf, "0x", 2)) && (conv->ox = 0) : 0;
@@ -70,6 +71,7 @@ t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
 	if ((conv->before == 0 && pf->str) || conv->before == 3)
 	{
 		(conv->ox == 1) ? buffer(&*pf, "0x", 2) : 0;
+		conv->flag & TYPE_O && conv->flag & SHARP && conv->min_width ? buffer(&*pf, "0", 1) : 0;
 		buffer(&*pf, &*pf->str, len);
 	}
 	((conv->flag & MINUS && !(conv->min_width > conv->precision))

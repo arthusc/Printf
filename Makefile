@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
+#    By: achambon <achambon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/10 16:46:50 by achambon          #+#    #+#              #
-#    Updated: 2017/09/18 23:01:59 by mbriffau         ###   ########.fr        #
+#    Updated: 2017/09/26 17:07:33 by achambon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,22 +35,19 @@ SOURCES =	ft_printf.c \
 			ft_error_management.c \
 			conversion_specifier.c \
 			init_conv.c \
+			pointer.c \
 			call_buffer.c \
+			color.c \
 			option.c \
 			conv_c.c \
+			pf_string.c \
 			conv_d.c \
 			conv_d2.c \
 			conv_d3.c \
 			conv_d4.c \
-			conv_o.c \
-			conv_o2.c \
-			conv_o3.c \
-			conv_o4.c \
+			conv_file.c \
 			conv_p.c \
 			conv_s.c \
-			conv_u.c \
-			conv_u2.c \
-			conv_u3.c \
 			conv_x.c \
 			conv_x2.c \
 			conv_x3.c \

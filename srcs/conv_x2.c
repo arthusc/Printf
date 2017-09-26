@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_x2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 18:31:25 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/19 18:33:10 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/26 11:12:55 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,10 @@ int		conv_x_width_only2(t_printf *pf, t_conv *conv, int len, char *str)
 			(add_char_and_string_2_buff(&*pf, '-', str, len));
 			return (0);
 		}
-		(conv->flag & SHARP) ? (buffer(&*pf, "0x", 2))
+		(conv->flag & SHARP && conv->flag & TYPE_X && ft_strncmp(pf->str, "0", 1)) ? (buffer(&*pf, "0x", 2))
 		&& (conv->min_width = conv->min_width - 2) : 0;
-		option_x(&*pf, conv->min_width - len, '0', &*conv);
+		conv->flag & TYPE_O && conv->flag & SHARP ? conv->min_width-- : 0;
+		!(conv->flag & TYPE_O) || (conv->min_width && conv->flag & ZERO && !(conv->flag & PRECISION)) ? option_x(&*pf, conv->min_width - len, '0', &*conv) : option_x(&*pf, conv->min_width - len, ' ', &*conv);
 		return (0);
 	}
 	if (!(conv_x_width_only3(&*pf, conv, len, str)))

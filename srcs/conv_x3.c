@@ -15,12 +15,13 @@
 t_conv		option_x(t_printf *pf, int n, char c, t_conv *conv)
 {
 	int		i;
-	char	tab[n + 1];
+	char	array[n + 1];
 	int		len;
 
+	ft_bzero(array, n + 1);
 	len = ft_strlen(pf->str);
 	i = 0;
-	tab[n] = '\0';
+	// tab[n] = '\0';
 	pf->n = n;
 	if (!n)
 		return (*conv);
@@ -28,10 +29,11 @@ t_conv		option_x(t_printf *pf, int n, char c, t_conv *conv)
 	{
 		if (conv->flag & SHARP)
 			pf->n--;
-		fill_tab_with_c(&*pf, tab, c);
+		fill_tab_with_c(&*pf, array, c);
 		buffer(&*pf, " ", 1);
 		if (conv->flag & SHARP)
 			buffer(&*pf, "0x", 2);
+		// conv->flag & TYPE_O && conv->flag & SHARP ? buffer(&*pf, "0", 1) : 0;
 		buffer(&*pf, pf->str, len);
 		return (*conv);
 	}
@@ -69,7 +71,7 @@ int			conv_x_minus_width_sup_len(t_printf *pf, t_conv *conv, int len)
 			option_x(&*pf, conv->min_width - len, ' ', conv);
 			return (0);
 		}
-		else if (conv->flag & ZERO)
+		if (conv->flag & ZERO)
 		{
 			conv->before = 1;
 			option_x(&*pf, conv->min_width - len, ' ', conv);

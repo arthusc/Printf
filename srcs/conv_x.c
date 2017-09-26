@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_x.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:30:50 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/19 18:31:13 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/26 17:04:34 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		conv_x_width_only(t_printf *pf, t_conv *conv, int len, char *str)
 	{
 		if (conv->min_width < len)
 		{
-			if (conv->flag & SHARP && !(conv->flag & MINUS))
+			if (conv->flag & SHARP && conv->flag & TYPE_X && !(conv->flag & MINUS))
 				add_0x(&*pf, &*conv);
 			buffer(&*pf, str, len);
 			return (0);
@@ -46,7 +46,7 @@ int		print_conv_x3(t_printf *pf, t_conv *conv, int len)
 			&& !(conv->flag & MINUS))
 	{
 		conv->before = 3;
-		(conv->flag & SHARP) ? buffer(&*pf, "0x", 2) : 0;
+		(conv->flag & SHARP && conv->flag & TYPE_X && ft_strncmp(pf->str, "0", 1) ) ? buffer(&*pf, "0x", 2) : 0;
 		option_x(&*pf, conv->precision - len, '0', &*conv);
 		return (0);
 	}
@@ -82,12 +82,29 @@ int		print_conv_x2(t_printf *pf, t_conv *conv, int len, char *str)
 	return (1);
 }
 
+static int		if_tick_but_no_prec(t_printf *pf, t_conv *conv)//delete
+{
+	if(conv->flag & SHARP && conv->flag & TYPE_O)
+	{
+		conv->min_width--;
+		option_x(&*pf, conv->min_width - ft_strlen(pf->str), ' ', &*conv);
+		return (0);
+	}
+	if(conv->flag & SHARP && conv->flag & TYPE_X)
+		conv->min_width = conv->min_width - 2;
+	if(conv->min_width)
+		while(conv->min_width-- - ft_strlen(pf->str))
+			buffer(&*pf, " ", 1);
+	return(pf->i_buf);
+}
+
 int		print_conv_x(t_printf *pf, t_conv *conv, int len, char *str)
 {
 	conv->width_temp = conv->min_width;
-	if (!conv->precision && conv->precision_tick)
+	if (!conv->precision && conv->flag & PRECISION)
 	{
-		if_tick_but_no_prec(&*pf, conv);
+		if (!(if_tick_but_no_prec(&*pf, conv)))
+			return (pf->i_buf);///////////tick
 		if (!(ft_strncmp("0", str, len)))
 			return (pf->i_buf);
 	}
@@ -108,27 +125,16 @@ int		print_conv_x(t_printf *pf, t_conv *conv, int len, char *str)
 
 void	conv_x(t_printf *pf, t_conv *conv)
 {
-	uintmax_t	va_ptr;
-	char		*str;
+	uintmax_t	ptr;
 
-	va_ptr = 1;
-	conv->flag & MODIFIER_L ? ((va_ptr = (unsigned long int)va_ptr) &&
-			(va_ptr = va_arg(pf->ap, unsigned long int))) : 0;
-	conv->flag & MODIFIER_LL ? ((va_ptr = (unsigned long long int)va_ptr) &&
-			(va_ptr = va_arg(pf->ap, unsigned long long int))) : 0;
-	conv->flag & MODIFIER_H ? ((va_ptr = (uint16_t)va_ptr) &&
-			(va_ptr = va_arg(pf->ap, unsigned int))) : 0;
-	conv->flag & MODIFIER_HH ? ((va_ptr = (uint8_t)va_ptr) &&
-			(va_ptr = va_arg(pf->ap, unsigned int))) : 0;
-	conv->flag & MODIFIER_Z ? ((va_ptr = (size_t)va_ptr) &&
-			(va_ptr = va_arg(pf->ap, size_t))) : 0;
-	conv->flag & MODIFIER_J ? ((va_ptr = (uintmax_t)va_ptr) &&
-			(va_ptr = va_arg(pf->ap, uintmax_t))) : 0;
-	!(conv->flag & 0x7E0) ? ((va_ptr = (unsigned int)va_ptr) &&
-			(va_ptr = va_arg(pf->ap, unsigned int))) : 0;
-	str = ft_itoa_base((long long)va_ptr, 16);
-	pf->str = str;
-	conv->flag & MODIFIER_X ? 0 : (str = ft_str_tolower(str));
-	print_conv_x(pf, conv, ft_strlen(str), str);
+	ptr = (conv->flag & TYPE_O + TYPE_U + TYPE_X) ? ptr_number(&*pf, conv->flag) : ptr_number_base(&*pf, conv->flag);
+	if (conv->flag & TYPE_X)
+		pf->str = ft_itoa_base((long long)ptr, 16);
+	if (conv->flag & TYPE_U)
+		pf->str = ft_itoa_base((long long)ptr, 10);
+	if (conv->flag & TYPE_O)
+		pf->str = ft_itoa_base((long long)ptr, 8);
+	conv->flag & MODIFIER_X ? 0 : (pf->str = ft_str_tolower(pf->str));
+	print_conv_x(pf, conv, ft_strlen(pf->str), pf->str);
 	return ;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversion_specifier.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 18:00:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/18 23:26:35 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/26 16:58:12 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_printf	*conversion_specifier(t_printf *pf, t_conv *conv)
 		conv->flag & TYPE_C ? conv_c(&*pf, &*conv) : 0;
 		conv->flag & TYPE_P ? conv_p(&*pf, &*conv) : 0;
 		conv->flag & TYPE_X ? conv_x(&*pf, &*conv) : 0;
-		conv->flag & TYPE_O ? conv_o(&*pf, &*conv) : 0;
-		conv->flag & TYPE_U ? conv_u(&*pf, &*conv) : 0;
+		conv->flag & TYPE_O ? conv_x(&*pf, &*conv) : 0;
+		conv->flag & TYPE_U ? conv_x(&*pf, &*conv) : 0;
 		conv->flag & TYPE_B ? conv_b(&*pf, &*conv) : 0;
 		conv->flag & TYPE_PERCENT ? conv_percent(&*pf, &*conv) : 0;
 		pf->i++;

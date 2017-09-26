@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   call_buffer.c                                      :+:      :+:    :+:   */
+/*   conv_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/17 09:53:49 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/21 16:06:33 by mbriffau         ###   ########.fr       */
+/*   Created: 2017/09/24 23:44:27 by mbriffau          #+#    #+#             */
+/*   Updated: 2017/09/24 23:47:54 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		minwidth_decr_add_char_2_buff(t_printf *pf, char c, t_conv *conv)
+void			conv_s_file(t_printf *pf)
 {
-	conv->min_width--;
-	buffer(pf, &c, 1);
-	return(pf->i_buf);
-}
+	int		fd;
+	char	*s;
+	char	array[32];
+	int		ret;
 
-int		special_hhd_reverse_0_n_minus(t_printf *pf, char *str, char c)
-{
-	str[0] = '0';
-	buffer(pf, &c, 1);
-	return(pf->i_buf);
+	s = va_arg(pf->ap, char *);
+	fd = open(s, O_RDONLY);
+	if (fd == -1 || -1 == read(fd, array, 1))
+		exit(-1);
+	close(fd);
+	fd = open(s, O_RDONLY);
+	while ((ret = read(fd, array, 32)))
+		buffer(&*pf, array, ret);
 }
