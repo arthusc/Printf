@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 16:00:14 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/26 17:02:11 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/26 17:44:26 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ uintmax_t	ptr_number(t_printf *pf, int f)
 
 	ptr = 0;
 	if (f & MODIFIER_H || f & MODIFIER_HH)
+	{
 		ptr = (f & MODIFIER_HH ?
 			(uintmax_t)((unsigned char)va_arg(pf->ap, unsigned int))
 			: (uintmax_t)((unsigned short)va_arg(pf->ap, unsigned int)));
+	}
 	else if (f & MODIFIER_L || f & MODIFIER_LL)
 		ptr = (f & MODIFIER_LL ?
 			va_arg(pf->ap, unsigned long long)

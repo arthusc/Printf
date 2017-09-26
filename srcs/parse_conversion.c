@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/26 17:06:39 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/26 17:55:16 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void		parse_modifier(int *i, int *f, char *s)
 		}
 		if (s[*i] == 'h')
 			(s[*i + 1] == 'h') ? (*f += MODIFIER_HH) && (*i += 1) 
-		: (*f += MODIFIER_HH);
+		: (*f += MODIFIER_H);
 		else if (s[*i] == 'l')
 			(s[*i + 1] == 'l') ? (*f += MODIFIER_LL) && (*i += 1)
 		: (*f += MODIFIER_L);

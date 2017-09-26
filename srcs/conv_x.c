@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:30:50 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/26 17:04:34 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/26 17:29:30 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	conv_x(t_printf *pf, t_conv *conv)
 {
 	uintmax_t	ptr;
 
-	ptr = (conv->flag & TYPE_O + TYPE_U + TYPE_X) ? ptr_number(&*pf, conv->flag) : ptr_number_base(&*pf, conv->flag);
+	ptr = ptr_number(&*pf, conv->flag);
 	if (conv->flag & TYPE_X)
 		pf->str = ft_itoa_base((long long)ptr, 16);
 	if (conv->flag & TYPE_U)
