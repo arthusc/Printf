@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_d4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 16:08:01 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/21 13:21:44 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/26 22:31:23 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_conv	option_d(t_printf *pf, int n, char c, t_conv *conv)
 int		conv_d_minus_width_only(t_printf *pf, t_conv *conv, int len, char *str)
 {
 	if (conv->min_width < len)
-		return (0);
+		return (1);
 	else if (conv->min_width > len)
 	{
 		(conv->flag & PLUS + MINUS + ZERO) ? conv->before = 1 : 0;
@@ -65,6 +65,7 @@ int		conv_d_minus_width_only(t_printf *pf, t_conv *conv, int len, char *str)
 			conv->before = 1;
 			// option_d(&*pf, conv->min_width - len, ' ', conv);
 		}
+		str[0] != '-' && conv->flag & PLUS && conv->flag & ZERO && !(conv->flag & MODIFIER_HH) ? buffer(&*pf, "+", 1) && conv->min_width-- : 0;
 		option_d(&*pf, conv->min_width - len, ' ', conv);
 		return (0);
 	}
@@ -74,7 +75,7 @@ int		conv_d_minus_width_only(t_printf *pf, t_conv *conv, int len, char *str)
 		option_d(&*pf, conv->min_width - len, ' ', conv);
 	}
 	str = pf->str;
-	return (pf->i_buf);
+	return (0);
 }
 
 int		conv_d_minus_width_and_prec(t_printf *pf, t_conv *conv,

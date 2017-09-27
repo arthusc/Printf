@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_d3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 16:07:29 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/19 16:07:43 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/26 22:22:06 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int		conv_d_minus(t_printf *pf, t_conv *conv, int len, char *str)
 	if (!conv->min_width && !conv->precision)
 		return (pf->i_buf);
 	if (conv->min_width && !conv->precision)
-		return (conv_d_minus_width_only(pf, conv, len, str));
+	{
+		if (!(conv_d_minus_width_only(pf, conv, len, str)))
+				return (0);
+	}
 	if (!conv->min_width && conv->precision)
 	{
 		conv->before = 3;
@@ -33,6 +36,8 @@ int		conv_d_minus(t_printf *pf, t_conv *conv, int len, char *str)
 	}
 	if (conv->min_width && conv->precision)
 		return (conv_d_minus_width_and_prec(pf, conv, len, str));
+	(conv->flag & SPACE && !(conv->flag & ZERO)) || (!(conv->flag & MODIFIER_HH) && conv->flag & SPACE && conv->flag & ZERO && (!(conv->flag & PLUS)) && conv->min_width < len) ? buffer(&*pf, " ", 1) : 0;
+	(conv->flag & PLUS && !(conv->flag & ZERO)) || (!(conv->flag & MODIFIER_HH) && conv->flag & PLUS && conv->flag & ZERO && conv->min_width < len) ? buffer(&*pf, "+", 1) : 0;
 	buffer(&*pf, str, len);
 	return (0);
 }

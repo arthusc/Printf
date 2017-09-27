@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_d2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 16:04:41 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/20 16:32:23 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/26 20:28:13 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char *str)
 	int		len;
 
 	len = ft_strlen(str);
-	(conv_d_minus(&*pf, conv, len, str));
+	if (!(conv_d_minus(&*pf, conv, len, str)))
+		return (0);
 	if (conv->min_width > len || width_temp > len)
 	{
 		if (str[0] == '-')

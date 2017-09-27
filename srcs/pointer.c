@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 16:00:14 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/26 17:44:26 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/26 23:51:13 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ uintmax_t	ptr_number(t_printf *pf, int f)
 	return(ptr);
 }
 
-char	*ft_uitoa_pf(uintmax_t n)
+char	*ft_uitoa_pf(unsigned long n)
 {
 	int			i;
-	uintmax_t	a;
+	unsigned long	a;
 	char		*str;
 
 	i = 1;

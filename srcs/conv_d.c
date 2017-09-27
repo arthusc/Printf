@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/21 16:37:13 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/26 19:02:08 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ void	conv_d(t_printf *pf, t_conv *conv)
 	int				len;
 	intmax_t		ptr;
 	int				c;
-
 	int		width_temp;
-
 
 	c = 0;
 	ptr = ptr_number_base(&*pf, conv->flag);

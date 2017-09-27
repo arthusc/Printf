@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/26 17:06:20 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/26 23:37:34 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void		conv_x(t_printf *pf, t_conv *conv);
 */
 intmax_t	ptr_number_base(t_printf *pf, int f);
 uintmax_t	ptr_number(t_printf *pf, int f);
-char		*ft_uitoa_pf(uintmax_t n);
+char		*ft_uitoa_pf(unsigned long n);
 
 
 
