@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/23 18:00:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/26 16:58:12 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/27 22:08:52 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_printf	*conversion_specifier(t_printf *pf, t_conv *conv)
 		conv->flag & TYPE_U ? conv_x(&*pf, &*conv) : 0;
 		conv->flag & TYPE_B ? conv_b(&*pf, &*conv) : 0;
 		conv->flag & TYPE_PERCENT ? conv_percent(&*pf, &*conv) : 0;
-		pf->i++;
 	}
 	else if (!(conv->flag & 0xFF800000))
 		(conv->flag & 0x1F) && conv->min_width ? no_conv(&*pf, &*conv) : 0;
+	pf->i++;
 	return (pf);
 }

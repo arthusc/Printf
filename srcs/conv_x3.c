@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_x3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 18:34:06 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/19 18:35:30 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/27 22:42:48 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_conv		option_x(t_printf *pf, int n, char c, t_conv *conv)
 	ft_bzero(array, n + 1);
 	len = ft_strlen(pf->str);
 	i = 0;
-	// tab[n] = '\0';
 	pf->n = n;
 	if (!n)
 		return (*conv);
@@ -33,7 +32,6 @@ t_conv		option_x(t_printf *pf, int n, char c, t_conv *conv)
 		buffer(&*pf, " ", 1);
 		if (conv->flag & SHARP)
 			buffer(&*pf, "0x", 2);
-		// conv->flag & TYPE_O && conv->flag & SHARP ? buffer(&*pf, "0", 1) : 0;
 		buffer(&*pf, pf->str, len);
 		return (*conv);
 	}
@@ -56,7 +54,7 @@ int			conv_x_minus_width_sup_len(t_printf *pf, t_conv *conv, int len)
 {
 	if (conv->min_width > len)
 	{
-		(conv->flag & SHARP) ? (conv->min_width = conv->min_width - 2)
+		(conv->flag & SHARP && !(conv->flag & TYPE_O)) ? (conv->min_width = conv->min_width - 2)
 		&& (buffer(&*pf, "0x", 2)) : 0;
 		if (conv->flag & PLUS && !(conv->flag & ZERO) && !(conv->flag & SPACE))
 		{

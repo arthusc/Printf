@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:30:50 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/27 21:26:15 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/27 22:44:49 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ static int		if_tick_but_no_prec(t_printf *pf, t_conv *conv)
 	if (conv->flag & SHARP && conv->flag & TYPE_O)
 	{
 		conv->min_width--;
-		option_x(&*pf, conv->min_width - ft_strlen(pf->str), ' ', &*conv);
+		if (conv->min_width > 0)
+			option_x(&*pf, conv->min_width - ft_strlen(pf->str), ' ', &*conv);
+		else 
+			buffer(&*pf, pf->str, ft_strlen(pf->str));
 		return (0);
 	}
 	if (conv->flag & SHARP && conv->flag & TYPE_X)
@@ -143,6 +146,8 @@ void		conv_x(t_printf *pf, t_conv *conv)
 	if (conv->flag & TYPE_O)
 		pf->str = ft_itoa_base((long long)ptr, 8, 1);
 	conv->flag & MODIFIER_X ? 0 : (pf->str = ft_str_tolower(pf->str));
+	if (conv->flag & TYPE_O && conv->flag & SHARP && conv->min_width > 0 && !(conv->flag & ZERO))
+		conv->min_width--;
 	print_conv_x(pf, conv, ft_strlen(pf->str), pf->str);
 	return ;
 }
