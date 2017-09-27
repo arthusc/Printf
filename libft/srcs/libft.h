@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 21:10:16 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/23 17:51:25 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:55:26 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int					ft_wordlen(const char *s, char c);
 char				**ft_double_memalloc(size_t nstr, size_t size);
 char				*ft_strcut(size_t option, char *s, char c, size_t with);
 char				*ft_strnjoinfree(char *s1, char *s2, size_t n, char del);
-char				*ft_itoa_base(long long value, int base);
+char				*ft_itoa_base(long long value, int base, int unsignedornot);
 void				ft_error(char const *s);
 
 #endif

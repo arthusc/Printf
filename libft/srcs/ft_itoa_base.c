@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 10:05:30 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/02/24 10:05:41 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/27 20:07:18 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,25 @@ static char		*itoa_base(unsigned long long value, unsigned long long base)
 	return (str);
 }
 
-char			*ft_itoa_base(long long value, int base)
+static char		*ft_itoa_base_unsigned(unsigned long long value, int base)
+{
+	char	*str;
+
+	str = itoa_base(value, base);
+	if (base > 10)
+		baserot(str);
+	return (str);
+}
+
+char			*ft_itoa_base(long long value, int base, int unsignedornot)
 {
 	char	*str;
 	char	*tmp;
 
 	if (base < 2 || base > 16)
 		return (NULL);
+	if (unsignedornot)
+		return (ft_itoa_base_unsigned(value, base));
 	if (base == 10 && value < 0)
 	{
 		if (value < -9223372036854775807)
@@ -81,7 +93,6 @@ char			*ft_itoa_base(long long value, int base)
 	}
 	else
 		str = itoa_base(value, base);
-	if (base > 10)
-		baserot(str);
+	(base > 10) ? baserot(str) : 0;
 	return (str);
 }

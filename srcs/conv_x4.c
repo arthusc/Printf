@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_x4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 18:36:31 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/19 18:38:30 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/27 21:35:33 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
 	if (!(conv->before == 3) && conv->before && pf->str)
 	{
 		(conv->ox == 1) ? buffer(&*pf, "0x", 2) : 0;
-		conv->flag & TYPE_O && conv->flag & SHARP ? buffer(&*pf, "0", 1) : 0;
+		conv->flag & TYPE_O && conv->flag & SHARP ? buffer(&*pf, "0", 1) && conv->min_width-- : 0;
 		buffer(&*pf, pf->str, len);
 	}
 	(conv->precision_set == 2) ? (buffer(&*pf, "0x", 2)) && (conv->ox = 0) : 0;
@@ -71,7 +71,7 @@ t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
 	if ((conv->before == 0 && pf->str) || conv->before == 3)
 	{
 		(conv->ox == 1) ? buffer(&*pf, "0x", 2) : 0;
-		conv->flag & TYPE_O && conv->flag & SHARP && conv->min_width ? buffer(&*pf, "0", 1) : 0;
+		conv->flag & TYPE_O && conv->flag & SHARP && conv->min_width ? buffer(&*pf, "0", 1) && ft_putstr("YA"): 0;
 		buffer(&*pf, &*pf->str, len);
 	}
 	((conv->flag & MINUS && !(conv->min_width > conv->precision))

@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 15:58:06 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/26 23:50:27 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:55:54 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int		conv_p(t_printf *pf, t_conv *conv)
 	i = 0;
 	conv->ox = 1;
 	pointer = va_arg(pf->ap, void *);
-	str = ft_itoa_base((long long)pointer, 16);
+	str = ft_itoa_base((long long)pointer, 16, 0);
 	pf->str = str;
 	len = ft_strlen(str);
 	pf->len = len;

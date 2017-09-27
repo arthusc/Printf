@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_b.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 21:57:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/20 15:18:03 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:57:23 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			conv_b(t_printf *pf, t_conv *conv)
 
 	i = 0;
 	ptr = va_arg(pf->ap, unsigned int);
-	str = ft_itoa_base((long long)ptr, 2);
+	str = ft_itoa_base((long long)ptr, 2, 0);
 	len = ft_strlen(str);
 	call_option_b(&*pf, &*conv);
 	while ((++i + len) <= 8)
