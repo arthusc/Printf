@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 16:04:41 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/28 16:58:57 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 20:42:07 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int				add_char_and_string_2_buff(t_printf *pf, char c, char *str,
 int				conv_d_prec_only(t_printf *pf, t_conv *conv, int len, char *str)
 {
 	conv->before = 3;
-	if (str[0] == '-')
+	if (str[0] == '-' && conv->precision >= len + 1)
 	{
 		str[0] = '0';
 		buffer(&*pf, "-", 1);
-		while (conv->precision-- - len)
+		while (conv->precision-- - len > 0)
 			buffer(&*pf, "0", 1);
 		buffer(&*pf, str, len);
 		return (0);

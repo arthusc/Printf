@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 17:19:55 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 19:00:05 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,23 +89,6 @@ static void		parse_modifier(int *i, int *f, char *s)
 		(s[*i] == 'z') ? (*f += MODIFIER_Z) : 0;
 		*i += 1;
 	}
-}
-
-static int		parse_type(char c)
-{
-	int ret;
-
-	ret = 0;
-	c == 'd' || c == 'D' || c == 'i' ? ret = TYPE_D : 0;
-	c == 's' || c == 'S' ? ret = TYPE_S : 0;
-	c == 'c' || c == 'C' ? ret = TYPE_C : 0;
-	c == 'x' || c == 'X' ? ret = TYPE_X : 0;
-	c == 'o' || c == 'O' ? ret = TYPE_O : 0;
-	c == 'p' ? ret = TYPE_P : 0;
-	c == 'u' || c == 'U' ? ret = TYPE_U : 0;
-	c == 'b' ? ret = TYPE_B : 0;
-	c == '%' ? ret = TYPE_PERCENT : 0;
-	return (ret);
 }
 
 t_printf		*parse_conversion(t_printf *pf)
