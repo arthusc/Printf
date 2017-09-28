@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 21:18:21 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 21:21:51 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include "macros_pf.h"
 
 typedef struct			s_conv
 {
@@ -62,7 +63,8 @@ t_printf				*parse_conversion(t_printf *pf);
 **conv_c
 */
 void					conv_c(t_printf *pf, t_conv *conv);
-t_conv					*option_char(t_printf *pf, int print_size, char c, t_conv *conv);
+t_conv					*option_char(t_printf *pf, int print_size, char c,
+		t_conv *conv);
 /*
 **conv_s
 */
@@ -72,19 +74,26 @@ void					conv_s_file(t_printf *pf);
 **conv_d
 */
 void					conv_d(t_printf *pf, t_conv *conv);
-int						conv_d_prec_only(t_printf *pf, t_conv *conv, int len, char *str);
-int						conv_d_minus(t_printf *pf, t_conv *conv, int width_temp, char *str);
-int						conv_d_width_only(t_printf *pf, t_conv *conv, int width_temp, char *str);
-int						conv_d_prec_only(t_printf *pf, t_conv *conv, int len, char *str);
-int						conv_d_hh_nominus(t_printf *pf, t_conv *conv, char *str, int len);
+int						conv_d_prec_only(t_printf *pf, t_conv *conv, int len,
+		char *str);
+int						conv_d_minus(t_printf *pf, t_conv *conv, int width_temp,
+		char *str);
+int						conv_d_width_only(t_printf *pf, t_conv *conv,
+		int width_temp, char *str);
+int						conv_d_prec_only(t_printf *pf, t_conv *conv, int len,
+		char *str);
+int						conv_d_hh_nominus(t_printf *pf, t_conv *conv, char *str,
+		int len);
 int						option_d(t_printf *pf, int n, char c, t_conv *conv);
 char					*ft_itoa_printf(long long n);
 /*
 **conv_x
 */
 void					conv_x(t_printf *pf, t_conv *conv);
-int						conv_x_minus(t_printf *pf, t_conv *conv, char *str, int len);
-int						conv_x_width_only(t_printf *pf, t_conv *conv, int len, char *str);
+int						conv_x_minus(t_printf *pf, t_conv *conv, char *str,
+		int len);
+int						conv_x_width_only(t_printf *pf, t_conv *conv, int len,
+		char *str);
 t_conv					option_x(t_printf *pf, int n, char c, t_conv *conv);
 t_printf				*add_0x(t_printf *pf, t_conv *conv);
 char					*ft_str_tolower(char *s);
@@ -98,10 +107,14 @@ char					*ft_uitoa_pf(unsigned long n);
 int						option(t_printf *pf, int c, size_t n);
 int						conv_p(t_printf *pf, t_conv *conv);
 int						print_p(t_printf *pf, t_conv *conv, int len, char *str);
-int						conv_p_minus(t_printf *pf, t_conv *conv, int len, char *str);
-int						add_char_and_string_2_buff(t_printf *pf, char c, char *str, int len);
-int						minwidth_decr_add_char_2_buff(t_printf *pf, char c, t_conv *conv);
-int						special_hhd_reverse_0_n_minus(t_printf *pf, char *str, char c);
+int						conv_p_minus(t_printf *pf, t_conv *conv, int len,
+		char *str);
+int						add_char_and_string_2_buff(t_printf *pf, char c,
+		char *str, int len);
+int						minwidth_decr_add_char_2_buff(t_printf *pf, char c,
+		t_conv *conv);
+int						special_hhd_reverse_0_n_minus(t_printf *pf, char *str,
+		char c);
 void					conv_b(t_printf *pf, t_conv *conv);
 void					conv_percent(t_printf *pf, t_conv *conv);
 void					no_conv(t_printf *pf, t_conv *conv);
