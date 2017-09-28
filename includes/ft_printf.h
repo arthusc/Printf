@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/27 21:28:35 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 12:09:49 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int			conv_p(t_printf *pf, t_conv *conv);
 
 void		conv_mx(t_printf *pf, t_conv *conv);
 int			conv_x_minus(t_printf *pf, t_conv *conv, int len, char *str);
-int			conv_x_nowidth_noprec(t_printf *pf, t_conv *conv, char *str, int len);
+int			conv_x_nowidth_noprec(t_printf *pf, t_conv *conv, char *str);
 int			conv_x_minus2(t_printf *pf, t_conv *conv, char *str, int len);
 int 		conv_x_width_only3(t_printf *pf, t_conv *conv, int len, char *str);
 int			conv_x_width_only2(t_printf *pf, t_conv *conv, int len, char *str);

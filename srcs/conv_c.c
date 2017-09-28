@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/26 23:14:19 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 12:29:31 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ static void		conv_c_wint(t_printf *pf, t_conv *conv)
 	int		len;
 
 	if (MB_CUR_MAX == 1)
-		exit (-1);
+		exit(-1);
 	c = va_arg(pf->ap, wint_t);
 	if (!c)
-		{
-			conv->min_width > 1 && !(conv->flag & MINUS)
-			? option_char(&*pf, 1, ' ', &*conv) : 0;
-			buffer(*&pf, "\0", 1);
-			return ;
-		}
+	{
+		conv->min_width > 1 && !(conv->flag & MINUS)
+		? option_char(&*pf, 1, ' ', &*conv) : 0;
+		buffer(*&pf, "\0", 1);
+		return ;
+	}
 	len = count_wint(c);
 	conv->min_width > len && conv->flag & ZERO && !(conv->flag & MINUS)
 	? option_char(&*pf, len, '0', &*conv) : 0;
@@ -66,7 +66,6 @@ void			conv_c(t_printf *pf, t_conv *conv)
 			conv->min_width > 1 && !(conv->flag & MINUS)
 			? option_char(&*pf, 1, ' ', &*conv) : 0;
 			buffer(*&pf, "\0", 1);
-			// pf->subtract_buffer += 1;
 			return ;
 		}
 		(conv->flag & ZERO && !(conv->flag & MINUS))

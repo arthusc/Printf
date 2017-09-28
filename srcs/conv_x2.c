@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 18:31:25 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/27 22:46:00 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 12:09:35 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,10 @@ int		conv_x_minus(t_printf *pf, t_conv *conv, int len, char *str)
 	return (0);
 }
 
-int		conv_x_nowidth_noprec(t_printf *pf, t_conv *conv, char *str, int len)
+int		conv_x_nowidth_noprec(t_printf *pf, t_conv *conv, char *str)
 {
 	if (!conv->min_width && !conv->precision)
-	{
-		if (conv->flag & SPACE && !(conv->flag & PLUS))
-		{
-			(add_char_and_string_2_buff(&*pf, ' ', str, len));
-			return (0);
-		}
-		if (conv->flag & PLUS)
-		{
-			(add_char_and_string_2_buff(&*pf, '+', str, len));
-			return (0);
-		}
 		(conv->flag & SHARP && str[0] != '0') ? add_0x(&*pf, &*conv) : 0;
-	}
 	return (1);
 }
 

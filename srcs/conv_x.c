@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:30:50 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/27 22:44:49 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 12:09:29 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int			print_conv_x(t_printf *pf, t_conv *conv, int len, char *str)
 		if (!(ft_strncmp("0", str, len)))
 			return (pf->i_buf);
 	}
-	if (!(conv_x_nowidth_noprec(&*pf, conv, str, len)))
+	if (!(conv_x_nowidth_noprec(&*pf, conv, str)))
 		return (pf->i_buf);
 	if (!(conv_x_minus2(&*pf, conv, str, len)))
 		return (pf->i_buf);
