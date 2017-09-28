@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 22:10:28 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 22:56:40 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 22:59:30 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <fcntl.h>
 # include "macros_pf.h"
 
-typedef struct			s_conv
+typedef struct	s_conv
 {
 	int			min_width;
 	int			width_temp;
@@ -33,9 +33,9 @@ typedef struct			s_conv
 	char		modif;
 	char		sign;
 	int			flag;
-}						t_conv;
+}				t_conv;
 
-typedef struct			s_printf
+typedef struct	s_printf
 {
 	char		*format;
 	va_list		ap;

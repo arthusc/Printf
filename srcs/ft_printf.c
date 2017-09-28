@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:41:18 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 17:25:56 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 22:40:13 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int				ft_printf(char *format, ...)
 				parsing_color(&pf);
 		if (pf.format[pf.i] == '%')
 		{
-			(!pf.format[pf.i + 1]) ? exit(-1) : 0;
-			pf.i++;
+			(!pf.format[pf.i + 1]) ? exit(-1) : pf.i++;
 			pf.format ? parse_conversion(&pf) : 0;
 		}
 		else if (pf.format[pf.i])

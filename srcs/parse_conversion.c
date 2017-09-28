@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 19:00:05 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 22:52:04 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ t_printf		*parse_conversion(t_printf *pf)
 	(!pf->format[pf->i]) ? ft_error_pf(INFO, "error_format_type") : 0;
 	conv->flag += parse_type(pf->format[pf->i]);
 	conversion_specifier(&*pf, &*conv);
+	free(conv);
 	return (pf);
 }

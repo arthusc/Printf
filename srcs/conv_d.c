@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:10:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 17:01:57 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 22:47:51 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,5 @@ void			conv_d(t_printf *pf, t_conv *conv)
 	if (!(conv_d3(&*pf, conv, width_temp)))
 		return ;
 	buffer(&*pf, pf->str, len);
+	free(pf->str);
 }
