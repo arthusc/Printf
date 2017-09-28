@@ -6,17 +6,18 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 18:34:06 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/28 14:23:40 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 14:47:48 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			conv_x_minus_width_sup_len(t_printf *pf, t_conv *conv, int len)
+static int		conv_x_minus_width_sup_len(t_printf *pf, t_conv *conv, int len)
 {
 	if (conv->min_width > len)
 	{
-		(conv->flag & SHARP && !(conv->flag & TYPE_O)) ? (conv->min_width = conv->min_width - 2)
+		(conv->flag & SHARP && !(conv->flag & TYPE_O)) ?
+			(conv->min_width = conv->min_width - 2)
 		&& (buffer(&*pf, "0x", 2)) : 0;
 		if (conv->flag & PLUS && !(conv->flag & ZERO) && !(conv->flag & SPACE))
 		{
@@ -25,13 +26,8 @@ int			conv_x_minus_width_sup_len(t_printf *pf, t_conv *conv, int len)
 			return (0);
 		}
 		(conv->flag & PLUS && !(conv->flag & ZERO)) ? conv->min_width-- : 0;
-		if (conv->flag & PLUS && conv->flag & ZERO && !conv->flag & MODIFIER_HH)
-		{
-			conv->before = 1;
-			option_x(&*pf, conv->min_width - len, ' ', conv);
-			return (0);
-		}
-		if (conv->flag & ZERO)
+		if ((conv->flag & PLUS && conv->flag & ZERO &&
+					!conv->flag & MODIFIER_HH) || (conv->flag & ZERO))
 		{
 			conv->before = 1;
 			option_x(&*pf, conv->min_width - len, ' ', conv);
@@ -41,7 +37,7 @@ int			conv_x_minus_width_sup_len(t_printf *pf, t_conv *conv, int len)
 	return (1);
 }
 
-int			conv_x_minus_width_only(t_printf *pf, t_conv *conv, int len)
+static int		conv_x_minus_width_only(t_printf *pf, t_conv *conv, int len)
 {
 	if (conv->min_width && !conv->precision)
 	{
@@ -64,7 +60,7 @@ int			conv_x_minus_width_only(t_printf *pf, t_conv *conv, int len)
 	return (1);
 }
 
-int			conv_x_minus_width_and_prec(t_printf *pf, t_conv *conv,
+static int		conv_x_minus_width_and_prec(t_printf *pf, t_conv *conv,
 int len, char *str)
 {
 	if (conv->min_width && conv->precision)
@@ -91,7 +87,7 @@ int len, char *str)
 	return (1);
 }
 
-int		conv_x_minus2(t_printf *pf, t_conv *conv, int len, char *str)
+static int		conv_x_minus2(t_printf *pf, t_conv *conv, int len, char *str)
 {
 	if (!conv->min_width && !conv->precision)
 		return (pf->i_buf);
@@ -115,8 +111,7 @@ int		conv_x_minus2(t_printf *pf, t_conv *conv, int len, char *str)
 	return (0);
 }
 
-
-int		conv_x_minus(t_printf *pf, t_conv *conv, char *str, int len)
+int				conv_x_minus(t_printf *pf, t_conv *conv, char *str, int len)
 {
 	if (conv->flag & MINUS)
 	{

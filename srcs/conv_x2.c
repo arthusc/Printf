@@ -6,13 +6,13 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 18:31:25 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/28 14:35:14 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 14:41:06 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-t_printf	*add_0x(t_printf *pf, t_conv *conv)
+t_printf		*add_0x(t_printf *pf, t_conv *conv)
 {
 	if (conv->flag & MODIFIER_X)
 	{
@@ -26,21 +26,21 @@ t_printf	*add_0x(t_printf *pf, t_conv *conv)
 static int		conv_x_width_only3(t_printf *pf, t_conv *conv, int len,
 		char *str)
 {
-		if (str[0] == '-')
-		{
-			str[0] = '0';
-			(add_char_and_string_2_buff(&*pf, '-', str, len));
-			return (0);
-		}
-		(conv->flag & SHARP && conv->flag & TYPE_X &&
-		 ft_strncmp(pf->str, "0", 1)) ? (buffer(&*pf, "0x", 2))
+	if (str[0] == '-')
+	{
+		str[0] = '0';
+		(add_char_and_string_2_buff(&*pf, '-', str, len));
+		return (0);
+	}
+	(conv->flag & SHARP && conv->flag & TYPE_X &&
+	ft_strncmp(pf->str, "0", 1)) ? (buffer(&*pf, "0x", 2))
 		&& (conv->min_width = conv->min_width - 2) : 0;
-		conv->flag & TYPE_O && conv->flag & SHARP ? conv->min_width-- : 0;
-		!(conv->flag & TYPE_O) || (conv->min_width && conv->flag & ZERO &&
-		!(conv->flag & PRECISION)) ?
+	conv->flag & TYPE_O && conv->flag & SHARP ? conv->min_width-- : 0;
+	!(conv->flag & TYPE_O) || (conv->min_width && conv->flag & ZERO &&
+			!(conv->flag & PRECISION)) ?
 		option_x(&*pf, conv->min_width - len, '0', &*conv) :
 		option_x(&*pf, conv->min_width - len, ' ', &*conv);
-		return (0);
+	return (0);
 	return (1);
 }
 
@@ -50,14 +50,14 @@ static int		conv_x_width_only2(t_printf *pf, t_conv *conv, int len,
 	if (conv->flag & PLUS && conv->flag & ZERO && !(conv->flag & MODIFIER_HH))
 	{
 		(conv->flag & SHARP) ? (buffer(&*pf, "0x", 2))
-		&& (conv->min_width = conv->min_width - 2) : 0;
+			&& (conv->min_width = conv->min_width - 2) : 0;
 		option_x(&*pf, conv->min_width - len, '0', &*conv);
 		return (0);
 	}
 	else if (conv->flag & ZERO)
 	{
 		if (!(conv_x_width_only3(&*pf, conv, len, str)))
-		return (0);
+			return (0);
 	}
 	if (conv->flag & MODIFIER_HH)
 	{
@@ -69,14 +69,15 @@ static int		conv_x_width_only2(t_printf *pf, t_conv *conv, int len,
 	return (1);
 }
 
-int			conv_x_width_only(t_printf *pf, t_conv *conv, int len, char *str)
+int				conv_x_width_only(t_printf *pf, t_conv *conv, int len,
+		char *str)
 {
 	if (conv->min_width && !conv->precision)
 	{
 		if (conv->min_width < len)
 		{
 			if (conv->flag & SHARP && conv->flag & TYPE_X
-			&& !(conv->flag & MINUS))
+					&& !(conv->flag & MINUS))
 				add_0x(&*pf, &*conv);
 			buffer(&*pf, str, len);
 			return (0);

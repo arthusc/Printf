@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 18:36:31 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/28 14:24:04 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 14:50:48 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char				*ft_str_tolower(char *s)
 	return (s);
 }
 
-static int					fill_tab_with_c(t_printf *pf, char *tab, char c)
+static int			fill_tab_with_c(t_printf *pf, char *tab, char c)
 {
 	int i;
 
@@ -37,7 +37,8 @@ static int					fill_tab_with_c(t_printf *pf, char *tab, char c)
 	return (pf->i_buf);
 }
 
-static t_conv				option_x3(t_printf *pf, char *tab, char c, t_conv *conv)
+static t_conv		option_x3(t_printf *pf, char *tab,
+		char c, t_conv *conv)
 {
 	if (!(conv->flag & MINUS) || (conv->flag & MINUS &&
 				conv->min_width > conv->precision) || conv->before == 3)
@@ -51,7 +52,7 @@ static t_conv				option_x3(t_printf *pf, char *tab, char c, t_conv *conv)
 	return (*conv);
 }
 
-static t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
+static t_conv		option_x2(t_printf *pf, int n, char c, t_conv *conv)
 {
 	char	tab[n + 1];
 	int		len;
@@ -63,14 +64,16 @@ static t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
 	if (!(conv->before == 3) && conv->before && pf->str)
 	{
 		(conv->ox == 1) ? buffer(&*pf, "0x", 2) : 0;
-		conv->flag & TYPE_O && conv->flag & SHARP ? buffer(&*pf, "0", 1) && conv->min_width-- : 0;
+		conv->flag & TYPE_O && conv->flag & SHARP ? buffer(&*pf, "0", 1)
+			&& conv->min_width-- : 0;
 		buffer(&*pf, pf->str, len);
 	}
 	option_x3(&*pf, tab, c, conv);
 	if ((conv->before == 0 && pf->str) || conv->before == 3)
 	{
 		(conv->ox == 1) ? buffer(&*pf, "0x", 2) : 0;
-		conv->flag & TYPE_O && conv->flag & SHARP && conv->min_width ? buffer(&*pf, "0", 1) : 0;
+		conv->flag & TYPE_O && conv->flag & SHARP && conv->min_width ?
+			buffer(&*pf, "0", 1) : 0;
 		buffer(&*pf, &*pf->str, len);
 	}
 	((conv->flag & MINUS && !(conv->min_width > conv->precision))
@@ -78,7 +81,7 @@ static t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
 	return (*conv);
 }
 
-t_conv		option_x(t_printf *pf, int n, char c, t_conv *conv)
+t_conv				option_x(t_printf *pf, int n, char c, t_conv *conv)
 {
 	int		i;
 	char	array[n + 1];
