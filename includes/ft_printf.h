@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 22:10:28 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 22:31:30 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 22:56:40 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,15 @@ t_printf		parsing_color(t_printf *pf);
 t_printf		*buffer(t_printf *pf, char *saved, int len);
 t_printf		*conversion_specifier(t_printf *pf, t_conv *conv);
 t_printf		*parse_conversion(t_printf *pf);
-/*
-**conv_c
-*/
+
 int				count_wchars(t_conv *conv, wchar_t *wstr, int size);
 int				ft_wstrlen(wchar_t *s);
 void			conv_c(t_printf *pf, t_conv *conv);
 t_conv			*option_char(t_printf *pf, int print_size, char c,
 		t_conv *conv);
-/*
-**conv_s
-*/
 void			conv_s(t_printf *pf, t_conv *conv);
-void			conv_s_file(t_printf *pf);
 /*
-**conv_d
+**void			conv_s_file(t_printf *pf);
 */
 void			conv_d(t_printf *pf, t_conv *conv);
 int				conv_d_prec_only(t_printf *pf, t_conv *conv, int len,
@@ -88,9 +82,6 @@ int				conv_d_hh_nominus(t_printf *pf, t_conv *conv, char *str,
 		int len);
 int				option_d(t_printf *pf, int n, char c, t_conv *conv);
 char			*ft_itoa_printf(long long n);
-/*
-**conv_x
-*/
 void			conv_x(t_printf *pf, t_conv *conv);
 int				conv_x_minus(t_printf *pf, t_conv *conv, char *str,
 		int len);
@@ -99,9 +90,6 @@ int				conv_x_width_only(t_printf *pf, t_conv *conv, int len,
 t_conv			option_x(t_printf *pf, int n, char c, t_conv *conv);
 t_printf		*add_0x(t_printf *pf, t_conv *conv);
 char			*ft_str_tolower(char *s);
-/*
-**number.c
-*/
 t_conv			option_p(t_printf *pf, int n, char c, t_conv *conv);
 intmax_t		ptr_number_base(t_printf *pf, int f);
 uintmax_t		ptr_number(t_printf *pf, int f);
