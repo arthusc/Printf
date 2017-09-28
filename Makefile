@@ -6,7 +6,7 @@
 #    By: achambon <achambon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/10 16:46:50 by achambon          #+#    #+#              #
-#    Updated: 2017/09/26 17:07:33 by achambon         ###   ########.fr        #
+#    Updated: 2017/09/28 13:46:41 by achambon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SOURCES =	ft_printf.c \
 			conv_d4.c \
 			conv_file.c \
 			conv_p.c \
+			conv_p2.c \
 			conv_s.c \
 			conv_x.c \
 			conv_x2.c \

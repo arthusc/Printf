@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 12:09:49 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 13:47:48 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,12 @@ char		*ft_itoa_printf(long long n);
 
 void		conv_f(t_printf *pf, t_conv *conv);
 void		conv_f_L(t_printf *pf, t_conv *conv);
+
+
 int			conv_p(t_printf *pf, t_conv *conv);
+t_conv	option_p(t_printf *pf, int n, char c, t_conv *conv);
+int		print_p(t_printf *pf, t_conv *conv, int len, char *str);
+int		conv_p_minus(t_printf *pf, t_conv *conv, int len, char *str);
 
 void		conv_mx(t_printf *pf, t_conv *conv);
 int			conv_x_minus(t_printf *pf, t_conv *conv, int len, char *str);
