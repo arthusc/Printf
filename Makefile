@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/10 16:46:50 by achambon          #+#    #+#              #
-#    Updated: 2017/09/28 22:33:57 by mbriffau         ###   ########.fr        #
+#    Updated: 2017/09/28 23:28:48 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,6 @@ SOURCES =	ft_printf.c \
 			conv_d2.c \
 			conv_d3.c \
 			conv_d4.c \
-			conv_file.c \
 			conv_p.c \
 			conv_p2.c \
 			conv_s.c \
@@ -82,6 +81,6 @@ fclean: clean
 	@-/bin/rm -f $(NAME)
 	@echo "$(NAME) has been \033[1;31mdeleted\033[0m."
 
-re : fclean all testre
+re : fclean all
 
 .PHONY.: all clean fclean re
