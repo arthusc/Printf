@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/24 18:21:31 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 14:42:48 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define TYPE_B			(1 << 24)
 # define TYPE_PERCENT 	(1 << 23)
 
-
+# define PREC_PARSE		(1 << 14)
 # define PRECISION		(1 << 13)
 
 # define MODIFIER_F		(1 << 12)

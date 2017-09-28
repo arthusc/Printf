@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: achambon <achambon@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/10 16:46:50 by achambon          #+#    #+#              #
-#    Updated: 2017/09/28 13:46:41 by achambon         ###   ########.fr        #
+#    Updated: 2017/09/28 14:49:21 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SOURCES =	ft_printf.c \
 			conv_x4.c \
 			conv_b.c \
 			conv_percent.c \
-			no_conv.c
+			no_conv.c \
+			parse_wildcard.c
 
 all: $(NAME)
 
