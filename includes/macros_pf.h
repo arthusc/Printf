@@ -6,17 +6,14 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 14:42:48 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 21:30:34 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef MACROS_PF_H
-#define MACROS_PF_H
+# define MACROS_PF_H
 # define INFO __FILE__, (char *)__FUNCTION__, __LINE__
-
 # define BUFFER_SIZE	1000
-
 # define TYPE_S			(1 << 31)
 # define TYPE_C			(1 << 30)
 # define TYPE_D			(1 << 29)
@@ -26,10 +23,8 @@
 # define TYPE_O			(1 << 25)
 # define TYPE_B			(1 << 24)
 # define TYPE_PERCENT 	(1 << 23)
-
 # define PREC_PARSE		(1 << 14)
 # define PRECISION		(1 << 13)
-
 # define MODIFIER_F		(1 << 12)
 # define MODIFIER_X		(1 << 11)
 # define MODIFIER_H		(1 << 10)
@@ -38,18 +33,16 @@
 # define MODIFIER_LL	(1 << 7)
 # define MODIFIER_J		(1 << 6)
 # define MODIFIER_Z		(1 << 5)
-
 # define MINUS			(1 << 4)
 # define PLUS			(1 << 3)
 # define SHARP			(1 << 2)
 # define ZERO			(1 << 1)
 # define SPACE			(1 << 0)
-
 # define LONGEST_COLOR	6
-
-/*init*/
+/*
+ **init
+*/
 # define COLOR			"\033["
-
 # define EOC			"0m"
 # define BLACK			"30m"
 # define RED			"31m"
@@ -59,7 +52,6 @@
 # define VIOLET			"35m"
 # define CYAN			"36m"
 # define WHITE			"37m"
-
 # define LOG_CLEAR		\033[2K
 # define LOG_UP			\033[A
 # define LOG_NOCOLOR	\033[0m
@@ -75,4 +67,3 @@
 # define LOG_CYAN		\033[1;36m
 # define LOG_WHITE		\033[1;37m
 #endif
-
