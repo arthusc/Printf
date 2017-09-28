@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 14:25:19 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 14:45:25 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void		ft_error_pf(char *file, char *func, int line, char *s);
 
 int			ft_printf(char *format, ...);
 t_printf	*parse_conversion(t_printf *pf);
+int			parse_wildcard(t_printf *pf, t_conv *conv);
 t_conv		*init_conv(void);
 t_printf	*print_wint(t_printf *pf, wint_t wint);
 // void		print_p(t_printf *pf, int len, char *str);
