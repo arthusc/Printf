@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 21:21:51 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 21:24:03 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 typedef struct			s_conv
 {
 	int					min_width;
-	int 				width_temp;
+	int					width_temp;
 	int					precision;
 	int					precision_set;
 	int					ox;
@@ -37,14 +37,14 @@ typedef struct			s_conv
 
 typedef struct			s_printf
 {
-	char 				*format;
+	char				*format;
 	va_list				ap;
 	int					i;
-	char 				*str;
-	int 				len;
-	int 				n;
+	char				*str;
+	int					len;
+	int					n;
 	char				*buffer;
-	int 				i_buf;
+	int					i_buf;
 	int					subtract_buffer;
 	int					add_buffer;
 }						t_printf;
@@ -118,7 +118,5 @@ int						special_hhd_reverse_0_n_minus(t_printf *pf, char *str,
 void					conv_b(t_printf *pf, t_conv *conv);
 void					conv_percent(t_printf *pf, t_conv *conv);
 void					no_conv(t_printf *pf, t_conv *conv);
-void					conv_f(t_printf *pf, t_conv *conv);
-void					conv_f_L(t_printf *pf, t_conv *conv);
 
 #endif
