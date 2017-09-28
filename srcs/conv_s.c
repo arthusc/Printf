@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 23:11:10 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 23:24:47 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@ static void			print_wstring(t_printf *pf, wchar_t *wstr, int n)
 
 static void			conv_s_base(t_printf *pf, t_conv *conv, void *str, int len)
 {
+	int	free_or_not;
+
+	free_or_not = 0;
 	if (str == NULL)
+	{
 		(str = ft_strdup("(null)"));
+		free_or_not = 1;
+	}
 	len = ft_strlen(str);
 	if (conv->flag & PRECISION && conv->precision < len)
 		len = conv->precision;
@@ -33,7 +39,7 @@ static void			conv_s_base(t_printf *pf, t_conv *conv, void *str, int len)
 	buffer(&*pf, str, len);
 	(conv->min_width > len && conv->flag & MINUS)
 	? option_char(&*pf, len, ' ', &*conv) : 0;
-	free(str);
+	free_or_not ? free(str) : 0;
 }
 
 static int			size_wchar(wchar_t *s, int max)
