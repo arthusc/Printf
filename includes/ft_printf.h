@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 13:47:48 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 14:25:19 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ void		conv_d(t_printf *pf, t_conv *conv);
 **conv_x
 */
 void		conv_x(t_printf *pf, t_conv *conv);
+int			conv_x_minus(t_printf *pf, t_conv *conv, char *str, int len);
+int			conv_x_width_only(t_printf *pf, t_conv *conv, int len, char *str);
+t_conv		option_x(t_printf *pf, int n, char c, t_conv *conv);
+t_printf	*add_0x(t_printf *pf, t_conv *conv);
+char		*ft_str_tolower(char *s);
+
 /*
 **number.c
 */
@@ -129,21 +135,6 @@ t_conv	option_p(t_printf *pf, int n, char c, t_conv *conv);
 int		print_p(t_printf *pf, t_conv *conv, int len, char *str);
 int		conv_p_minus(t_printf *pf, t_conv *conv, int len, char *str);
 
-void		conv_mx(t_printf *pf, t_conv *conv);
-int			conv_x_minus(t_printf *pf, t_conv *conv, int len, char *str);
-int			conv_x_nowidth_noprec(t_printf *pf, t_conv *conv, char *str);
-int			conv_x_minus2(t_printf *pf, t_conv *conv, char *str, int len);
-int 		conv_x_width_only3(t_printf *pf, t_conv *conv, int len, char *str);
-int			conv_x_width_only2(t_printf *pf, t_conv *conv, int len, char *str);
-t_conv		option_x(t_printf *pf, int n, char c, t_conv *conv);
-t_printf	*add_0x(t_printf *pf, t_conv *conv);
-int			conv_x_minus_width_sup_len(t_printf *pf, t_conv *conv, int len);
-int			conv_x_minus_width_only(t_printf *pf, t_conv *conv, int len);
-int			conv_x_minus_width_and_prec(t_printf *pf, t_conv *conv, int len, char *str);
-char		*ft_str_tolower(char *s);
-int			fill_tab_with_c(t_printf *pf, char *tab, char c);
-t_conv		option_x3(t_printf *pf, char *tab, char c, t_conv *conv);
-t_conv		option_x2(t_printf *pf, int n, char c, t_conv *conv);
 
 void		conv_o(t_printf *pf, t_conv *conv);
 int			conv_o_nowidth_noprec(t_printf *pf, t_conv *conv, char *str, int len);

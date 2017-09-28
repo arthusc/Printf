@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 18:36:31 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/27 22:42:27 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 14:24:04 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char				*ft_str_tolower(char *s)
 	return (s);
 }
 
-int					fill_tab_with_c(t_printf *pf, char *tab, char c)
+static int					fill_tab_with_c(t_printf *pf, char *tab, char c)
 {
 	int i;
 
@@ -37,7 +37,7 @@ int					fill_tab_with_c(t_printf *pf, char *tab, char c)
 	return (pf->i_buf);
 }
 
-t_conv				option_x3(t_printf *pf, char *tab, char c, t_conv *conv)
+static t_conv				option_x3(t_printf *pf, char *tab, char c, t_conv *conv)
 {
 	if (!(conv->flag & MINUS) || (conv->flag & MINUS &&
 				conv->min_width > conv->precision) || conv->before == 3)
@@ -51,7 +51,7 @@ t_conv				option_x3(t_printf *pf, char *tab, char c, t_conv *conv)
 	return (*conv);
 }
 
-t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
+static t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
 {
 	char	tab[n + 1];
 	int		len;
@@ -66,7 +66,6 @@ t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
 		conv->flag & TYPE_O && conv->flag & SHARP ? buffer(&*pf, "0", 1) && conv->min_width-- : 0;
 		buffer(&*pf, pf->str, len);
 	}
-	(conv->precision_set == 2) ? (buffer(&*pf, "0x", 2)) && (conv->ox = 0) : 0;
 	option_x3(&*pf, tab, c, conv);
 	if ((conv->before == 0 && pf->str) || conv->before == 3)
 	{
@@ -76,5 +75,32 @@ t_conv				option_x2(t_printf *pf, int n, char c, t_conv *conv)
 	}
 	((conv->flag & MINUS && !(conv->min_width > conv->precision))
 	&& !(conv->before == 3)) ? fill_tab_with_c(&*pf, tab, c) : 0;
+	return (*conv);
+}
+
+t_conv		option_x(t_printf *pf, int n, char c, t_conv *conv)
+{
+	int		i;
+	char	array[n + 1];
+	int		len;
+
+	ft_bzero(array, n + 1);
+	len = ft_strlen(pf->str);
+	i = 0;
+	pf->n = n;
+	if (!n)
+		return (*conv);
+	if (conv->before == 4)
+	{
+		if (conv->flag & SHARP)
+			pf->n--;
+		fill_tab_with_c(&*pf, array, c);
+		buffer(&*pf, " ", 1);
+		if (conv->flag & SHARP)
+			buffer(&*pf, "0x", 2);
+		buffer(&*pf, pf->str, len);
+		return (*conv);
+	}
+	option_x2(&*pf, pf->n, c, conv);
 	return (*conv);
 }

@@ -6,49 +6,11 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 18:34:06 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/27 22:42:48 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 14:23:40 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-t_conv		option_x(t_printf *pf, int n, char c, t_conv *conv)
-{
-	int		i;
-	char	array[n + 1];
-	int		len;
-
-	ft_bzero(array, n + 1);
-	len = ft_strlen(pf->str);
-	i = 0;
-	pf->n = n;
-	if (!n)
-		return (*conv);
-	if (conv->before == 4)
-	{
-		if (conv->flag & SHARP)
-			pf->n--;
-		fill_tab_with_c(&*pf, array, c);
-		buffer(&*pf, " ", 1);
-		if (conv->flag & SHARP)
-			buffer(&*pf, "0x", 2);
-		buffer(&*pf, pf->str, len);
-		return (*conv);
-	}
-	option_x2(&*pf, pf->n, c, conv);
-	return (*conv);
-}
-
-t_printf	*add_0x(t_printf *pf, t_conv *conv)
-{
-	if (conv->flag & MODIFIER_X)
-	{
-		buffer(&*pf, "0X", 2);
-		return (pf);
-	}
-	buffer(&*pf, "0x", 2);
-	return (pf);
-}
 
 int			conv_x_minus_width_sup_len(t_printf *pf, t_conv *conv, int len)
 {
@@ -125,6 +87,56 @@ int len, char *str)
 		conv->before = 3;
 		option_x(&*pf, conv->precision - len, '0', conv);
 		return (0);
+	}
+	return (1);
+}
+
+int		conv_x_minus2(t_printf *pf, t_conv *conv, int len, char *str)
+{
+	if (!conv->min_width && !conv->precision)
+		return (pf->i_buf);
+	if (!(conv_x_minus_width_only(&*pf, conv, len)))
+		return (pf->i_buf);
+	if (!conv->min_width && conv->precision)
+	{
+		if (conv->flag & SHARP)
+			buffer(&*pf, "0x", 2);
+		conv->before = 3;
+		if (str[0] == '-')
+		{
+			special_hhd_reverse_0_n_minus(pf, str, '-');
+		}
+		option_x(&*pf, conv->precision - len, '0', conv);
+		return (pf->i_buf);
+	}
+	if (!(conv_x_minus_width_and_prec(&*pf, conv, len, str)))
+		return (pf->i_buf);
+	buffer(&*pf, str, len);
+	return (0);
+}
+
+
+int		conv_x_minus(t_printf *pf, t_conv *conv, char *str, int len)
+{
+	if (conv->flag & MINUS)
+	{
+		(conv_x_minus2(&*pf, conv, len, str));
+		if (conv->min_width > len || conv->width_temp > len)
+		{
+			if (str[0] == '-')
+			{
+				conv->width_temp--;
+				(conv->flag & PLUS && !(conv->flag & SPACE + ZERO))
+				? conv->width_temp++ : 0;
+			}
+			return (0);
+		}
+		if (conv->min_width < len && !(conv->flag & SPACE)
+		&& !(conv->flag & PLUS) && !conv->precision)
+		{
+			buffer(&*pf, str, len);
+			return (0);
+		}
 	}
 	return (1);
 }
