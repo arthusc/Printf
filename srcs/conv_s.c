@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_s.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 22:57:32 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 23:11:10 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void			conv_s_base(t_printf *pf, t_conv *conv, void *str, int len)
 	buffer(&*pf, str, len);
 	(conv->min_width > len && conv->flag & MINUS)
 	? option_char(&*pf, len, ' ', &*conv) : 0;
+	free(str);
 }
 
 static int			size_wchar(wchar_t *s, int max)
@@ -80,9 +81,6 @@ static void			conv_s_wchar(t_printf *pf, t_conv *conv, wchar_t *str)
 	? option_char(&*pf, len, ' ', &*conv) : 0;
 }
 
-void				conv_s(t_printf *pf, t_conv *conv)
-{
-	void	*str;
 /*
 **	if (conv->flag & MODIFIER_F)
 **	{
@@ -90,6 +88,11 @@ void				conv_s(t_printf *pf, t_conv *conv)
 **		return ;
 **	}
 */
+
+void				conv_s(t_printf *pf, t_conv *conv)
+{
+	void	*str;
+
 	if (conv->flag & MODIFIER_L)
 	{
 		str = va_arg(pf->ap, wchar_t *);

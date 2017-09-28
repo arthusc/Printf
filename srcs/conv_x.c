@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:30:50 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/28 14:39:44 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 23:11:09 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ void			conv_x(t_printf *pf, t_conv *conv)
 			&& !(conv->flag & ZERO))
 		conv->min_width--;
 	print_conv_x(pf, conv, ft_strlen(pf->str), pf->str);
+	free(ptr);
 	return ;
 }

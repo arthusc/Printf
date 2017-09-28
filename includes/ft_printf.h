@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 22:10:28 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 22:59:30 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 23:11:11 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct	s_printf
 	int			i_buf;
 	int			subtract_buffer;
 	int			add_buffer;
-}						t_printf;
+}				t_printf;
 
 void			ft_error_pf(char *file, char *func, int line, char *s);
 int				ft_printf(char *format, ...);

@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 15:58:06 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/28 13:51:14 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 23:11:11 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ int				conv_p(t_printf *pf, t_conv *conv)
 	if (conv->min_width && conv->precision)
 		return (going_for_option(&*pf, conv));
 	buffer(&*pf, str, len);
+	free(str);
 	return (0);
 }

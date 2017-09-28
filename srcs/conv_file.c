@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   conv_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 23:44:27 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 22:57:48 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 23:11:12 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 /*
 **#include "../includes/ft_printf.h"
 **
