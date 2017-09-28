@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 16:07:37 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 22:32:34 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 22:43:39 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void			conv_s_base(t_printf *pf, t_conv *conv, void *str, int len)
 	buffer(&*pf, str, len);
 	(conv->min_width > len && conv->flag & MINUS)
 	? option_char(&*pf, len, ' ', &*conv) : 0;
+	free(str);
 }
 
 static int			size_wchar(wchar_t *s, int max)
