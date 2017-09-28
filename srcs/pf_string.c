@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 00:09:01 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 17:12:44 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 22:32:55 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,43 @@ t_conv		*option_char(t_printf *pf, int print_size, char c, t_conv *conv)
 	}
 	conv->min_width = 0;
 	return (conv);
+}
+
+int			ft_wstrlen(wchar_t *s)
+{
+	int		i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int			count_wchars(t_conv *conv, wchar_t *wstr, int size)
+{
+	int		i;
+	int		add;
+	int		total;
+
+	i = 0;
+	add = 0;
+	total = 0;
+	while (i < size)
+	{
+		if (wstr[i] <= 0x7F)
+			add = 1;
+		else if (wstr[i] <= 0x7FF)
+			add = 2;
+		else if (wstr[i] <= 0xFFFF)
+			add = 3;
+		else if (wstr[i] <= 0x10FFFF)
+			add = 4;
+		if (conv->precision_set && conv->flag & TYPE_S
+			&& (total + add) > conv->precision)
+			break ;
+		total += add;
+		i++;
+	}
+	size = i;
+	return (total);
 }
