@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 22:34:35 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 15:20:39 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 17:14:01 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int		parse_wildcard(t_printf *pf, t_conv *conv)
 	return (0);
 }
 
-// use a last min_width
-// if prec > min_width
-// if n after prec, go min_width
+/*
+** use a last min_width
+** if prec > min_width
+** if n after prec, go min_width
+*/

@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/17 18:34:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 14:53:17 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 16:57:27 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,32 +77,17 @@ t_conv		*option_char(t_printf *pf, int print_size, char c, t_conv *conv);
 */
 void		conv_s(t_printf *pf, t_conv *conv);
 void		conv_s_file(t_printf *pf);
-
-int	option(t_printf *pf, int c, size_t n);
 /*
 **conv_d
 */
 void		conv_d(t_printf *pf, t_conv *conv);
-int			conv_d_l(t_printf *pf, t_conv *conv);
-int			conv_d_h(t_printf *pf, t_conv *conv);
 int			conv_d_prec_only(t_printf *pf, t_conv *conv, int len, char *str);
-int			conv_d_width_only(t_printf *pf, t_conv *conv, int width_temp, char *str);
-int			conv_d_width_only2(t_printf *pf, t_conv *conv, int len, char *str);
-int			conv_d_width_only3(t_printf *pf, t_conv *conv, int len, char *str);
-int			conv_d_minus2(t_printf *pf, t_conv *conv, int width_temp, char *str);
-int			conv_d_width_only3(t_printf *pf, t_conv *conv, int len, char *str);
-int			conv_d_width_only2(t_printf *pf, t_conv *conv, int len, char *str);
+int			conv_d_minus(t_printf *pf, t_conv *conv, int width_temp, char *str);
 int			conv_d_width_only(t_printf *pf, t_conv *conv, int width_temp, char *str);
 int			conv_d_prec_only(t_printf *pf, t_conv *conv, int len, char *str);
-int			conv_d_minus(t_printf *pf, t_conv *conv, int len, char *str);
-int			conv_d_hh_nominus_width_only2(t_printf *pf, t_conv *conv, char *str, int len);
-int			conv_d_hh_nominus_width_only(t_printf *pf, t_conv *conv, char *str, int len);
-int			conv_d_hh_nominus_width_and_prec(t_printf *pf, t_conv *conv, char *str, int len);
+// int			conv_d_minus2(t_printf *pf, t_conv *conv, int len, char *str);
 int			conv_d_hh_nominus(t_printf *pf, t_conv *conv, char *str, int len);
-t_conv		option_dbis_convbefore4(t_printf *pf, t_conv *conv, char *s);
-t_conv		option_d(t_printf *pf, int n, char c, t_conv *conv);
-int			conv_d_minus_width_only(t_printf *pf, t_conv *conv, int len, char *str);
-int			conv_d_minus_width_and_prec(t_printf *pf, t_conv *conv, int len, char *str);
+int		option_d(t_printf *pf, int n, char c, t_conv *conv);
 char		*ft_itoa_printf(long long n);
 /*
 **conv_x
@@ -124,7 +109,7 @@ char		*ft_uitoa_pf(unsigned long n);
 
 
 
-
+int			option(t_printf *pf, int c, size_t n);
 
 void		conv_f(t_printf *pf, t_conv *conv);
 void		conv_f_L(t_printf *pf, t_conv *conv);

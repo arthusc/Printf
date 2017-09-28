@@ -6,13 +6,13 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/25 00:09:01 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/25 20:57:01 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 17:12:44 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-t_printf		*print_wint(t_printf *pf, wint_t wint)
+t_printf	*print_wint(t_printf *pf, wint_t wint)
 {
 	char	str[4];
 	int		lock;
@@ -34,7 +34,7 @@ t_printf		*print_wint(t_printf *pf, wint_t wint)
 	return (pf);
 }
 
-t_conv	*option_char(t_printf *pf, int print_size, char c, t_conv *conv)
+t_conv		*option_char(t_printf *pf, int print_size, char c, t_conv *conv)
 {
 	int			i;
 	char		tab[(conv->min_width - print_size) + 1];

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_conversion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/27 15:49:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 15:20:16 by mbriffau         ###   ########.fr       */
+/*   Updated: 2017/09/28 17:19:55 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static t_conv		*parse_flags(t_conv *conv, char *s, int *i)
+static t_conv	*parse_flags(t_conv *conv, char *s, int *i)
 {
 	while (ft_strchr("#0-+ ", s[*i]))
 	{
@@ -28,7 +28,7 @@ static t_conv		*parse_flags(t_conv *conv, char *s, int *i)
 	return (conv);
 }
 
-static t_conv		*parse_precision(t_printf *pf, t_conv *conv)
+static t_conv	*parse_precision(t_printf *pf, t_conv *conv)
 {
 	!(conv->flag & PRECISION) ? conv->flag += PRECISION : 0;
 	parse_wildcard(&*pf, &*conv) ? pf->i++ : 0;
@@ -39,13 +39,13 @@ static t_conv		*parse_precision(t_printf *pf, t_conv *conv)
 			pf->i++;
 		if (!pf->format[pf->i])
 			ft_error_pf(INFO, "Invalid format. (After Precision)");
-		conv->flag & PREC_PARSE ? 0 : (conv->flag += PREC_PARSE) ;
+		conv->flag & PREC_PARSE ? 0 : (conv->flag += PREC_PARSE);
 		parse_wildcard(&*pf, &*conv) ? pf->i++ : 0;
 	}
 	return (conv);
 }
 
-static int			overwrite_modifier(int *f)
+static int		overwrite_modifier(int *f)
 {
 	if (*f & 0x7E0)
 	{
@@ -77,10 +77,10 @@ static void		parse_modifier(int *i, int *f, char *s)
 		if (ft_strchr("CSDUO", s[*i]))
 		{
 			*f += MODIFIER_L;
-			break;
+			break ;
 		}
 		if (s[*i] == 'h')
-			(s[*i + 1] == 'h') ? (*f += MODIFIER_HH) && (*i += 1) 
+			(s[*i + 1] == 'h') ? (*f += MODIFIER_HH) && (*i += 1)
 		: (*f += MODIFIER_H);
 		else if (s[*i] == 'l')
 			(s[*i + 1] == 'l') ? (*f += MODIFIER_LL) && (*i += 1)
@@ -91,7 +91,7 @@ static void		parse_modifier(int *i, int *f, char *s)
 	}
 }
 
-static int			parse_type(char c)
+static int		parse_type(char c)
 {
 	int ret;
 
@@ -108,7 +108,7 @@ static int			parse_type(char c)
 	return (ret);
 }
 
-t_printf			*parse_conversion(t_printf *pf)
+t_printf		*parse_conversion(t_printf *pf)
 {
 	t_conv		*conv;
 

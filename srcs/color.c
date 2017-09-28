@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 17:39:29 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/28 12:26:51 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 17:10:29 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ static void		text_color(t_printf *pf, char *color)
 	ft_strcmp("violet}", color) == 0 ? i += 5 : 0;
 	ft_strcmp("cyan}", color) == 0 ? i += 6 : 0;
 	ft_strcmp("white}", color) == 0 ? i += 7 : 0;
-	(ft_strcmp("eoc}", color) == 0) ? (i = 0) && (len = 1) : 0;
+	if (ft_strcmp("eoc}", color) == 0)
+	{
+		(i = 0);
+		(len = 1);
+	}
 	buffer(&*pf, ft_itoa(i), len);
 	pf->subtract_buffer += len;
 }

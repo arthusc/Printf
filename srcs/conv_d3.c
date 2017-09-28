@@ -6,85 +6,13 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 16:07:29 by achambon          #+#    #+#             */
-/*   Updated: 2017/09/26 22:22:06 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 16:58:58 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		conv_d_minus(t_printf *pf, t_conv *conv, int len, char *str)
-{
-	if (!conv->min_width && !conv->precision)
-		return (pf->i_buf);
-	if (conv->min_width && !conv->precision)
-	{
-		if (!(conv_d_minus_width_only(pf, conv, len, str)))
-				return (0);
-	}
-	if (!conv->min_width && conv->precision)
-	{
-		conv->before = 3;
-		if (conv->flag & SPACE && !(conv->flag & PLUS)
-			&& !(conv->flag & MODIFIER_HH))
-			buffer(&*pf, " ", 1);
-		if (conv->flag & PLUS && !(conv->flag & MODIFIER_HH))
-			buffer(&*pf, "+", 1);
-		if (str[0] == '-')
-			special_hhd_reverse_0_n_minus(pf, str, '-');
-		option_d(&*pf, conv->precision - len, '0', conv);
-		return (pf->i_buf);
-	}
-	if (conv->min_width && conv->precision)
-		return (conv_d_minus_width_and_prec(pf, conv, len, str));
-	(conv->flag & SPACE && !(conv->flag & ZERO)) || (!(conv->flag & MODIFIER_HH) && conv->flag & SPACE && conv->flag & ZERO && (!(conv->flag & PLUS)) && conv->min_width < len) ? buffer(&*pf, " ", 1) : 0;
-	(conv->flag & PLUS && !(conv->flag & ZERO)) || (!(conv->flag & MODIFIER_HH) && conv->flag & PLUS && conv->flag & ZERO && conv->min_width < len) ? buffer(&*pf, "+", 1) : 0;
-	buffer(&*pf, str, len);
-	return (0);
-}
-
-int		conv_d_hh_nominus_width_only2(t_printf *pf, t_conv *conv,
-char *str, int len)
-{
-	if (conv->flag & PLUS && !(conv->flag & ZERO + MODIFIER_HH))
-		conv->min_width--;
-	else if (str[0] != '-' && conv->flag & PLUS && conv->flag
-	& ZERO && !(conv->flag & MODIFIER_HH))
-	{
-		buffer(&*pf, "+", 1);
-		option_d(&*pf, conv->min_width - 1 - len, '0', conv);
-		return (pf->i_buf);
-	}
-	else if (conv->flag & ZERO)
-	{
-		if (str[0] == '-')
-		{
-			str[0] = '0';
-			return (add_char_and_string_2_buff(&*pf, '-', str, len));
-		}
-		option_d(&*pf, conv->min_width - len, '0', conv);
-		return (pf->i_buf);
-	}
-	option_d(&*pf, conv->min_width - len, ' ', conv);
-	return (pf->i_buf);
-}
-
-int		conv_d_hh_nominus_width_only(t_printf *pf, t_conv *conv,
-char *str, int len)
-{
-	if (conv->min_width < len)
-	{
-		if (conv->flag & PLUS && str[0] != '-')
-			return (add_char_and_string_2_buff(&*pf, '+', str, len));
-		if (conv->flag & SPACE && !(conv->flag & ZERO))
-			return (add_char_and_string_2_buff(&*pf, ' ', str, len));
-		buffer(&*pf, str, len);
-	}
-	if (conv->min_width >= len)
-		conv_d_hh_nominus_width_only2(&*pf, conv, str, len);
-	return (pf->i_buf);
-}
-
-int		conv_d_hh_nominus_width_and_prec(t_printf *pf, t_conv *conv,
+static int		conv_d_hh_nominus_width_and_prec(t_printf *pf, t_conv *conv,
 char *str, int len)
 {
 	if (conv->min_width > conv->precision)
@@ -114,7 +42,49 @@ char *str, int len)
 	return (0);
 }
 
-int		conv_d_hh_nominus(t_printf *pf, t_conv *conv,
+static int		conv_d_hh_nominus_width_only2(t_printf *pf, t_conv *conv,
+char *str, int len)
+{
+	if (conv->flag & PLUS && !(conv->flag & ZERO + MODIFIER_HH))
+		conv->min_width--;
+	else if (str[0] != '-' && conv->flag & PLUS && conv->flag
+	& ZERO && !(conv->flag & MODIFIER_HH))
+	{
+		buffer(&*pf, "+", 1);
+		option_d(&*pf, conv->min_width - 1 - len, '0', conv);
+		return (0);
+	}
+	else if (conv->flag & ZERO)
+	{
+		if (str[0] == '-')
+		{
+			str[0] = '0';
+			return (add_char_and_string_2_buff(&*pf, '-', str, len));
+		}
+		option_d(&*pf, conv->min_width - len, '0', conv);
+		return (0);
+	}
+	option_d(&*pf, conv->min_width - len, ' ', conv);
+	return (0);
+}
+
+static int		conv_d_hh_nominus_width_only(t_printf *pf, t_conv *conv,
+char *str, int len)
+{
+	if (conv->min_width < len)
+	{
+		if (conv->flag & PLUS && str[0] != '-')
+			return (add_char_and_string_2_buff(&*pf, '+', str, len));
+		if (conv->flag & SPACE && !(conv->flag & ZERO))
+			return (add_char_and_string_2_buff(&*pf, ' ', str, len));
+		buffer(&*pf, str, len);
+	}
+	if (conv->min_width >= len)
+		conv_d_hh_nominus_width_only2(&*pf, conv, str, len);
+	return (0);
+}
+
+int				conv_d_hh_nominus(t_printf *pf, t_conv *conv,
 char *str, int len)
 {
 	if (conv->min_width && !conv->precision)
@@ -130,7 +100,7 @@ char *str, int len)
 		if (str[0] == '-')
 			special_hhd_reverse_0_n_minus(pf, str, '-');
 		option_d(&*pf, conv->precision - len, '0', conv);
-		return (pf->i_buf);
+		return (0);
 	}
 	if (conv->min_width && conv->precision)
 		return (conv_d_hh_nominus_width_and_prec(pf, conv, str, len));

@@ -6,7 +6,7 @@
 /*   By: achambon <achambon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 16:00:14 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/26 23:51:13 by achambon         ###   ########.fr       */
+/*   Updated: 2017/09/28 17:12:05 by achambon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ intmax_t	ptr_number_base(t_printf *pf, int f)
 		ptr = va_arg(pf->ap, intmax_t);
 	else
 		ptr = va_arg(pf->ap, int);
-	return(ptr);
+	return (ptr);
 }
 
 uintmax_t	ptr_number(t_printf *pf, int f)
@@ -53,14 +53,14 @@ uintmax_t	ptr_number(t_printf *pf, int f)
 		ptr = va_arg(pf->ap, uintmax_t);
 	else
 		ptr = va_arg(pf->ap, unsigned int);
-	return(ptr);
+	return (ptr);
 }
 
-char	*ft_uitoa_pf(unsigned long n)
+char		*ft_uitoa_pf(unsigned long n)
 {
-	int			i;
+	int				i;
 	unsigned long	a;
-	char		*str;
+	char			*str;
 
 	i = 1;
 	a = n;
@@ -78,7 +78,7 @@ char	*ft_uitoa_pf(unsigned long n)
 	return (str);
 }
 
-char	*ft_itoa_printf(long long n)
+char		*ft_itoa_printf(long long n)
 {
 	int			i;
 	long long	a;
